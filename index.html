@@ -53,10 +53,11 @@ a { color: inherit; }
 /* Infos pas encore remplies : surlignées en jaune, hors charte exprès */
 .a-remplir { background: #FFE14D; color: #111 !important; padding: 0 .25em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 
-/* Boutons, dans l'esprit de l'étiquette de la charte */
-.btn { display: inline-block; font-family: var(--mono); font-weight: 700; font-size: 1rem; line-height: 1.25; text-decoration: none; padding: 17px 24px; border-radius: 12px; transition: background .15s, color .15s; }
+/* Boutons, dans l'esprit de l'étiquette de la charte : au survol, le blanc balaie le rose */
+.btn { position: relative; isolation: isolate; overflow: hidden; display: inline-block; font-family: var(--mono); font-weight: 700; font-size: 1rem; line-height: 1.25; text-decoration: none; padding: 17px 24px; border-radius: 12px; transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--blanc); transform: scaleX(0); transform-origin: right; transition: transform .5s cubic-bezier(.7, 0, .2, 1); }
+.btn:hover::before { transform: scaleX(1); transform-origin: left; }
 .btn-rose { background: var(--rose); color: var(--encre); }
-.btn-rose:hover { background: var(--blanc); }
 .btn-petit { padding: 10px 15px; font-size: .88rem; border-radius: 10px; }
 
 /* Titres de section en Space Mono */
@@ -99,7 +100,7 @@ html:not(.js) .trim { display: none; }
 .offre .grand { margin-top: clamp(40px, 6vw, 72px); max-width: 44ch; font-size: clamp(1.2rem, 1rem + .9vw, 1.7rem); line-height: 1.4; }
 
 /* ========== Le constat ========== */
-.symptomes { margin-top: 36px; font-weight: 700; font-size: clamp(1.4rem, 1rem + 1.5vw, 2.25rem); line-height: 1.16; letter-spacing: -0.01em; }
+.symptomes { margin-top: 36px; font-weight: 700; font-size: clamp(1.4rem, 1rem + 1.5vw, 2.25rem); line-height: 1.32; letter-spacing: -0.01em; }
 .symptomes .lead { display: block; font-family: var(--mono); font-weight: 700; font-size: .95rem; letter-spacing: 0; color: var(--vert); margin-bottom: 10px; }
 
 /* ========== La promesse ========== */
@@ -118,7 +119,7 @@ html:not(.js) .trim { display: none; }
 .temps { list-style: none; padding: 0; margin: clamp(36px, 5vw, 64px) 0 0; }
 .temps li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 12px 64px; padding: 30px 0 34px; border-top: 3px solid var(--encre); }
 .temps h3 { font-weight: 700; font-size: clamp(1.5rem, 1rem + 1.4vw, 2.25rem); line-height: 1.08; letter-spacing: -0.01em; }
-.temps .quand { display: table; margin-bottom: 14px; padding: 5px 10px; border-radius: 8px; background: var(--rose); font-family: var(--mono); font-weight: 700; font-size: .78rem; line-height: 1.3; letter-spacing: .03em; text-transform: uppercase; }
+.temps .quand { display: block; width: fit-content; transform-origin: left center; margin-bottom: 14px; padding: 5px 10px; border-radius: 8px; background: var(--rose); font-family: var(--mono); font-weight: 700; font-size: .78rem; line-height: 1.3; letter-spacing: .03em; text-transform: uppercase; }
 .temps p { font-size: 1.08rem; max-width: 52ch; }
 
 /* ========== Ce que vous recevez ========== */
@@ -128,7 +129,8 @@ html:not(.js) .trim { display: none; }
 .livrables h3 { font-weight: 700; font-size: clamp(1.3rem, 1rem + .8vw, 1.7rem); line-height: 1.14; margin-bottom: 8px; }
 
 /* ========== Le déroulé ========== */
-.frise { list-style: none; padding: 0; margin: clamp(36px, 5vw, 64px) 0 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 3px solid var(--encre); }
+.frise-cadre { position: relative; margin-top: clamp(36px, 5vw, 64px); }
+.frise { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 3px solid var(--encre); }
 .frise li { padding: 18px 20px 8px 0; }
 .frise li + li { padding-left: 18px; border-left: 1px solid var(--filet); }
 .frise .moment { font-family: var(--mono); font-weight: 700; font-size: clamp(1.1rem, .9rem + .6vw, 1.45rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--vert); }
@@ -175,16 +177,99 @@ html:not(.js) .trim { display: none; }
 /* ========== Parlons-en ========== */
 .parlons { background: var(--vert); color: var(--blanc); padding: clamp(88px, 12vw, 168px) 0 36px; }
 .parlons-corps { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; }
-.parlons h2 { font-family: var(--mono); font-weight: 700; font-size: clamp(3rem, 1.2rem + 7vw, 8rem); line-height: .95; letter-spacing: -0.05em; color: var(--rose); }
+.parlons h2 { white-space: nowrap; font-family: var(--mono); font-weight: 700; font-size: clamp(2.5rem, 1.2rem + 7vw, 8rem); line-height: .95; letter-spacing: -0.05em; color: var(--rose); }
 .parlons-texte { margin: 30px 0 40px; font-size: clamp(1.25rem, 1rem + 1vw, 1.8rem); line-height: 1.3; font-weight: 600; max-width: 30ch; }
 .sceau { width: clamp(200px, 24vw, 320px); height: auto; display: block; }
 .sceau text { font-family: var(--mono); font-weight: 700; font-size: 28px; fill: var(--blanc); }
 .sceau .sceau-logo { color: var(--rose); }
 .coordonnees { margin-top: 56px; line-height: 2; }
 .coordonnees a { text-decoration: none; }
+.coordonnees [data-info] { white-space: nowrap; }
 .coordonnees a[href]:hover { text-decoration: underline; }
 .coordonnees .sep { margin: 0 .55em; opacity: .5; }
 .pied { margin-top: clamp(72px, 10vw, 120px); padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .3); font-size: .85rem; color: rgba(255, 255, 255, .75); }
+
+/* ==================================================================
+   Mouvement. Tout ce qui part caché est sous .anime, posé par le script
+   seulement si l'appareil accepte les animations.
+   ================================================================== */
+
+/* Bandeau qui descend une fois le haut de page passé, avec l'avancée de lecture */
+.entete { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: var(--vert); color: var(--blanc); transform: translateY(-100%); transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.entete.visible { transform: none; }
+.entete-corps { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: var(--max); margin: 0 auto; padding: 10px var(--marge); }
+.entete .logo { width: 44px; }
+.entete-nom { font-family: var(--mono); font-weight: 700; font-size: .85rem; }
+.entete-avance { height: 3px; background: var(--rose); transform-origin: left; transform: scaleX(var(--avance, 0)); }
+
+/* Le titre tapé à la machine */
+.frappe { position: relative; }
+.anime .frappe .c { visibility: hidden; }
+.anime .frappe .c.on { visibility: visible; }
+.curseur { position: absolute; left: 0; top: 0; width: .55em; height: .84em; background: currentColor; pointer-events: none; animation: clignote 1.05s steps(1) infinite; }
+.curseur.tape { animation: none; }
+@keyframes clignote { 50% { opacity: 0; } }
+.anime .intro { opacity: 0; transform: translateY(16px); transition: opacity .7s, transform .8s cubic-bezier(.2, .8, .2, 1); }
+.anime .intro.on { opacity: 1; transform: none; }
+
+/* Les symptômes se surlignent un par un, au rose de la charte */
+.surligne { background-image: linear-gradient(var(--rose), var(--rose)); background-repeat: no-repeat; background-size: 100% 100%; border-radius: 6px; padding: 0 .14em; margin: 0 -.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.anime .symptomes .surligne { background-size: 0% 100%; transition: background-size .8s cubic-bezier(.7, 0, .2, 1); }
+.anime .symptomes.vu .surligne { background-size: 100% 100%; }
+.symptomes .surligne:nth-of-type(2) { transition-delay: .1s; }
+.symptomes .surligne:nth-of-type(3) { transition-delay: .45s; }
+.symptomes .surligne:nth-of-type(4) { transition-delay: .8s; }
+.symptomes .surligne:nth-of-type(5) { transition-delay: 1.15s; }
+
+/* Les filets se tracent de gauche à droite */
+.registre > div, .temps li, .livrables li, .raisons li, .fbloc { position: relative; }
+.trait { border-top-color: transparent !important; }
+.trait::before { content: ""; position: absolute; left: 0; right: 0; top: -3px; height: 3px; background: var(--couleur-trait, var(--encre)); transform-origin: left; }
+.fbloc { --couleur-trait: var(--rose); }
+.anime .trait::before { transform: scaleX(0); transition: transform 1s cubic-bezier(.7, 0, .2, 1) var(--retard, 0s); }
+.anime .trait.vu::before { transform: scaleX(1); }
+
+/* Les étiquettes de temps sautent en place */
+.anime .temps .quand { transform: scale(.3); opacity: 0; transition: transform .6s cubic-bezier(.34, 1.56, .64, 1) .5s, opacity .2s .5s; }
+.anime .temps li.vu .quand { transform: none; opacity: 1; }
+
+/* Survols */
+.registre > div { isolation: isolate; }
+.registre > div::after { content: ""; position: absolute; z-index: -1; left: -18px; right: -18px; top: 8px; bottom: 6px; background: var(--rose); border-radius: 16px; transform: scaleX(0); transform-origin: left; transition: transform .55s cubic-bezier(.7, 0, .2, 1); }
+.registre dt { transition: transform .45s cubic-bezier(.2, .8, .2, 1), color .3s; }
+.livrables li { isolation: isolate; }
+.livrables li::after { content: ""; position: absolute; z-index: -1; left: -18px; right: -18px; top: 12px; bottom: 10px; background: var(--blanc); border-radius: 16px; opacity: 0; transform: translateY(10px) scale(.97); transition: opacity .3s, transform .5s cubic-bezier(.2, .8, .2, 1); }
+.livrables h3 { transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.raisons .qui { background-image: linear-gradient(var(--rose), var(--rose)); background-repeat: no-repeat; background-size: 0% 100%; border-radius: 6px; padding: 0 .12em; margin: 0 -.12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-size .55s cubic-bezier(.7, 0, .2, 1); }
+.tableau th, .tableau td { transition: background .25s; }
+.tableau .survol { background: rgba(255, 255, 255, .08); }
+@media (hover: hover) {
+  .registre > div:hover::after { transform: scaleX(1); }
+  .registre > div:hover dt { transform: translateX(14px); color: var(--vert-fonce); }
+  .livrables li:hover::after { opacity: 1; transform: none; }
+  .livrables li:hover h3 { transform: translateX(6px); }
+  .raisons li:hover .qui { background-size: 100% 100%; }
+}
+
+/* La frise avance avec le défilement */
+.frise-cadre::before { content: ""; position: absolute; left: 0; top: -4px; height: 5px; width: calc(var(--avance, 1) * 100%); background: var(--vert); border-radius: 3px; }
+.frise-cadre::after { content: ""; position: absolute; top: -1.5px; left: calc(var(--avance, 1) * 100%); width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: var(--rose); border: 4px solid var(--vert); }
+html:not(.anime) .frise-cadre::after { display: none; }
+.frise .moment, .frise p { transition: color .4s; }
+.anime .frise li:not(.actif) .moment { color: #A7B6AD; }
+.anime .frise li:not(.actif) p { color: #8A9890; }
+
+/* Les prix défilent, les coches sautent */
+.nombre { display: inline-block; text-align: right; }
+.coche { display: inline-block; }
+.anime .tableau .coche { transform: scale(0) rotate(-30deg); transition: transform .5s cubic-bezier(.34, 1.56, .64, 1) calc(.35s + var(--d, 0s)); }
+.anime .tableau.vu .coche { transform: none; }
+
+/* Parlons-en : les lettres montent puis suivent la souris */
+.parlons h2 .l, .parlons h2 .li { display: inline-block; }
+.anime .parlons h2 .l { opacity: 0; transform: translateY(.45em) rotate(8deg); transition: opacity .4s calc(var(--i) * 50ms), transform .8s cubic-bezier(.2, .9, .25, 1.25) calc(var(--i) * 50ms); }
+.anime .parlons h2.vu .l { opacity: 1; transform: none; }
+.sceau { overflow: visible; }
 
 /* Sans animation : le mur s'affiche directement rangé */
 .scene.fixe { height: auto; }
@@ -193,9 +278,13 @@ html:not(.js) .trim { display: none; }
 
 /* Tablette */
 @media (max-width: 1000px) {
-  .frise { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .frise li:nth-child(4) { padding-left: 0; border-left: 0; }
-  .frise li:nth-child(n+4) { border-top: 1px solid var(--filet); margin-top: 12px; }
+  /* La frise passe à la verticale, la barre verte descend le long du trait */
+  .frise { grid-template-columns: minmax(0, 1fr); border-top: 0; border-left: 3px solid var(--encre); }
+  .frise li, .frise li + li { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 6px 32px; align-items: baseline; padding: 18px 0 20px 28px; border-left: 0; }
+  .frise li + li { border-top: 1px solid var(--filet); }
+  .frise p { margin-top: 0; }
+  .frise-cadre::before { top: 0; left: -4px; width: 5px; height: calc(var(--avance, 1) * 100%); }
+  .frise-cadre::after { top: calc(var(--avance, 1) * 100%); left: -1.5px; margin-top: -10px; }
 }
 
 /* Téléphone */
@@ -213,10 +302,10 @@ html:not(.js) .trim { display: none; }
   .registre > div { padding: 22px 0; }
   .livrables, .questions { grid-template-columns: minmax(0, 1fr); }
   .livrables li { padding-bottom: 26px; }
-  .frise { grid-template-columns: minmax(0, 1fr); }
-  .frise li, .frise li + li, .frise li:nth-child(4) { padding: 16px 0 18px; border-left: 0; margin-top: 0; }
-  .frise li + li { border-top: 1px solid var(--filet); }
-  .frise p { margin-top: 8px; }
+  .frise li, .frise li + li { display: block; padding: 16px 0 18px 24px; }
+  .frise p + p { margin-top: 6px; }
+  .entete-nom { display: none; }
+  .entete .logo { width: 40px; }
   .defile { display: none; }
   .formules-liste { display: block; margin-top: 36px; }
   .parlons-corps { grid-template-columns: minmax(0, 1fr); }
@@ -230,6 +319,17 @@ html:not(.js) .trim { display: none; }
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="mp" viewBox="0 0 393 237"><path fill="currentColor" d="M 0.8 166 L 0.8 70.9 C 0.8 57.7 3.8 45.8 10 35.3 C 16.2 24.7 25 16.4 36.5 10.3 C 48.1 4.2 61.8 1.2 77.7 1.2 C 85.6 1.2 93 2.1 99.7 3.9 C 106.4 5.6 112.5 8.1 118 11.1 C 123.6 14.1 128.3 17.7 132.3 21.9 L 133 21.9 C 137.1 17.7 142 14.1 147.5 11.1 C 153.1 8.1 159.3 5.6 166.1 3.9 C 172.9 2.1 180.3 1.2 188.2 1.2 C 204.1 1.2 217.8 4.2 229.3 10.3 C 240.9 16.4 249.8 24.7 256 35.3 C 262.3 45.8 265.5 57.7 265.5 70.9 L 265.5 166 L 216.5 166 L 216.5 72.5 C 216.5 67.2 215.2 62.5 212.5 58.2 C 209.9 53.9 206.4 50.4 202 47.7 C 197.6 45 192.6 43.6 187 43.6 C 181.3 43.6 176.2 45 171.7 47.7 C 167.2 50.4 163.7 53.9 161.2 58.2 C 158.7 62.5 157.4 67.2 157.4 72.5 L 157.4 166 L 108.8 166 L 108.8 72.5 C 108.8 67.2 107.5 62.5 104.8 58.2 C 102.2 53.9 98.7 50.4 94.2 47.7 C 89.7 45 84.6 43.6 78.9 43.6 C 73.3 43.6 68.2 45 63.7 47.7 C 59.2 50.4 55.7 53.9 53.2 58.2 C 50.7 62.5 49.4 67.2 49.4 72.5 L 49.4 166Z"/><path fill="currentColor" d="M 304.3 0.4 C 318.1 0.4 330.3 2.6 341.1 6.9 C 351.8 11.3 360.9 17.4 368.4 25.4 C 376 33.4 381.8 42.7 385.8 53.4 C 389.8 64.1 391.8 75.9 391.8 88.9 C 391.8 105 388.5 119.3 381.8 131.7 C 375.1 144.1 365.9 153.8 354.3 160.8 C 342.6 167.8 329 171.3 313.5 171.3 C 306.9 171.3 300.7 170.5 294.9 168.8 C 289.1 167.1 283.8 164.7 279 161.5 C 274.2 158.3 270.2 154.4 267.1 149.7 L 266.1 149.7 L 266.1 236.6 L 216.8 236.6 L 216.8 88.9 C 216.8 70.9 220.4 55.3 227.6 42.1 C 234.8 28.9 245 18.7 258.1 11.4 C 271.3 4.1 286.7 0.4 304.3 0.4Z M 304.3 43.1 C 296.7 43.1 290 44.9 284.4 48.6 C 278.8 52.4 274.5 57.4 271.5 63.9 C 268.5 70.4 267.1 77.6 267.1 85.7 C 267.1 93.8 268.5 101 271.5 107.4 C 274.5 113.7 278.8 118.8 284.4 122.5 C 290 126.2 296.7 128 304.3 128 C 311.9 128 318.5 126.2 324 122.5 C 329.5 118.8 333.8 113.7 336.9 107.4 C 340 101 341.5 93.8 341.5 85.7 C 341.5 77.6 340 70.4 336.9 63.9 C 333.8 57.4 329.5 52.4 324 48.6 C 318.5 44.9 311.9 43.1 304.3 43.1Z"/></symbol>
 </svg>
+
+<header class="entete">
+  <div class="entete-corps">
+    <a class="marque" href="#haut" aria-label="Communicants de demain, retour en haut">
+      <svg class="logo" viewBox="0 0 393 237" aria-hidden="true"><use href="#mp"/></svg>
+      <span class="entete-nom" aria-hidden="true">Communicants de demain</span>
+    </a>
+    <a class="btn btn-rose btn-petit" data-contact href="#parlons-en">Prendre rendez-vous</a>
+  </div>
+  <div class="entete-avance"></div>
+</header>
 
 <main>
 
@@ -245,8 +345,8 @@ html:not(.js) .trim { display: none; }
     <div class="scene-corps">
       <div class="scene-texte">
         <h1>Communicants de demain</h1>
-        <p class="accroche">Faire grandir les talents, structurer votre communication.</p>
-        <a class="btn btn-rose" data-contact href="#parlons-en">Réserver un premier échange de 30&nbsp;minutes</a>
+        <p class="accroche intro">Faire grandir les talents, structurer votre communication.</p>
+        <a class="btn btn-rose intro" data-contact href="#parlons-en">Réserver un premier échange de 30&nbsp;minutes</a>
       </div>
       <div class="mur" aria-hidden="true">
         <span class="trim">Mois 1 à 3</span>
@@ -270,9 +370,9 @@ html:not(.js) .trim { display: none; }
   </div>
 </section>
 
-<section class="bloc offre" id="offre">
+<section class="bloc offre deploie" id="offre">
   <div class="conteneur">
-    <h2 class="question">Vous avez recruté un alternant en communication, mais vous manquez d’expertise métier en interne pour l’accompagner&#8239;?</h2>
+    <h2 class="question mots">Vous avez recruté un alternant en communication, mais vous manquez d’expertise métier en interne pour l’accompagner&#8239;?</h2>
     <p class="reponse">Vous êtes au bon endroit.</p>
     <p class="grand">Un accompagnement stratégique, opérationnel et pédagogique sur mesure pour les dirigeants et leurs alternants, accessible à tout moment de l’année.</p>
   </div>
@@ -283,15 +383,15 @@ html:not(.js) .trim { display: none; }
     <h2 class="titre">Le constat</h2>
     <div>
       <p class="grand">Votre alternant en communication est en poste depuis quelques mois et vous sentez qu’il manque un cadre&nbsp;: personne dans l’entreprise n’est communicant pour le guider.</p>
-      <p class="symptomes"><span class="lead">Résultat fréquent</span>Des objectifs flous, un alternant qui se demande quoi prioriser, un dirigeant qui manque de temps pour le guider, et une alternance qui n’exploite pas tout son potentiel.</p>
+      <p class="symptomes"><span class="lead">Résultat fréquent</span><span class="surligne">Des objectifs flous</span>, <span class="surligne">un alternant qui se demande quoi prioriser</span>, <span class="surligne">un dirigeant qui manque de temps pour le guider</span>, et <span class="surligne">une alternance qui n’exploite pas tout son potentiel</span>.</p>
     </div>
   </div>
 </section>
 
-<section class="bloc promesse">
+<section class="bloc promesse deploie">
   <div class="conteneur">
     <h2>Notre promesse</h2>
-    <p class="promesse-texte">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route claire jusqu’à la fin de son alternance.</p>
+    <p class="promesse-texte mots">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route claire jusqu’à la fin de son alternance.</p>
   </div>
 </section>
 
@@ -335,7 +435,7 @@ html:not(.js) .trim { display: none; }
   </div>
 </section>
 
-<section class="bloc recevez" id="livrables">
+<section class="bloc recevez deploie" id="livrables">
   <div class="conteneur">
     <h2 class="titre">Ce que vous recevez</h2>
     <ul class="livrables">
@@ -352,6 +452,7 @@ html:not(.js) .trim { display: none; }
 <section class="bloc" id="deroule">
   <div class="conteneur">
     <h2 class="titre">Le déroulé</h2>
+    <div class="frise-cadre">
     <ol class="frise">
       <li><p class="moment">Au démarrage</p><p>Entretien dirigeant et entretien alternant</p></li>
       <li><p class="moment">Fin du premier mois</p><p>Remise du diagnostic et du plan d’action jusqu’à la fin de l’alternance</p></li>
@@ -360,10 +461,11 @@ html:not(.js) .trim { display: none; }
       <li><p class="moment">M+6 et M+9</p><p>Points d’ajustement (selon la formule et la date de fin d’alternance)</p></li>
       <li><p class="moment">Jusqu’à la fin</p><p>Support par mail, jusqu’à la fin de l’alternance</p></li>
     </ol>
+    </div>
   </div>
 </section>
 
-<section class="bloc formules" id="formules">
+<section class="bloc formules deploie" id="formules">
   <div class="conteneur">
     <h2 class="titre">Les formules</h2>
     <div class="defile">
@@ -371,9 +473,9 @@ html:not(.js) .trim { display: none; }
         <thead>
           <tr>
             <th scope="col"><span class="sr">Ce qui est compris</span></th>
-            <th scope="col"><span class="f-nom">Essentiel</span><span class="f-prix">690&nbsp;€ <small>HT</small></span></th>
-            <th scope="col"><span class="f-nom">Accompagné</span><span class="f-prix">1&#8239;090&nbsp;€ <small>HT</small></span></th>
-            <th scope="col"><span class="f-nom">Premium</span><span class="f-prix">1&#8239;690&nbsp;€ <small>HT</small></span></th>
+            <th scope="col"><span class="f-nom">Essentiel</span><span class="f-prix"><span class="nombre" data-n="690">690</span>&nbsp;€ <small>HT</small></span></th>
+            <th scope="col"><span class="f-nom">Accompagné</span><span class="f-prix"><span class="nombre" data-n="1090">1&#8239;090</span>&nbsp;€ <small>HT</small></span></th>
+            <th scope="col"><span class="f-nom">Premium</span><span class="f-prix"><span class="nombre" data-n="1690">1&#8239;690</span>&nbsp;€ <small>HT</small></span></th>
           </tr>
         </thead>
         <tbody>
@@ -390,7 +492,7 @@ html:not(.js) .trim { display: none; }
     <div class="formules-liste">
       <div class="fbloc">
         <p class="f-nom">Essentiel</p>
-        <p class="f-prix">690&nbsp;€ <small>HT</small></p>
+        <p class="f-prix"><span class="nombre" data-n="690">690</span>&nbsp;€ <small>HT</small></p>
         <ul>
           <li>Entretien dirigeant + entretien alternant</li>
           <li>Synthèse de diagnostic</li>
@@ -399,7 +501,7 @@ html:not(.js) .trim { display: none; }
       </div>
       <div class="fbloc">
         <p class="f-nom">Accompagné</p>
-        <p class="f-prix">1&#8239;090&nbsp;€ <small>HT</small></p>
+        <p class="f-prix"><span class="nombre" data-n="1090">1&#8239;090</span>&nbsp;€ <small>HT</small></p>
         <ul>
           <li class="plus">Tout l’Essentiel, et en plus</li>
           <li>Points de suivi M+1 et M+3</li>
@@ -408,7 +510,7 @@ html:not(.js) .trim { display: none; }
       </div>
       <div class="fbloc">
         <p class="f-nom">Premium</p>
-        <p class="f-prix">1&#8239;690&nbsp;€ <small>HT</small></p>
+        <p class="f-prix"><span class="nombre" data-n="1690">1&#8239;690</span>&nbsp;€ <small>HT</small></p>
         <ul>
           <li class="plus">Tout l’Accompagné, et en plus</li>
           <li>Points de suivi M+6 et M+9 + bilan de fin</li>
@@ -461,7 +563,7 @@ html:not(.js) .trim { display: none; }
   </div>
 </section>
 
-<section class="parlons" id="parlons-en">
+<section class="parlons deploie" id="parlons-en">
   <div class="conteneur">
     <div class="parlons-corps">
       <div>
@@ -471,7 +573,7 @@ html:not(.js) .trim { display: none; }
       </div>
       <svg class="sceau" viewBox="0 0 240 240" aria-hidden="true">
         <path id="rond" d="M 28 120 A 92 92 0 1 1 212 120 A 92 92 0 1 1 28 120" fill="none"/>
-        <text transform="rotate(-58 120 120)"><textPath href="#rond" textLength="572" lengthAdjust="spacing">Sens · Cohérence · Impact · </textPath></text>
+        <text class="sceau-anneau" transform="rotate(-58 120 120)"><textPath href="#rond" textLength="572" lengthAdjust="spacing">Sens · Cohérence · Impact · </textPath></text>
         <svg class="sceau-logo" x="68" y="90" width="104" height="63" viewBox="0 0 393 237"><use href="#mp"/></svg>
       </svg>
     </div>
@@ -489,7 +591,7 @@ html:not(.js) .trim { display: none; }
    À REMPLIR : tout ce qui est vide reste surligné en jaune sur la page.
    ============================================================ */
 const INFOS = {
-  nom: "",              // ex. "Camille Martin"
+  nom: "Marine Perinel",
   metier: "Communication RSE & Stratégie d’impact",
   email: "",            // ex. "camille@exemple.fr"
   telephone: "",        // ex. "06 12 34 56 78"
@@ -523,27 +625,223 @@ const INFOS = {
 })();
 
 /* ============================================================
-   Le mur : les post-it en vrac se rangent par trimestre au défilement.
+   Mouvement : le mur de post-it, les titres tapés à la machine,
+   les aplats qui se déploient, la frise qui avance, les prix qui défilent.
+   Tout est coupé si l'appareil demande moins d'animations.
    ============================================================ */
 (function () {
-  const scene = document.querySelector('.scene');
-  const mur = scene.querySelector('.mur');
-  const trims = [...mur.querySelectorAll('.trim')];
-  mur.querySelectorAll('.note').forEach(el => { el.innerHTML = '<span>' + el.innerHTML + '</span>'; });
-  const notes = [...mur.querySelectorAll('.note')].map(el => ({
-    el, q: el.querySelector('.q'),
-    quart: +el.dataset.q, x: +el.dataset.x, y: +el.dataset.y, r: +el.dataset.r
+  const racine = document.documentElement;
+  const calme = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const mouvement = !calme.matches;
+  const fin = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (mouvement) racine.classList.add('anime');
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const borne = v => Math.min(1, Math.max(0, v));
+  const adoucir = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const sortie = t => 1 - Math.pow(1 - t, 3);
+  const prets = (document.fonts && document.fonts.ready) || Promise.resolve();
+
+  /* ---------- Déclenchement quand un élément arrive à l'écran ---------- */
+  const vu = new IntersectionObserver(entrees => entrees.forEach(e => {
+    if (!e.isIntersecting) return;
+    vu.unobserve(e.target);
+    e.target.classList.add('vu');
+    if (e.target._quandVu) e.target._quandVu();
+  }), { rootMargin: '0px 0px -12% 0px' });
+  const quandVu = (el, f) => { if (!el) return; if (f) el._quandVu = f; vu.observe(el); };
+  // Les titres, eux, démarrent dès qu'ils pointent à l'écran
+  const vuTot = new IntersectionObserver(entrees => entrees.forEach(e => {
+    if (!e.isIntersecting) return;
+    vuTot.unobserve(e.target);
+    e.target._quandVu();
+  }));
+
+  /* ---------- Frappe à la machine (Space Mono) ---------- */
+  function preparerFrappe(el) {
+    const texte = el.textContent;
+    el.setAttribute('aria-label', texte);
+    el.classList.add('frappe');
+    el.textContent = '';
+    const lettres = [...texte].map(ch => {
+      const s = document.createElement('span');
+      s.className = 'c';
+      s.setAttribute('aria-hidden', 'true');
+      s.textContent = ch;
+      el.appendChild(s);
+      return s;
+    });
+    return pas => new Promise(fini => {
+      const curseur = document.createElement('span');
+      curseur.className = 'curseur tape';
+      curseur.setAttribute('aria-hidden', 'true');
+      el.appendChild(curseur);
+      const taille = parseFloat(getComputedStyle(el).fontSize);
+      const placer = s => {
+        const ref = s || lettres[0];
+        curseur.style.left = (s ? s.offsetLeft + s.offsetWidth : ref.offsetLeft) + 'px';
+        curseur.style.top = (ref.offsetTop + ref.offsetHeight / 2 - taille * .44) + 'px';
+      };
+      placer(null);
+      let i = 0;
+      function suivant() {
+        if (i >= lettres.length) {
+          curseur.classList.remove('tape');
+          setTimeout(() => curseur.remove(), 2600);
+          fini();
+          return;
+        }
+        const s = lettres[i++];
+        s.classList.add('on');
+        placer(s);
+        setTimeout(suivant, s.textContent === ' ' ? pas * 2.2 : pas * (.6 + Math.random() * .8));
+      }
+      setTimeout(suivant, 420);
+    });
+  }
+
+  /* ---------- Titres de section qui se décodent ---------- */
+  const signes = 'abcdefghijklmnopqrstuvwxyz#%&*+=/<>';
+  const garde = /[\s  '’?!.,:;-]/;
+  const brouiller = (vrai, k) => [...vrai].map((ch, i) => i < k || garde.test(ch) ? ch : signes[Math.random() * signes.length | 0]).join('');
+  function decoder(el) {
+    const vrai = el.dataset.vrai, n = [...vrai].length, duree = Math.min(1100, 420 + n * 30), t0 = performance.now();
+    let dernier = -1e3;
+    (function image(ts) {
+      const k = Math.floor((ts - t0) / duree * n);
+      if (k >= n) { el.textContent = vrai; return; }
+      if (ts - dernier > 50) { el.textContent = brouiller(vrai, k); dernier = ts; }
+      requestAnimationFrame(image);
+    })(t0);
+  }
+
+  /* ---------- Mise en place ---------- */
+  // Filets tracés (avec ou sans animation, le filet passe par un pseudo-élément)
+  $$('.registre > div, .temps li, .livrables li, .raisons li, .fbloc').forEach(el => {
+    el.classList.add('trait');
+    el.style.setProperty('--retard', ([...el.parentNode.children].indexOf(el) % 6) * .09 + 's');
+    if (mouvement) quandVu(el);
+  });
+
+  // Coches du tableau
+  $$('.tableau td.oui').forEach(td => { td.innerHTML = '<span class="coche">✓</span>'; });
+  $$('.tableau span.oui').forEach(s => s.classList.add('coche'));
+  $$('.tableau tbody tr').forEach((tr, r) => $$('.coche', tr).forEach((c, k) => c.style.setProperty('--d', (r * .07 + k * .06) + 's')));
+
+  // Survol d'une formule : toute la colonne s'éclaire
+  const tableau = $('.tableau');
+  if (fin && tableau) {
+    const eteindre = () => $$('.survol', tableau).forEach(c => c.classList.remove('survol'));
+    tableau.addEventListener('mouseover', e => {
+      const cellule = e.target.closest('td, th');
+      eteindre();
+      if (cellule && cellule.cellIndex > 0) $$('tr', tableau).forEach(tr => tr.cells[cellule.cellIndex] && tr.cells[cellule.cellIndex].classList.add('survol'));
+    });
+    tableau.addEventListener('mouseleave', eteindre);
+  }
+
+  const lettresFin = [];
+  let blocsMots = [];
+
+  if (mouvement) {
+    // Le titre se tape, puis l'accroche et le bouton arrivent
+    const taperTitre = preparerFrappe($('.scene h1'));
+    taperTitre(64).then(() => $$('.intro').forEach((el, i) => setTimeout(() => el.classList.add('on'), 100 + i * 170)));
+
+    // Les titres de section se décodent en arrivant
+    $$('.titre').forEach(el => {
+      el.dataset.vrai = el.textContent;
+      el.setAttribute('aria-label', el.textContent);
+      el.textContent = brouiller(el.dataset.vrai, 0);
+      el._quandVu = () => decoder(el);
+      vuTot.observe(el);
+    });
+
+    // « Vous êtes au bon endroit. » se tape aussi
+    const reponse = $('.reponse');
+    const taperReponse = preparerFrappe(reponse);
+    quandVu(reponse, () => taperReponse(48));
+
+    quandVu($('.symptomes'));
+    quandVu(tableau);
+
+    // Les grandes phrases s'éclairent mot à mot au fil de la lecture
+    blocsMots = $$('.mots').map(el => {
+      const texte = el.textContent;
+      el.textContent = '';
+      const mots = texte.split(' ').map((m, i, tout) => {
+        const s = document.createElement('span');
+        s.className = 'mot';
+        s.textContent = m;
+        el.appendChild(s);
+        if (i < tout.length - 1) el.appendChild(document.createTextNode(' '));
+        return s;
+      });
+      return { el, mots, k: -1 };
+    });
+
+    // Les prix défilent jusqu'à leur valeur
+    const format = n => n >= 1000 ? Math.floor(n / 1000) + ' ' + String(n % 1000).padStart(3, '0') : String(n);
+    prets.then(() => $$('.nombre').forEach(el => {
+      const largeur = el.getBoundingClientRect().width;
+      if (!largeur) return;
+      el.style.minWidth = largeur + 'px';
+      const n = +el.dataset.n;
+      el.textContent = '0';
+      const col = el.closest('th, .fbloc');
+      const rang = col ? [...col.parentNode.children].indexOf(col) : 0;
+      quandVu(el, () => {
+        const t0 = performance.now() + rang * 150, duree = 1300;
+        (function image(ts) {
+          const t = borne((ts - t0) / duree);
+          el.textContent = format(Math.round(sortie(t) * n / 10) * 10);
+          if (t < 1) requestAnimationFrame(image); else el.textContent = format(n);
+        })(performance.now());
+      });
+    }));
+
+    // « Parlons-en. » lettre par lettre
+    const titreFin = $('.parlons h2'), texteFin = titreFin.textContent;
+    titreFin.setAttribute('aria-label', texteFin);
+    titreFin.textContent = '';
+    [...texteFin].forEach((ch, i) => {
+      const o = document.createElement('span');
+      o.className = 'l';
+      o.style.setProperty('--i', i);
+      o.setAttribute('aria-hidden', 'true');
+      const d = document.createElement('span');
+      d.className = 'li';
+      d.textContent = ch;
+      o.appendChild(d);
+      titreFin.appendChild(o);
+      lettresFin.push({ o, d, y: 0, r: 0 });
+    });
+    quandVu(titreFin);
+
+    // Boutons aimantés
+    if (fin) $$('.btn').forEach(b => {
+      b.addEventListener('mousemove', e => {
+        const r = b.getBoundingClientRect();
+        b.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * .16).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * .3).toFixed(1)}px)`;
+      });
+      b.addEventListener('mouseleave', () => { b.style.transform = ''; });
+    });
+  }
+
+  /* ---------- Le mur : les post-it en vrac se rangent par trimestre ---------- */
+  const scene = $('.scene'), mur = $('.mur', scene), trims = $$('.trim', mur);
+  $$('.note', mur).forEach(el => { el.innerHTML = '<span>' + el.innerHTML + '</span>'; });
+  const notes = $$('.note', mur).map((el, i) => ({
+    el, q: $('.q', el),
+    quart: +el.dataset.q, x: +el.dataset.x, y: +el.dataset.y, r: +el.dataset.r,
+    phase: i * 1.73, px: 0, py: 0, w: -1
   }));
   const parQuart = [0, 0, 0, 0];
   notes.forEach(n => { n.place = parQuart[n.quart]++; });
 
-  const calme = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const borne = v => Math.min(1, Math.max(0, v));
-  const adoucir = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
   let W, H, noteW, noteH, gonfle;
-
-  function mesurer() {
+  function mesurerMur() {
     W = mur.clientWidth; H = mur.clientHeight;
     const cols = W >= 560 ? 4 : 2;
     const rangs = 4 / cols;
@@ -557,7 +855,6 @@ const INFOS = {
     const grilleH = rangH * rangs - ecartRang;
     const haut = Math.max(0, (H - grilleH) / 2);
     const taille = Math.max(12.5, Math.min(17, noteH * .3));
-
     trims.forEach((t, i) => {
       const c = i % cols, rg = Math.floor(i / cols);
       t.style.width = cellW + 'px';
@@ -567,6 +864,7 @@ const INFOS = {
     gonfle = cols === 4 ? .22 : 0;
     notes.forEach(n => {
       n.w0 = cols === 4 ? noteW : Math.min(noteW, W * .4);
+      n.w = -1;
       n.el.style.height = noteH + 'px';
       n.el.style.fontSize = taille + 'px';
       n.ax = n.x * (W - n.w0);
@@ -577,46 +875,162 @@ const INFOS = {
     });
   }
 
-  function progression() {
-    if (scene.classList.contains('fixe')) return 1;
-    const r = scene.getBoundingClientRect();
-    const course = r.height - window.innerHeight;
-    return course > 0 ? borne(-r.top / course) : 1;
-  }
-
-  function dessiner() {
-    const p = progression();
+  const debut = performance.now() + 150;
+  function dessinerMur(p, ts, rMur) {
+    const sx = souris && rMur ? souris.x - rMur.left : -1e4;
+    const sy = souris && rMur ? souris.y - rMur.top : -1e4;
     notes.forEach((n, i) => {
       const t = adoucir(borne((p - .06 - i * .026) / .52));
-      const x = n.ax + (n.bx - n.ax) * t;
-      const y = n.ay + (n.by - n.ay) * t;
-      const s = 1 + gonfle * (1 - t);
-      n.el.style.width = (n.w0 + (noteW - n.w0) * t) + 'px';
-      n.el.style.transform = `translate(${x}px, ${y}px) rotate(${n.r * (1 - t)}deg) scale(${s})`;
+      const c = 1 - t;
+      const w = n.w0 + (noteW - n.w0) * t;
+      let x = n.ax + (n.bx - n.ax) * t, y = n.ay + (n.by - n.ay) * t, r = n.r * c, s = 1 + gonfle * c, o = 1;
+      if (mouvement) {
+        // Arrivée : les post-it tombent sur le mur l'un après l'autre
+        const a = sortie(borne((ts - debut - i * 80) / 720));
+        // En vrac, ils flottent doucement et s'écartent du curseur
+        x += Math.sin(ts * .0011 + n.phase) * 4 * c;
+        y += Math.cos(ts * .0009 + n.phase * 1.3) * 5 * c;
+        r += Math.sin(ts * .0007 + n.phase) * 1.4 * c;
+        let tx = 0, ty = 0;
+        if (c > .02) {
+          const dx = x + w / 2 - sx, dy = y + noteH / 2 - sy, d = Math.hypot(dx, dy) || 1, R = 190;
+          if (d < R) { const f = Math.pow(1 - d / R, 2) * 40 * c; tx = dx / d * f; ty = dy / d * f; }
+        }
+        n.px += (tx - n.px) * .12;
+        n.py += (ty - n.py) * .12;
+        x += n.px;
+        y += n.py - (1 - a) * 90;
+        r += (1 - a) * n.r * 3;
+        s *= 1 + (1 - a) * .15;
+        o = a;
+      }
+      if (Math.abs(w - n.w) > .2) { n.el.style.width = w + 'px'; n.w = w; }
+      n.el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(3)})`;
+      n.el.style.opacity = o;
       n.q.style.opacity = 1 - borne(t * 1.6);
     });
     const tl = borne((p - .55) / .25);
-    trims.forEach(t => { t.style.opacity = tl; });
+    trims.forEach(tr => { tr.style.opacity = tl; });
   }
 
-  let attente = false;
+  /* ---------- Une seule boucle pour tout ce qui suit le défilement ---------- */
+  const deploies = $$('.deploie');
+  const frise = $('.frise-cadre'), etapes = $$('.frise li');
+  const entete = $('.entete');
+  const parlons = $('.parlons'), anneau = $('.sceau-anneau'), sceau = $('.sceau');
+
+  function mesurer() {
+    mesurerMur();
+    etapes.forEach(li => { li._haut = li.offsetTop + 14; });
+  }
+
+  let heroVu = true, finVu = false, souris = null;
+  new IntersectionObserver(([e]) => { heroVu = e.isIntersecting; demander(); }).observe(scene);
+  new IntersectionObserver(([e]) => { finVu = e.isIntersecting; demander(); }).observe(parlons);
+
+  let angle = 0, vitesse = .012, vitesseCible = .012;
+  if (fin && mouvement) {
+    window.addEventListener('mousemove', e => { souris = { x: e.clientX, y: e.clientY }; }, { passive: true });
+    window.addEventListener('mouseout', e => { if (!e.relatedTarget) souris = null; });
+    sceau.addEventListener('mouseenter', () => { vitesseCible = .1; });
+    sceau.addEventListener('mouseleave', () => { vitesseCible = .012; });
+  }
+
+  let attente = false, tPrec = 0, scrollPrec = window.scrollY;
   function demander() {
     if (attente) return;
     attente = true;
-    requestAnimationFrame(() => { attente = false; dessiner(); });
+    requestAnimationFrame(image);
+  }
+
+  function image(ts) {
+    attente = false;
+    const dt = tPrec ? Math.min(64, ts - tPrec) : 16;
+    tPrec = ts;
+    const vh = window.innerHeight, vw = window.innerWidth, defil = window.scrollY;
+
+    // Toutes les lectures d'abord…
+    const rScene = scene.getBoundingClientRect();
+    const rMur = heroVu ? mur.getBoundingClientRect() : null;
+    const hautsDep = deploies.map(d => d.getBoundingClientRect().top);
+    const hautsMots = blocsMots.map(b => b.el.getBoundingClientRect().top);
+    const rFrise = frise.getBoundingClientRect();
+    const rLettres = finVu && souris ? lettresFin.map(l => l.o.getBoundingClientRect()) : null;
+    const docH = document.documentElement.scrollHeight;
+
+    // …puis les écritures
+    if (heroVu) {
+      const course = rScene.height - vh;
+      const p = scene.classList.contains('fixe') ? 1 : (course > 0 ? borne(-rScene.top / course) : 1);
+      dessinerMur(p, ts, rMur);
+    }
+
+    // Les aplats s'ouvrent depuis une étiquette arrondie, comme dans la charte
+    const marge = Math.min(vw * .05, 64);
+    deploies.forEach((d, i) => {
+      const e = mouvement ? adoucir(borne((vh - hautsDep[i]) / (vh * .6))) : 1;
+      const v = e >= .999 ? '' : `inset(0px ${((1 - e) * marge).toFixed(1)}px round ${((1 - e) * 40).toFixed(1)}px)`;
+      if (d._clip !== v) { d.style.clipPath = v; d._clip = v; }
+    });
+
+    blocsMots.forEach((b, i) => {
+      const p = borne((vh * .9 - hautsMots[i]) / (vh * .5));
+      const k = p * (b.mots.length + 2);
+      if (Math.abs(k - b.k) < .005) return;
+      b.k = k;
+      b.mots.forEach((m, j) => { m.style.opacity = (.16 + .84 * borne(k - j)).toFixed(3); });
+    });
+
+    // La frise avance
+    const vertical = vw <= 1000;
+    const pf = !mouvement ? 1 : vertical ? borne((vh * .62 - rFrise.top) / rFrise.height) : borne((vh * .82 - rFrise.top) / (vh * .45));
+    if (frise._p !== pf) {
+      frise._p = pf;
+      frise.style.setProperty('--avance', pf.toFixed(4));
+      etapes.forEach((li, j) => li.classList.toggle('actif', vertical ? pf * rFrise.height >= li._haut : pf >= (j + .12) / etapes.length));
+    }
+
+    // Le bandeau du haut et l'avancée de lecture
+    entete.classList.toggle('visible', rScene.bottom < 60);
+    entete.style.setProperty('--avance', borne(defil / Math.max(1, docH - vh)).toFixed(4));
+
+    // Parlons-en : le sceau tourne, les lettres suivent la souris
+    if (finVu && mouvement) {
+      vitesse += (vitesseCible - vitesse) * .05;
+      angle += dt * vitesse + (defil - scrollPrec) * .15;
+      anneau.setAttribute('transform', `rotate(${(angle - 58).toFixed(2)} 120 120)`);
+      lettresFin.forEach((l, j) => {
+        let ty = 0, tr = 0;
+        if (rLettres) {
+          const r = rLettres[j];
+          const dx = r.left + r.width / 2 - souris.x, dy = r.top + r.height / 2 - souris.y;
+          const f = Math.max(0, 1 - Math.hypot(dx, dy) / 260);
+          ty = -f * f * r.height * .3;
+          tr = -dx / 260 * f * 12;
+        }
+        l.y += (ty - l.y) * .15;
+        l.r += (tr - l.r) * .15;
+        l.d.style.transform = `translate3d(0, ${l.y.toFixed(2)}px, 0) rotate(${l.r.toFixed(2)}deg)`;
+      });
+    }
+    scrollPrec = defil;
+
+    // Tant que le mur ou la fin sont à l'écran, ça continue de vivre
+    if (mouvement && !document.hidden && (heroVu || finVu)) demander();
   }
 
   function regler() {
     scene.classList.toggle('fixe', calme.matches);
     mesurer();
-    dessiner();
+    demander();
   }
 
   regler();
   window.addEventListener('scroll', demander, { passive: true });
   window.addEventListener('resize', () => { mesurer(); demander(); });
   calme.addEventListener?.('change', regler);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { mesurer(); dessiner(); });
+  document.addEventListener('visibilitychange', demander);
+  prets.then(() => { mesurer(); demander(); });
 })();
 </script>
 </body>
