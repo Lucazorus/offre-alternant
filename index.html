@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Brouillon : à retirer quand la page est définitive, pour qu'elle apparaisse sur Google -->
+<meta name="robots" content="noindex">
+<title>Alternant en communication, réussissez votre année</title>
+<meta name="description" content="Un accompagnement sur mesure pour les dirigeants et leurs alternants en communication, sans communicant dans l’équipe. Démarrage en janvier 2027.">
+<meta property="og:title" content="Alternant en communication, réussissez votre année même sans communicant dans l’équipe">
+<meta property="og:description" content="Un accompagnement sur mesure pour les dirigeants et leurs alternants, avec un démarrage en janvier.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F4EFE6'/%3E%3Cpath d='M21 6C14 4 6 7 5 15s7 12 14 11 10-7 8-13-8-7-12-6' fill='none' stroke='%23C93C25' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root {
+  --papier: #F4EFE6;
+  --papier-2: #ECE5D7;
+  --encre: #1D1C1A;
+  --encre-2: #45413A;
+  --gris: #6A645B;
+  --trait: #D6CDBC;
+  --rouge: #C93C25;
+  --rouge-fonce: #A9311D;
+  --fluo: #F5E25B;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --marge: clamp(16px, 5vw, 64px);
+  --max: 1200px;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3 { font-family: var(--serif); font-weight: 340; letter-spacing: -0.02em; margin: 0; }
+h2 { font-size: clamp(2rem, 1.1rem + 3vw, 3.5rem); line-height: 1.04; }
+p { margin: 0 0 1em; }
+a { color: inherit; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.conteneur { max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); }
+
+/* Infos à remplir : surlignées tant qu'elles sont vides */
+.a-remplir {
+  background: var(--fluo);
+  color: var(--encre) !important;
+  padding: 0 .25em;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Boutons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--rouge); color: #FFFBF5;
+  font-weight: 600; font-size: 1rem; line-height: 1.2;
+  text-decoration: none;
+  padding: 17px 26px;
+  border-radius: 6px;
+  transition: background .2s, transform .2s;
+}
+.btn:hover { background: var(--rouge-fonce); }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-petit { padding: 10px 16px; font-size: .9rem; }
+.btn-ligne { background: transparent; color: var(--encre); box-shadow: inset 0 0 0 1.5px var(--encre); padding: 11px 18px; font-size: .92rem; }
+.btn-ligne:hover { background: var(--encre); color: var(--papier); }
+.lien { font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+.lien:hover { color: var(--rouge-fonce); }
+
+/* En-tête */
+.entete {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(244, 239, 230, .92);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--trait);
+}
+.entete-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; }
+.signature { margin: 0; line-height: 1.25; }
+.signature .nom { display: block; font-weight: 600; font-size: .98rem; }
+.signature .metier { display: block; color: var(--gris); font-size: .84rem; }
+
+/* Ouverture */
+.ouverture {
+  padding: clamp(56px, 9vw, 120px) 0 clamp(48px, 6vw, 80px);
+  background-image: radial-gradient(circle, rgba(29, 28, 26, .11) 1px, transparent 1.3px);
+  background-size: 24px 24px;
+  background-position: -11px -11px;
+}
+.h1-qui { display: block; font-family: var(--sans); font-weight: 600; font-size: clamp(1rem, .9rem + .4vw, 1.2rem); letter-spacing: 0; margin-bottom: 18px; }
+.h1-titre { display: block; font-size: clamp(2.55rem, .9rem + 6.3vw, 6.3rem); line-height: .98; letter-spacing: -0.035em; max-width: 15ch; }
+.h1-titre em { font-style: italic; font-weight: 300; }
+.ouverture-bas { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px 48px; margin-top: clamp(28px, 4vw, 48px); }
+.chapo { font-size: clamp(1.12rem, 1rem + .45vw, 1.35rem); line-height: 1.45; max-width: 34ch; margin: 0; color: var(--encre-2); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
+@media (min-width: 1100px) {
+  .ouverture { padding-top: 88px; }
+  .ouverture .conteneur { display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); column-gap: 56px; align-items: end; }
+  .ouverture-bas { flex-direction: column; align-items: flex-start; justify-content: flex-end; margin: 0 0 10px; gap: 28px; }
+  .ouverture-bas .actions { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .annee { grid-column: 1 / -1; margin-top: 72px; }
+}
+
+/* L'année en un coup d'œil */
+.annee { margin-top: clamp(56px, 8vw, 96px); background: var(--papier); }
+.annee-tete { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; margin-bottom: 14px; }
+.annee-an { font-family: var(--serif); font-style: italic; font-size: 1.6rem; line-height: 1; }
+.annee-legende { color: var(--gris); font-size: .88rem; }
+.trimestres { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.trimestres > span { border-left: 1px solid var(--encre); padding: 4px 8px 6px; font-size: .78rem; color: var(--gris); }
+.trimestres .court { display: none; }
+.mois { --ligne: 52px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--encre); border-bottom: 1px solid var(--trait); }
+.m { position: relative; min-height: 148px; padding: 10px 8px 0; border-left: 1px solid var(--trait); }
+.m:nth-child(3n+1) { border-left-color: var(--encre); }
+.m:last-child { border-right: 1px solid var(--trait); }
+.m-nom { position: relative; display: inline-block; font-family: var(--serif); font-size: 1.05rem; line-height: 1.2; }
+.m-nom .court { display: none; }
+.m-janv .m-nom { font-weight: 500; }
+.cercle { position: absolute; left: -15px; top: -11px; width: calc(100% + 30px); height: calc(100% + 22px); overflow: visible; pointer-events: none; }
+.cercle path, .trait-main path { fill: none; stroke: var(--rouge); stroke-width: 2.6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.seg { position: absolute; left: 0; right: 0; top: var(--ligne); height: 2px; margin-top: -1px; background: var(--encre); }
+.m:first-child .seg { left: 18%; }
+.m:last-child .seg { background: linear-gradient(90deg, var(--encre), rgba(29, 28, 26, 0)); }
+.pt { position: absolute; top: var(--ligne); left: calc(var(--x) * 100%); width: 13px; height: 13px; border-radius: 50%; background: var(--encre); transform: translate(-50%, -50%); }
+.pt-creux { background: var(--papier); box-shadow: inset 0 0 0 2px var(--encre); }
+.pt-rouge { width: 17px; height: 17px; background: var(--rouge); }
+.m-note { position: absolute; top: calc(var(--ligne) + 18px); left: 8px; right: 6px; margin: 0; font-size: .78rem; line-height: 1.3; color: var(--encre-2); }
+.m-note.fin { color: var(--gris); font-style: italic; }
+
+/* Sections */
+.section { padding: clamp(72px, 10vw, 136px) 0; border-top: 1px solid var(--trait); }
+.grille { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 32px; }
+.col-titre { grid-column: 1 / span 4; }
+.col-texte { grid-column: 5 / span 8; }
+.grand { font-size: clamp(1.15rem, 1rem + .5vw, 1.35rem); line-height: 1.5; }
+.surtitre { font-family: var(--sans); font-weight: 600; font-size: .95rem; letter-spacing: 0; margin: 0 0 10px; }
+
+/* Le constat : les problèmes rayés */
+.barres { list-style: none; padding: 0; margin: 6px 0 36px; }
+.barres li { font-family: var(--serif); font-weight: 340; font-size: clamp(1.45rem, 1rem + 1.5vw, 2.15rem); line-height: 1.22; padding: 6px 0; letter-spacing: -0.01em; }
+.barres span {
+  background-image: linear-gradient(var(--rouge), var(--rouge));
+  background-repeat: no-repeat;
+  background-size: 100% .09em;
+  background-position: 0 60%;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  color: var(--encre-2);
+}
+
+/* La promesse */
+.promesse { padding: clamp(80px, 12vw, 168px) 0; border-top: 1px solid var(--trait); }
+.promesse-texte { font-family: var(--serif); font-weight: 320; font-size: clamp(2rem, .9rem + 4.4vw, 4.8rem); line-height: 1.06; letter-spacing: -0.03em; max-width: 21ch; margin: 0; }
+.souligne { position: relative; white-space: nowrap; font-style: italic; }
+.trait-main { position: absolute; left: -3%; bottom: -.16em; width: 106%; height: .3em; overflow: visible; pointer-events: none; }
+.trait-main path { stroke-width: 3.2; }
+
+/* Pour qui */
+.registre { margin: clamp(36px, 5vw, 56px) 0 0; }
+.registre > div { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px 32px; padding: 28px 0; border-top: 1px solid var(--trait); align-items: baseline; }
+.registre > div:last-child { border-bottom: 1px solid var(--trait); }
+.registre dt { grid-column: 1 / span 4; font-family: var(--serif); font-weight: 340; font-size: clamp(1.6rem, 1rem + 2vw, 2.5rem); line-height: 1.08; letter-spacing: -0.02em; }
+.registre dd { grid-column: 5 / span 8; margin: 0; font-size: clamp(1.08rem, 1rem + .3vw, 1.25rem); color: var(--encre-2); max-width: 44ch; }
+
+/* Pourquoi janvier */
+.echeance { font-family: var(--serif); font-style: italic; font-size: clamp(1.4rem, 1.1rem + 1vw, 1.75rem); line-height: 1.3; color: var(--rouge-fonce); margin: 32px 0 0; max-width: 30ch; }
+
+/* L'approche en 3 temps */
+.temps { list-style: none; padding: 0; margin: clamp(40px, 6vw, 64px) 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.temps li { position: relative; padding-top: 40px; }
+.temps li::before { content: ""; position: absolute; top: 7px; left: 0; right: -40px; height: 2px; background: var(--encre); }
+.temps li:last-child::before { right: 0; background: linear-gradient(90deg, var(--encre), rgba(29, 28, 26, 0)); }
+.temps li::after { content: ""; position: absolute; top: 0; left: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--encre); }
+.temps li:last-child::after { background: var(--rouge); }
+.temps .quand-court { font-size: .86rem; color: var(--gris); margin: 0 0 10px; }
+.temps h3 { font-size: clamp(1.55rem, 1.1rem + 1vw, 2rem); line-height: 1.08; margin: 0 0 14px; }
+.temps p { color: var(--encre-2); }
+
+/* Ce que vous recevez */
+.recevez { background: var(--papier-2); }
+.livrables { list-style: none; padding: 0; margin: clamp(40px, 6vw, 64px) 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; }
+.livrables li { border-top: 1.5px solid var(--encre); padding: 20px 0 44px; }
+.livrables h3 { font-size: 1.5rem; line-height: 1.12; margin: 0 0 10px; }
+.livrables p { margin: 0; color: var(--encre-2); }
+
+/* Le déroulé */
+.agenda { list-style: none; padding: 0; margin: 0; }
+.agenda li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 6px 32px; padding: 24px 0; border-top: 1px solid var(--trait); }
+.agenda li:last-child { border-bottom: 1px solid var(--trait); }
+.quand { font-family: var(--serif); font-style: italic; font-size: clamp(1.35rem, 1.1rem + .7vw, 1.65rem); line-height: 1.15; margin: 0; }
+.quand small { display: block; margin-top: 4px; font-family: var(--sans); font-style: normal; font-size: .82rem; color: var(--gris); }
+.agenda p { margin: 0; }
+.agenda .formule { margin-top: 6px; font-size: .86rem; color: var(--gris); }
+
+/* Les formules */
+.tableau { width: 100%; border-collapse: collapse; margin-top: clamp(40px, 6vw, 64px); }
+.tableau th, .tableau td { padding: 16px 14px; border-bottom: 1px solid var(--trait); text-align: left; vertical-align: middle; }
+.tableau thead th { vertical-align: bottom; border-bottom: 1.5px solid var(--encre); padding-bottom: 20px; }
+.tableau tbody th { font-weight: 400; width: 40%; padding-left: 0; }
+.tableau td { width: 20%; }
+.f-nom { display: block; font-family: var(--sans); font-weight: 600; font-size: 1rem; margin-bottom: 6px; }
+.f-prix { display: block; font-family: var(--serif); font-weight: 340; font-size: clamp(2rem, 1.2rem + 1.6vw, 2.8rem); line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
+.f-prix small { font-family: var(--sans); font-size: .9rem; letter-spacing: 0; color: var(--gris); }
+.coche { width: 24px; height: 24px; display: block; }
+.coche path { fill: none; stroke: var(--rouge); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.non { display: block; width: 14px; height: 1.5px; background: var(--trait); }
+.quantite { display: block; font-size: .86rem; color: var(--encre-2); margin-top: 2px; }
+.tableau tfoot td { border-bottom: 0; padding-top: 24px; }
+.formules-liste { display: none; }
+.cadre { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 8px 32px; margin-top: clamp(48px, 6vw, 72px); }
+.cadre h3 { grid-column: 1 / span 4; font-size: 1.45rem; line-height: 1.15; }
+.cadre p { grid-column: 5 / span 8; color: var(--encre-2); margin: 0; max-width: 62ch; }
+
+/* Pourquoi ça marche */
+.raisons { list-style: none; padding: 0; margin: clamp(40px, 6vw, 64px) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; }
+.raisons li { position: relative; padding: 26px 0 30px 48px; border-top: 1px solid var(--trait); }
+.raisons .coche { position: absolute; left: 0; top: 30px; width: 30px; height: 30px; }
+.raisons h3 { font-size: clamp(1.45rem, 1.1rem + .9vw, 1.9rem); line-height: 1.1; margin: 0 0 8px; }
+.raisons p { margin: 0; color: var(--encre-2); }
+
+/* Questions fréquentes */
+.faq details { border-top: 1px solid var(--trait); }
+.faq details:last-child { border-bottom: 1px solid var(--trait); }
+.faq summary { position: relative; list-style: none; cursor: pointer; padding: 22px 44px 22px 0; font-family: var(--serif); font-weight: 380; font-size: clamp(1.2rem, 1.05rem + .5vw, 1.45rem); line-height: 1.25; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; position: absolute; right: 6px; top: 50%; width: 16px; height: 16px; translate: 0 -50%;
+  background:
+    linear-gradient(var(--encre), var(--encre)) center / 100% 2px no-repeat,
+    linear-gradient(var(--encre), var(--encre)) center / 2px 100% no-repeat;
+  transition: rotate .25s;
+}
+.faq details[open] summary::after { rotate: 45deg; }
+.faq summary:hover { color: var(--rouge-fonce); }
+.faq details p { margin: 0 0 26px; color: var(--encre-2); max-width: 62ch; }
+
+/* Parlons-en */
+.parlons { background: var(--encre); color: var(--papier); padding: clamp(88px, 13vw, 176px) 0 40px; }
+.parlons h2 { font-size: clamp(3.2rem, 1.6rem + 7vw, 8rem); line-height: .95; letter-spacing: -0.04em; }
+.parlons-texte { font-family: var(--serif); font-weight: 320; font-size: clamp(1.3rem, 1rem + 1.2vw, 2rem); line-height: 1.3; max-width: 28ch; margin: 28px 0 40px; }
+.parlons-texte .souligne { font-style: normal; }
+.parlons .btn { font-size: 1.08rem; padding: 20px 30px; }
+.coordonnees { margin: 56px 0 0; color: rgba(244, 239, 230, .75); line-height: 2; }
+.coordonnees a { text-decoration: none; }
+.coordonnees a[href]:hover { color: var(--papier); text-decoration: underline; }
+.coordonnees .pt-sep { margin: 0 .5em; opacity: .5; }
+.pied { margin-top: clamp(72px, 10vw, 120px); padding-top: 24px; border-top: 1px solid rgba(244, 239, 230, .18); font-size: .84rem; color: rgba(244, 239, 230, .55); }
+
+/* Animations (seulement si le système les autorise) */
+@media (prefers-reduced-motion: no-preference) {
+  .js .seg { transform: scaleX(0); transform-origin: left; animation: tracer .3s linear forwards; animation-delay: calc(.55s + var(--i) * .22s); }
+  .js .pt { scale: 0; animation: poser .4s cubic-bezier(.3, 1.6, .5, 1) forwards; animation-delay: calc(.55s + (var(--i) + var(--x)) * .22s); }
+  .js .m-note { opacity: 0; animation: apparaitre .5s ease forwards; animation-delay: calc(.7s + (var(--i) + .5) * .22s); }
+  .js .cercle path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: dessiner .9s cubic-bezier(.5, 0, .3, 1) .2s forwards; }
+
+  .js .barres span { background-size: 0% .09em; color: var(--encre); transition: background-size .55s cubic-bezier(.6, 0, .3, 1), color .55s; }
+  .js .barres li:nth-child(2) span { transition-delay: .35s; }
+  .js .barres li:nth-child(3) span { transition-delay: .7s; }
+  .js .barres li:nth-child(4) span { transition-delay: 1.05s; }
+  .js .barres.vu span { background-size: 100% .09em; color: var(--encre-2); }
+
+  .js .trait-main path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .8s cubic-bezier(.5, 0, .3, 1) .3s; }
+  .js .vu .trait-main path { stroke-dashoffset: 0; }
+}
+@keyframes tracer { to { transform: scaleX(1); } }
+@keyframes poser { to { scale: 1; } }
+@keyframes apparaitre { to { opacity: 1; } }
+@keyframes dessiner { to { stroke-dashoffset: 0; } }
+
+/* Tablette */
+@media (max-width: 980px) {
+  .livrables { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-note { font-size: .72rem; }
+}
+
+/* Téléphone */
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .grille { grid-template-columns: minmax(0, 1fr); }
+  .col-titre, .col-texte { grid-column: 1 / -1; }
+  .col-titre { margin-bottom: 28px; }
+  .registre > div { grid-template-columns: 1fr; padding: 22px 0; }
+  .registre dt, .registre dd { grid-column: 1 / -1; }
+  .ouverture-bas { align-items: flex-start; }
+  .actions { flex-direction: column; align-items: flex-start; }
+
+  .mois { --ligne: 44px; }
+  .m { min-height: 62px; padding: 8px 0 0; text-align: center; }
+  .m-nom .long { display: none; }
+  .m-nom .court { display: inline; }
+  .m-note { display: none; }
+  .pt { width: 10px; height: 10px; }
+  .pt-rouge { width: 13px; height: 13px; }
+  .cercle { left: -9px; width: calc(100% + 18px); top: -9px; height: calc(100% + 18px); }
+  .trimestres .long { display: none; }
+  .trimestres .court { display: inline; }
+
+  .temps { grid-template-columns: 1fr; gap: 0; }
+  .temps li { padding: 0 0 36px 38px; }
+  .temps li::before { top: 8px; bottom: -8px; left: 7px; right: auto; width: 2px; height: auto; }
+  .temps li:last-child::before { display: none; }
+  .temps .quand-court { margin-top: -3px; }
+
+  .livrables { grid-template-columns: 1fr; }
+  .livrables li { padding-bottom: 28px; }
+
+  .agenda li { grid-template-columns: 1fr; }
+
+  .tableau { display: none; }
+  .formules-liste { display: block; margin-top: 40px; }
+  .formule-bloc { border-top: 1.5px solid var(--encre); padding: 22px 0 30px; }
+  .formule-bloc .f-prix { margin: 4px 0 16px; }
+  .formule-bloc ul { list-style: none; padding: 0; margin: 0 0 22px; }
+  .formule-bloc li { position: relative; padding: 5px 0 5px 32px; }
+  .formule-bloc li .coche { position: absolute; left: 0; top: 7px; width: 20px; height: 20px; }
+  .formule-bloc li.plus { padding-left: 0; color: var(--gris); font-style: italic; }
+  .cadre { grid-template-columns: 1fr; }
+  .cadre h3, .cadre p { grid-column: 1 / -1; }
+
+  .raisons { grid-template-columns: 1fr; }
+  .raisons li { padding-left: 42px; }
+  .raisons .coche { width: 26px; height: 26px; top: 30px; }
+}
+@media (max-width: 380px) {
+  .signature .metier { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="entete">
+  <div class="conteneur entete-in">
+    <p class="signature"><span class="nom" data-info="nom">[Votre nom]</span><span class="metier" data-info="metier">Consultant(e) en communication</span></p>
+    <a class="btn btn-petit" data-contact href="#parlons-en">Prendre 20&nbsp;minutes</a>
+  </div>
+</header>
+
+<main>
+
+<section class="ouverture">
+  <div class="conteneur">
+    <h1>
+      <span class="h1-qui">Alternant en communication<span class="sr">&nbsp;:</span></span>
+      <span class="h1-titre">Réussissez votre année, <em>même sans communicant dans l’équipe.</em></span>
+    </h1>
+    <div class="ouverture-bas">
+      <p class="chapo">Un accompagnement sur mesure pour les dirigeants et leurs alternants, avec un démarrage en janvier.</p>
+      <div class="actions">
+        <a class="btn" data-contact href="#parlons-en">Réserver un premier échange de 20&nbsp;minutes</a>
+        <a class="lien" href="#formules">Voir les formules</a>
+      </div>
+    </div>
+
+    <div class="annee" role="img" aria-label="Le plan sur l’année : entretiens et feuille de route en janvier, points de suivi en février, avril, juillet et octobre, jusqu’à la fin de l’alternance.">
+      <div class="annee-tete">
+        <span class="annee-an">2027</span>
+        <span class="annee-legende">Un plan découpé par trimestre, de janvier à la fin de l’alternance</span>
+      </div>
+      <div class="trimestres">
+        <span><span class="long">1<sup>er</sup> trimestre</span><span class="court">T1</span></span>
+        <span><span class="long">2<sup>e</sup> trimestre</span><span class="court">T2</span></span>
+        <span><span class="long">3<sup>e</sup> trimestre</span><span class="court">T3</span></span>
+        <span><span class="long">4<sup>e</sup> trimestre</span><span class="court">T4</span></span>
+      </div>
+      <ol class="mois">
+        <li class="m m-janv" style="--i:0">
+          <span class="m-nom"><span class="long">janv.</span><span class="court">J</span>
+            <svg class="cercle" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M64 5 C42 0 10 5 5 23 C1 39 30 48 58 46 C84 44 98 33 94 19 C90 6 68 1 42 6"/></svg>
+          </span>
+          <span class="seg"></span>
+          <span class="pt pt-creux" style="--x:.18"></span>
+          <span class="pt pt-rouge" style="--x:.86"></span>
+          <p class="m-note">Entretiens, puis feuille de route</p>
+        </li>
+        <li class="m" style="--i:1"><span class="m-nom"><span class="long">févr.</span><span class="court">F</span></span><span class="seg"></span><span class="pt" style="--x:.5"></span><p class="m-note">Premier point de suivi</p></li>
+        <li class="m" style="--i:2"><span class="m-nom"><span class="long">mars</span><span class="court">M</span></span><span class="seg"></span></li>
+        <li class="m" style="--i:3"><span class="m-nom"><span class="long">avr.</span><span class="court">A</span></span><span class="seg"></span><span class="pt" style="--x:.5"></span><p class="m-note">Bilan du premier trimestre</p></li>
+        <li class="m" style="--i:4"><span class="m-nom"><span class="long">mai</span><span class="court">M</span></span><span class="seg"></span></li>
+        <li class="m" style="--i:5"><span class="m-nom"><span class="long">juin</span><span class="court">J</span></span><span class="seg"></span></li>
+        <li class="m" style="--i:6"><span class="m-nom"><span class="long">juil.</span><span class="court">J</span></span><span class="seg"></span><span class="pt" style="--x:.5"></span><p class="m-note">Point d’ajustement</p></li>
+        <li class="m" style="--i:7"><span class="m-nom"><span class="long">août</span><span class="court">A</span></span><span class="seg"></span></li>
+        <li class="m" style="--i:8"><span class="m-nom"><span class="long">sept.</span><span class="court">S</span></span><span class="seg"></span></li>
+        <li class="m" style="--i:9"><span class="m-nom"><span class="long">oct.</span><span class="court">O</span></span><span class="seg"></span><span class="pt" style="--x:.5"></span><p class="m-note">Point d’ajustement</p></li>
+        <li class="m" style="--i:10"><span class="m-nom"><span class="long">nov.</span><span class="court">N</span></span><span class="seg"></span></li>
+        <li class="m" style="--i:11"><span class="m-nom"><span class="long">déc.</span><span class="court">D</span></span><span class="seg"></span><p class="m-note fin">jusqu’à la fin de l’alternance</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="constat">
+  <div class="conteneur grille">
+    <h2 class="col-titre">Le constat</h2>
+    <div class="col-texte">
+      <p class="grand">Votre alternant en communication est en poste depuis quelques mois et vous sentez qu’il manque un cadre&nbsp;: personne dans l’entreprise n’est communicant pour le guider.</p>
+      <p class="surtitre">Résultat fréquent</p>
+      <ul class="barres" data-anim>
+        <li><span>des objectifs flous,</span></li>
+        <li><span>un alternant qui se demande quoi prioriser,</span></li>
+        <li><span>un dirigeant qui manque de temps pour le guider,</span></li>
+        <li><span>une alternance qui n’exploite pas tout son potentiel.</span></li>
+      </ul>
+      <p class="grand">Janvier est le bon moment pour poser ce cadre et repartir sur des bases claires.</p>
+    </div>
+  </div>
+</section>
+
+<section class="promesse">
+  <div class="conteneur">
+    <h2 class="surtitre">Notre promesse</h2>
+    <p class="promesse-texte" data-anim>Un alternant qui sait quoi faire dès le mois de <span class="souligne">février<svg class="trait-main" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 9 C25 4 60 3 98 7"/></svg></span>, avec une feuille de route claire jusqu’à la fin de son alternance.</p>
+  </div>
+</section>
+
+<section class="section" id="pour-qui">
+  <div class="conteneur">
+    <h2>Pour qui&#8239;?</h2>
+    <dl class="registre">
+      <div>
+        <dt>Les dirigeants</dt>
+        <dd>de TPE, PME, associations ou exploitations qui accueillent un alternant en communication, déjà en poste ou arrivant en janvier, sans tuteur communicant.</dd>
+      </div>
+      <div>
+        <dt>Les alternants</dt>
+        <dd>qui veulent un cadre clair, des priorités et un regard expert pour progresser.</dd>
+      </div>
+      <div>
+        <dt>Les écoles et CFA</dt>
+        <dd>qui souhaitent sécuriser le parcours de leurs étudiants en entreprise.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="section" id="janvier">
+  <div class="conteneur grille">
+    <h2 class="col-titre">Pourquoi démarrer en janvier&#8239;?</h2>
+    <div class="col-texte">
+      <p class="grand">Le changement d’année est le bon moment pour faire le point&nbsp;: les objectifs se fixent, les budgets s’arrêtent et l’alternant a déjà quelques mois de recul sur l’entreprise. Le plan démarre sans attendre la rentrée suivante.</p>
+      <p class="echeance">Les accompagnements débutent début janvier 2027. Pour caler les entretiens avant les fêtes, contactez-moi avant le <span data-info="dateLimite">[date limite]</span>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="approche">
+  <div class="conteneur">
+    <h2>Notre approche en 3&nbsp;temps</h2>
+    <ol class="temps">
+      <li>
+        <p class="quand-court">Début janvier</p>
+        <h3>Comprendre l’entreprise</h3>
+        <p>Un entretien avec le dirigeant pour cerner l’activité, les objectifs, les cibles, les canaux déjà utilisés, les moyens disponibles et les problématiques de communication.</p>
+      </li>
+      <li>
+        <p class="quand-court">Début janvier</p>
+        <h3>Comprendre l’alternant</h3>
+        <p>Un entretien avec l’alternant pour identifier ses savoir-faire, ses points forts, ses besoins de montée en compétences et ses envies. Nous faisons aussi le point sur ce qui a déjà été réalisé depuis son arrivée.</p>
+      </li>
+      <li>
+        <p class="quand-court">Fin janvier</p>
+        <h3>Construire la feuille de route</h3>
+        <p>Un plan d’action de janvier à la fin de l’alternance (jusqu’à 12&nbsp;mois), découpé par trimestre, qui précise quoi faire, dans quel ordre, avec quels indicateurs, et ce que l’alternant peut mener seul ou doit faire valider.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section recevez" id="livrables">
+  <div class="conteneur">
+    <h2>Ce que vous recevez</h2>
+    <ul class="livrables">
+      <li><h3>Une synthèse de diagnostic</h3><p>D’une page&nbsp;: objectifs, cibles, enjeux, ressources.</p></li>
+      <li><h3>Un plan d’action de janvier à la fin de l’alternance</h3><p>Priorités par trimestre, actions concrètes, indicateurs de réussite.</p></li>
+      <li><h3>Un calendrier</h3><p>Les temps forts de communication de l’année.</p></li>
+      <li><h3>Une répartition des rôles</h3><p>Ce que l’alternant fait en autonomie, ce qui passe par la validation du dirigeant.</p></li>
+      <li><h3>Des points de suivi</h3><p>Pour ajuster le cap.</p></li>
+      <li><h3>Un support par mail</h3><p>Pour débloquer les situations au quotidien.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="deroule">
+  <div class="conteneur grille">
+    <h2 class="col-titre">Le déroulé</h2>
+    <ol class="agenda col-texte">
+      <li>
+        <p class="quand">Début janvier</p>
+        <div><p>Entretien dirigeant et entretien alternant</p><p class="formule">Toutes les formules</p></div>
+      </li>
+      <li>
+        <p class="quand">Fin janvier</p>
+        <div><p>Remise du diagnostic et du plan d’action jusqu’à la fin de l’alternance</p><p class="formule">Toutes les formules</p></div>
+      </li>
+      <li>
+        <p class="quand">Février<small>M+1</small></p>
+        <div><p>Premier point de suivi&nbsp;: lancement et premiers ajustements</p><p class="formule">Formules Accompagné et Premium</p></div>
+      </li>
+      <li>
+        <p class="quand">Avril<small>M+3</small></p>
+        <div><p>Deuxième point&nbsp;: bilan du premier trimestre, priorités suivantes</p><p class="formule">Formules Accompagné et Premium</p></div>
+      </li>
+      <li>
+        <p class="quand">Juillet et octobre<small>M+6 et M+9</small></p>
+        <div><p>Points d’ajustement (selon la formule et la date de fin d’alternance)</p><p class="formule">Formule Premium</p></div>
+      </li>
+      <li>
+        <p class="quand">Jusqu’à la fin de l’alternance</p>
+        <div><p>Support par mail</p><p class="formule">Formules Accompagné et Premium</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="formules">
+  <div class="conteneur">
+    <h2>Les formules</h2>
+
+    <table class="tableau">
+      <thead>
+        <tr>
+          <th scope="col"><span class="sr">Ce qui est compris</span></th>
+          <th scope="col"><span class="f-nom">Essentiel</span><span class="f-prix">690&nbsp;€ <small>HT</small></span></th>
+          <th scope="col"><span class="f-nom">Accompagné</span><span class="f-prix">1&#8239;090&nbsp;€ <small>HT</small></span></th>
+          <th scope="col"><span class="f-nom">Premium</span><span class="f-prix">1&#8239;690&nbsp;€ <small>HT</small></span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Entretien dirigeant + entretien alternant</th>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+        </tr>
+        <tr>
+          <th scope="row">Synthèse de diagnostic</th>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+        </tr>
+        <tr>
+          <th scope="row">Plan d’action jusqu’à la fin de l’alternance</th>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+        </tr>
+        <tr>
+          <th scope="row">Points de suivi M+1 et M+3</th>
+          <td><span class="non" role="img" aria-label="Non compris"></span></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+        </tr>
+        <tr>
+          <th scope="row">Points de suivi M+6 et M+9 + bilan de fin</th>
+          <td><span class="non" role="img" aria-label="Non compris"></span></td>
+          <td><span class="non" role="img" aria-label="Non compris"></span></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+        </tr>
+        <tr>
+          <th scope="row">Support par mail</th>
+          <td><span class="non" role="img" aria-label="Non compris"></span></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg><span class="quantite">3&nbsp;échanges par mois</span></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg><span class="quantite">5&nbsp;échanges par mois</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Outils et modèles (calendrier éditorial, reporting)</th>
+          <td><span class="non" role="img" aria-label="Non compris"></span></td>
+          <td><span class="non" role="img" aria-label="Non compris"></span></td>
+          <td><svg class="coche" viewBox="0 0 24 24" role="img" aria-label="Compris"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th scope="row"><span class="sr">Contact</span></th>
+          <td><a class="btn btn-ligne" data-contact href="#parlons-en">En parler</a></td>
+          <td><a class="btn btn-ligne" data-contact href="#parlons-en">En parler</a></td>
+          <td><a class="btn btn-ligne" data-contact href="#parlons-en">En parler</a></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="formules-liste">
+      <div class="formule-bloc">
+        <span class="f-nom">Essentiel</span>
+        <span class="f-prix">690&nbsp;€ <small>HT</small></span>
+        <ul>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Entretien dirigeant et entretien alternant</li>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Synthèse de diagnostic</li>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Plan d’action jusqu’à la fin de l’alternance</li>
+        </ul>
+        <a class="btn btn-ligne" data-contact href="#parlons-en">En parler</a>
+      </div>
+      <div class="formule-bloc">
+        <span class="f-nom">Accompagné</span>
+        <span class="f-prix">1&#8239;090&nbsp;€ <small>HT</small></span>
+        <ul>
+          <li class="plus">Tout l’Essentiel, et en plus</li>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Points de suivi M+1 et M+3</li>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Support par mail, 3&nbsp;échanges par mois</li>
+        </ul>
+        <a class="btn btn-ligne" data-contact href="#parlons-en">En parler</a>
+      </div>
+      <div class="formule-bloc">
+        <span class="f-nom">Premium</span>
+        <span class="f-prix">1&#8239;690&nbsp;€ <small>HT</small></span>
+        <ul>
+          <li class="plus">Tout l’Accompagné, et en plus</li>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Points de suivi M+6 et M+9 et bilan de fin</li>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Support par mail, 5&nbsp;échanges par mois</li>
+          <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg>Outils et modèles (calendrier éditorial, reporting)</li>
+        </ul>
+        <a class="btn btn-ligne" data-contact href="#parlons-en">En parler</a>
+      </div>
+    </div>
+
+    <div class="cadre">
+      <h3>Le cadre du support par mail</h3>
+      <p>Réponse sous 48&nbsp;h ouvrées, dans la limite du volume prévu par votre formule. Sont exclus&nbsp;: la production de contenus, la création graphique et la relecture complète de documents. Ces prestations peuvent faire l’objet d’un devis séparé.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pourquoi">
+  <div class="conteneur">
+    <h2>Pourquoi ça marche</h2>
+    <ul class="raisons">
+      <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg><h3>Le dirigeant gagne du temps</h3><p>Il n’a plus à improviser la mission de l’alternant.</p></li>
+      <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg><h3>L’alternant gagne en autonomie</h3><p>Il sait quoi faire, pourquoi et dans quel ordre.</p></li>
+      <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg><h3>La communication de l’entreprise devient cohérente</h3><p>Les actions répondent à de vrais objectifs.</p></li>
+      <li><svg class="coche" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 L9.5 18 L20 5.5"/></svg><h3>L’alternance est mieux exploitée</h3><p>Résultats visibles et compétences acquises.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section faq" id="questions">
+  <div class="conteneur grille">
+    <h2 class="col-titre">Questions fréquentes</h2>
+    <div class="col-texte">
+      <details>
+        <summary>Faut-il que l’alternant soit déjà en poste&#8239;?</summary>
+        <p>Non. L’accompagnement convient aux alternants déjà en poste depuis quelques mois comme à ceux qui arrivent en janvier&nbsp;: nous partons de ce qui existe déjà.</p>
+      </details>
+      <details>
+        <summary>Qui participe aux entretiens&#8239;?</summary>
+        <p>Le dirigeant et l’alternant, séparément, afin que chacun puisse s’exprimer librement.</p>
+      </details>
+      <details>
+        <summary>Peut-on prolonger l’accompagnement au-delà de la période prévue&#8239;?</summary>
+        <p>Oui, sur devis, si l’alternance se poursuit ou si un nouvel alternant arrive.</p>
+      </details>
+      <details>
+        <summary>L’offre peut-elle être financée&#8239;?</summary>
+        <p><span data-info="financement">[À compléter selon votre statut et les dispositifs applicables.]</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="parlons" id="parlons-en">
+  <div class="conteneur">
+    <h2>Parlons-en</h2>
+    <p class="parlons-texte" data-anim>Un premier échange de <span class="souligne">20&nbsp;minutes<svg class="trait-main" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 9 C25 4 60 3 98 7"/></svg></span>, sans engagement, pour voir si cet accompagnement correspond à votre situation.</p>
+    <a class="btn" data-contact href="#parlons-en">Réserver mon échange
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p class="coordonnees">
+      <span data-info="nom">[Votre nom]</span><span class="pt-sep">·</span><a data-info="email" data-type="mail">[email]</a><span class="pt-sep">·</span><a data-info="telephone" data-type="tel">[téléphone]</a><span class="pt-sep">·</span><a data-info="site" data-type="web">[site]</a>
+    </p>
+    <p class="pied"><span data-info="nom">[Votre nom]</span>, <span data-info="metier">consultant(e) en communication</span></p>
+  </div>
+</section>
+
+</main>
+
+<script>
+/* ============================================================
+   À REMPLIR : tout ce qui est vide reste surligné en jaune sur la page.
+   ============================================================ */
+const INFOS = {
+  nom: "",              // ex. "Camille Martin"
+  metier: "Consultant(e) en communication",
+  email: "",            // ex. "camille@exemple.fr"
+  telephone: "",        // ex. "06 12 34 56 78"
+  site: "",             // ex. "exemple.fr"
+  dateLimite: "",       // ex. "12 décembre"
+  lienRdv: "",          // lien de prise de rendez-vous (Calendly, Cal.com…). Vide = les boutons ouvrent un mail.
+  financement: ""       // réponse à « L'offre peut-elle être financée ? »
+};
+
+(function () {
+  const vide = v => !v || !String(v).trim();
+
+  document.querySelectorAll('[data-info]').forEach(el => {
+    const v = INFOS[el.dataset.info];
+    if (vide(v)) { el.classList.add('a-remplir'); return; }
+    el.textContent = v;
+    const type = el.dataset.type;
+    if (type === 'mail') el.href = 'mailto:' + v;
+    if (type === 'tel') el.href = 'tel:' + v.replace(/[^\d+]/g, '');
+    if (type === 'web') el.href = /^https?:\/\//.test(v) ? v : 'https://' + v;
+  });
+
+  let contact = null;
+  if (!vide(INFOS.lienRdv)) contact = INFOS.lienRdv;
+  else if (!vide(INFOS.email)) contact = 'mailto:' + INFOS.email + '?subject=' + encodeURIComponent('Accompagnement de mon alternant en communication');
+  if (contact) {
+    document.querySelectorAll('[data-contact]').forEach(a => {
+      a.href = contact;
+      if (!vide(INFOS.lienRdv)) { a.target = '_blank'; a.rel = 'noopener'; }
+    });
+  }
+
+  const cibles = document.querySelectorAll('[data-anim]');
+  if (!('IntersectionObserver' in window)) { cibles.forEach(el => el.classList.add('vu')); return; }
+  const io = new IntersectionObserver(entrees => {
+    entrees.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.4 });
+  cibles.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
