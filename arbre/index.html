@@ -8,12 +8,13 @@
 <meta name="theme-color" content="#007A3F">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="i/b/000.webp" as="image" media="(min-aspect-ratio: 17/20)">
-<link rel="preload" href="i/t/000.webp" as="image" media="(max-aspect-ratio: 17/20)">
+<link rel="preload" href="i/b/000.avif" as="image" type="image/avif" media="(min-aspect-ratio: 17/20)">
+<link rel="preload" href="i/t/000.avif" as="image" type="image/avif" media="(max-aspect-ratio: 17/20)">
 <style>
 /* Version /arbre/ : l'arbre reste au centre, le défilement fait avancer le film (et le rembobine),
    chaque rubrique apparaît autour de lui et pointe la partie de l'arbre dont elle parle.
-   Film et repères : _blender/arbre.py (voir _blender/SCENARIO.md). */
+   Film : un chêne réel filmé par Gemini Omni (vidéo et scripts dans _video/, scénario dans _blender/SCENARIO.md).
+   Les textes sont posés sur des plaques de verre fumé vert (translucides et floutées, comme sur iOS), reliées à l'arbre. */
 @font-face { font-family: "Space Mono"; font-weight: 400; font-display: swap; src: url(../fonts/space-mono-400.woff2) format("woff2"); }
 @font-face { font-family: "Space Mono"; font-weight: 700; font-display: swap; src: url(../fonts/space-mono-700.woff2) format("woff2"); }
 @font-face { font-family: "Nunito Sans"; font-weight: 400 700; font-display: swap; src: url(../fonts/nunito-sans.woff2) format("woff2"); }
@@ -26,6 +27,13 @@
   --blanc: #FFFFFF;
   --gris: #4B5A52;
   --filet: #D3DDD7;
+  /* le verre fumé : vert sombre à moitié transparent, le film flouté derrière */
+  --verre: rgba(9, 46, 27, .55);
+  --verre-flou: blur(18px) saturate(1.5) brightness(.84);
+  --clair: #F4FAF6;
+  --clair-doux: rgba(238, 248, 242, .84);
+  --menthe: #B4EFCA;
+  --ligne-verre: rgba(255, 255, 255, .3);
   --mono: "Space Mono", ui-monospace, Menlo, monospace;
   --texte: "Avenir Next", "Avenir Next Thai Modern", "Avenir", "Nunito Sans", system-ui, sans-serif;
   --haut: 62px;
@@ -60,10 +68,10 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 .scene { position: fixed; inset: 0; overflow: hidden; }
 .film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--blanc); transform-origin: 50% 62%; }
 .traits { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
-.traits .halo { fill: none; stroke: var(--blanc); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-.traits .trait { fill: none; stroke: var(--encre); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.traits circle.halo { fill: var(--blanc); stroke: none; }
-.traits circle.point { fill: var(--rose); stroke: var(--vert-fonce); stroke-width: 2.5; }
+.traits .halo { fill: none; stroke: rgba(5, 30, 17, .5); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+.traits .trait { fill: none; stroke: var(--clair); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.traits circle.halo { fill: rgba(5, 30, 17, .5); stroke: none; }
+.traits circle.point { fill: var(--rose); stroke: var(--clair); stroke-width: 2; }
 .traits .rail-fond { fill: none; stroke: var(--vert-fonce); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
 .traits .rail { fill: none; stroke: var(--blanc); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
 .traits .pointille { stroke-dasharray: 0 11; }
@@ -81,29 +89,36 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 .eparpille > * { position: absolute; left: calc(var(--x, 5) * 1vw); top: calc(var(--y, 13) * 1vh); width: calc(var(--w, 26) * 1vw); max-width: 30rem; pointer-events: auto; }
 .eparpille > .a-droite { left: auto; right: calc(var(--r, 5) * 1vw); }
 [data-v] { opacity: 0; transform: translateY(var(--dy, 0px)); }
-.plaque { background: var(--blanc); padding: .85rem 1.05rem 1rem; }
-.filet { border-top: 3px solid var(--encre); padding-top: .65rem; }
-.plaque.filet { padding-top: .75rem; }
+.plaque {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, 0) 42%), var(--verre);
+  -webkit-backdrop-filter: var(--verre-flou); backdrop-filter: var(--verre-flou);
+  border-radius: 16px; color: var(--clair); padding: .85rem 1.05rem 1rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .26), inset 0 0 0 1px rgba(255, 255, 255, .13), 0 12px 32px rgba(3, 22, 12, .24);
+}
+.filet { border-top: 1px solid var(--ligne-verre); padding-top: .65rem; }
+.plaque.filet { border-top: 0; padding-top: .85rem; }
+.plaque > .filet:first-child, .plaque > :first-child > .filet:first-child { border-top: 0; padding-top: 0; }
 .replie { display: none; }
 
 /* Typographie */
 .titre { font-family: var(--mono); font-weight: 700; font-size: clamp(1.6rem, .9rem + 1.6vw, 2.8rem); line-height: 1.04; letter-spacing: -.035em; }
-.titre.plaque { display: inline-block; padding: .4rem .7rem .5rem; }
-.lead { font-family: var(--mono); font-weight: 700; font-size: .9rem; color: var(--vert); margin-bottom: .55rem; }
+.titre.plaque { display: inline-block; padding: .4rem .75rem .5rem; border-radius: 13px; }
+.lead { font-family: var(--mono); font-weight: 700; font-size: .9rem; color: var(--menthe); margin-bottom: .55rem; }
 .grand { font-size: 1.3rem; line-height: 1.38; letter-spacing: -.005em; }
-.calque h3 { font-family: var(--mono); font-weight: 700; font-size: 1.08rem; line-height: 1.2; letter-spacing: -.02em; color: var(--vert); margin-bottom: .3rem; }
+.calque h3 { font-family: var(--mono); font-weight: 700; font-size: 1.08rem; line-height: 1.2; letter-spacing: -.02em; color: var(--menthe); margin-bottom: .3rem; }
 .calque p { text-wrap: pretty; }
 .quand, .moment { display: inline-block; margin-bottom: .45rem; padding: .22rem .55rem; border-radius: 8px; background: var(--rose); font-family: var(--mono); font-weight: 700; font-size: .72rem; line-height: 1.3; letter-spacing: .03em; text-transform: uppercase; color: var(--encre); }
-.surligne { background-image: linear-gradient(var(--rose), var(--rose)); background-repeat: no-repeat; background-size: calc(var(--s, 0) * 100%) 100%; border-radius: 6px; padding: 0 .14em; margin: 0 -.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.surligne { color: color-mix(in srgb, var(--encre) calc(var(--s, 0) * 100%), var(--clair)); background-image: linear-gradient(var(--rose), var(--rose)); background-repeat: no-repeat; background-size: calc(var(--s, 0) * 100%) 100%; border-radius: 6px; padding: 0 .14em; margin: 0 -.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 
 /* 0. Accueil : le nom tapé à la machine au-dessus de l'île */
-.accueil { --tx: -50%; left: 50%; top: 13vh; width: min(92vw, 62rem); max-width: none; text-align: center; }
+.accueil { --tx: -50%; left: 50%; top: 13vh; width: min(92vw, 46rem); max-width: none; text-align: center; }
+.accueil.plaque { padding: 1.6rem 2rem 1.8rem; border-radius: 22px; }
 .nom { font-family: var(--mono); font-weight: 700; font-size: clamp(2.2rem, 1rem + 3.4vw, 4.6rem); line-height: 1; letter-spacing: -.045em; min-height: 1em; }
 .curseur { display: inline-block; width: .55em; height: .86em; margin-left: .05em; vertical-align: -.06em; background: currentColor; animation: clignote 1.05s steps(1) infinite; }
 .curseur.tape { animation: none; }
 @keyframes clignote { 50% { opacity: 0; } }
-.metier { margin-top: 1rem; font-family: var(--mono); font-weight: 700; font-size: .95rem; color: var(--vert); }
-.accueil h1 { margin-top: 2.1rem; font-family: var(--mono); font-weight: 700; font-size: clamp(1.4rem, .8rem + 1.5vw, 2.5rem); line-height: 1.05; letter-spacing: -.035em; color: var(--vert); }
+.metier { margin-top: 1rem; font-family: var(--mono); font-weight: 700; font-size: .95rem; color: var(--menthe); }
+.accueil h1 { margin-top: 2.1rem; font-family: var(--mono); font-weight: 700; font-size: clamp(1.4rem, .8rem + 1.5vw, 2.5rem); line-height: 1.05; letter-spacing: -.035em; color: var(--menthe); }
 .accroche { margin-top: .55rem; font-size: 1.25rem; }
 .accueil .apres { opacity: 0; transform: translateY(10px); transition: opacity .8s, transform 1s cubic-bezier(.2, .8, .2, 1); }
 .accueil.tape .apres { opacity: 1; transform: none; }
@@ -115,7 +130,7 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 
 /* 1. L'offre */
 .question { font-family: var(--mono); font-weight: 700; font-size: clamp(1.25rem, .75rem + 1.15vw, 2.05rem); line-height: 1.13; letter-spacing: -.03em; }
-.reponse { margin-top: 1.3rem; font-family: var(--mono); font-weight: 700; font-size: 1.3rem; line-height: 1.2; color: var(--vert); display: table; }
+.reponse { margin-top: 1.3rem; font-family: var(--mono); font-weight: 700; font-size: 1.3rem; line-height: 1.2; color: var(--menthe); display: table; }
 .offre .grand { margin-top: 1rem; }
 
 /* 2 et 3. Les post-it : ils tombent en vrac au constat, se rangent en trimestres à la promesse */
@@ -125,7 +140,7 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 .note .q { display: inline-block; white-space: pre; overflow: hidden; vertical-align: bottom; max-width: calc(var(--q, 1) * 1.2em); opacity: var(--q, 1); }
 .grille { position: absolute; left: 5vw; bottom: 6vh; display: grid; grid-template-columns: repeat(4, auto); gap: 0 1.2rem; pointer-events: none; }
 .trim { display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
-.trim .t { font-family: var(--mono); font-weight: 700; font-size: .8rem; color: var(--vert-fonce); opacity: 0; }
+.trim .t { font-family: var(--mono); font-weight: 700; font-size: .8rem; color: var(--clair); opacity: 0; background: var(--verre); -webkit-backdrop-filter: var(--verre-flou); backdrop-filter: var(--verre-flou); padding: .12rem .45rem; border-radius: 6px; }
 .place { visibility: hidden; }
 .constat .grand { margin-top: .9rem; }
 .symptomes p:last-child { font-size: 1.15rem; line-height: 1.5; }
@@ -133,14 +148,14 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 .promesse-texte { font-family: var(--mono); font-weight: 700; font-size: clamp(1.15rem, .7rem + 1vw, 1.8rem); line-height: 1.2; letter-spacing: -.025em; }
 
 /* 4. Pour qui */
-.qui-bloc p { color: var(--gris); }
+.qui-bloc p { color: var(--clair-doux); }
 
 /* 5. Mon approche en 3 temps */
 .temps li { margin-top: 1.05rem; }
-.temps p { font-size: .94rem; color: var(--gris); }
+.temps p { font-size: .94rem; color: var(--clair-doux); }
 
 /* 6. Ce que vous recevez */
-.livrables p { font-size: .94rem; color: var(--gris); }
+.livrables p { font-size: .94rem; color: var(--clair-doux); }
 
 /* 7. Le déroulé : une étape par rameau */
 .etapes li { margin-bottom: .55rem; }
@@ -150,33 +165,40 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 .formules .formule { margin-bottom: .7rem; }
 .f-tete { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
 .f-nom { font-family: var(--mono); font-weight: 700; font-size: 1.05rem; }
-.f-prix { font-family: var(--mono); font-weight: 700; font-size: 1.5rem; line-height: 1; letter-spacing: -.04em; color: var(--vert); white-space: nowrap; }
-.f-prix small { font-family: var(--texte); font-weight: 600; font-size: .78rem; letter-spacing: 0; color: var(--gris); }
+.f-prix { font-family: var(--mono); font-weight: 700; font-size: 1.5rem; line-height: 1; letter-spacing: -.04em; color: var(--menthe); white-space: nowrap; }
+.f-prix small { font-family: var(--texte); font-weight: 600; font-size: .78rem; letter-spacing: 0; color: var(--clair-doux); }
 .formule ul { margin-top: .45rem; }
 .formule li { position: relative; padding-left: 1.2em; font-size: .86rem; line-height: 1.35; margin-top: .15rem; }
-.formule li::before { content: "✓"; position: absolute; left: 0; color: var(--vert); font-weight: 700; }
+.formule li::before { content: "✓"; position: absolute; left: 0; color: var(--menthe); font-weight: 700; }
 .formule li.plus { font-weight: 700; }
 .formule li.plus::before { content: "+"; }
-.cadre p { font-size: .88rem; color: var(--gris); }
+.cadre p { font-size: .88rem; color: var(--clair-doux); }
 .cadre .btn { margin-top: .9rem; }
 
 /* 9. Pourquoi ça marche */
 .raisons li { font-size: 1.15rem; line-height: 1.32; }
 .raisons .qui { font-weight: 700; }
-.raisons .pourquoi { color: var(--gris); }
+.raisons .pourquoi { color: var(--clair-doux); }
 
 /* 10. Questions */
-.questions p { font-size: .94rem; color: var(--gris); }
+.questions p { font-size: .94rem; color: var(--clair-doux); }
 
 /* 11. Parlons-en */
-.parlons h2 { font-family: var(--mono); font-weight: 700; font-size: clamp(2.4rem, .6rem + 2.9vw, 4.4rem); line-height: .95; letter-spacing: -.05em; color: var(--vert); white-space: nowrap; }
+.parlons h2 { font-family: var(--mono); font-weight: 700; font-size: clamp(2.4rem, .6rem + 2.9vw, 4.4rem); line-height: .95; letter-spacing: -.05em; color: var(--menthe); white-space: nowrap; }
 .parlons-texte { margin-top: 1.1rem; font-size: 1.15rem; }
 .parlons .btn { margin-top: 1.3rem; }
-.sceau-bloc { width: clamp(150px, 15vw, 230px); }
+.sceau-bloc { width: clamp(150px, 15vw, 230px); padding: 10px; border-radius: 50%; background: var(--verre); -webkit-backdrop-filter: var(--verre-flou); backdrop-filter: var(--verre-flou); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .26), inset 0 0 0 1px rgba(255, 255, 255, .13), 0 12px 32px rgba(3, 22, 12, .24); }
 .sceau { width: 100%; height: auto; display: block; overflow: visible; }
-.sceau text { font-family: var(--mono); font-weight: 700; font-size: 28px; fill: var(--vert); }
-.sceau .sceau-logo { color: var(--vert); }
-.pied { left: 0; right: 0; top: auto; bottom: 2.4vh; width: auto; max-width: none; display: flex; justify-content: center; flex-wrap: wrap; gap: .3rem 2rem; font-family: var(--mono); font-size: .76rem; color: var(--gris); text-align: center; }
+.sceau text { font-family: var(--mono); font-weight: 700; font-size: 28px; fill: var(--menthe); }
+.sceau .sceau-logo { color: var(--menthe); }
+.pied { --tx: -50%; left: 50%; top: auto; bottom: 2.4vh; width: max-content; max-width: 92vw; display: flex; justify-content: center; flex-wrap: wrap; gap: .3rem 2rem; padding: .45rem 1rem; border-radius: 12px; background: var(--verre); -webkit-backdrop-filter: var(--verre-flou); backdrop-filter: var(--verre-flou); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .13); font-family: var(--mono); font-size: .76rem; color: var(--clair-doux); text-align: center; }
+
+/* ---------- Ordinateur : les six étapes du déroulé en frise au bas de l'écran, chacune sous son rameau.
+   Dans le film, les six rameaux occupent toute la largeur de la branche : une colonne à droite cacherait le sixième. ---------- */
+@media not all and (max-aspect-ratio: 17/20) {
+  .bloc.etapes { left: 3vw; right: 3vw; top: auto; bottom: 3.5vh; width: auto; max-width: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0 1vw; align-items: end; }
+  .etapes li { margin: 0; }
+}
 
 /* ---------- Téléphone et écrans en hauteur : l'arbre en bas, les textes en haut ---------- */
 @media (max-aspect-ratio: 17/20) {
@@ -189,6 +211,7 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
   .eparpille > *, .eparpille > .a-droite { position: relative; left: auto; right: auto; top: auto; width: auto; max-width: none; }
   .sous { --yp: 2.6rem; }
   .accueil { left: 50%; right: auto; width: calc(100% - 28px); top: 12vh; }
+  .accueil.plaque { padding: 1.1rem 1rem 1.25rem; }
   .nom { font-size: 2.3rem; }
   .accueil h1 { margin-top: 1.4rem; font-size: 1.45rem; }
   .accroche { font-size: 1.08rem; }
@@ -218,8 +241,8 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
   .questions p { font-size: .9rem; }
   .parlons h2 { font-size: 2.9rem; }
   .parlons-texte { margin-top: 1.4rem; font-size: 1.02rem; }
-  .bloc.sceau-bloc { left: auto; right: 14px; top: calc(var(--haut) + 3px); width: 76px; }
-  .bloc.pied { top: auto; left: 14px; right: 14px; bottom: 1.6vh; flex-direction: column; font-size: .66rem; }
+  .bloc.sceau-bloc { left: auto; right: 14px; top: auto; bottom: calc(1.6vh + 70px); width: 76px; padding: 4px; }
+  .bloc.pied { --tx: 0; top: auto; left: 14px; right: 14px; bottom: 1.6vh; width: auto; max-width: none; flex-direction: column; font-size: .66rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -250,8 +273,8 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 
   <main class="calque">
 
-    <!-- 0. Accueil : une graine rose sur une motte de terre, vue de haut -->
-    <section class="bloc accueil" data-u="-1,.03">
+    <!-- 0. Accueil : les vignes de Champagne vues de la lisière, un gland au premier plan -->
+    <section class="bloc accueil plaque" data-u="-1,.03">
       <p class="nom"><span class="frappe">Marine Perinel</span></p>
       <p class="metier apres">Communication RSE &amp; Stratégie d’impact</p>
       <h1 class="apres">Communicants de demain</h1>
@@ -259,19 +282,19 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
     </section>
     <div class="bloc indice" data-u="-1,.012" aria-hidden="true"></div>
 
-    <!-- 1. L'offre : on descend jusqu'à la graine, la pousse sort, les feuilles s'ouvrent -->
-    <section class="bloc offre" data-u=".03,.122" style="--x:5;--y:15;--w:36">
+    <!-- 1. L'offre : on descend jusqu'au gland, il germe, les feuilles s'ouvrent -->
+    <section class="bloc offre plaque" data-u=".03,.122" style="--x:5;--y:15;--w:36">
       <h2 class="question">Vous avez recruté un alternant en communication, mais vous manquez d’expertise métier en interne pour l’accompagner&#8239;?</h2>
       <p class="reponse" data-v=".071" data-trait="pointe" data-tu=".074,.122">Vous êtes au bon endroit.</p>
       <p class="grand" data-v=".093">Un accompagnement stratégique, opérationnel et pédagogique sur mesure pour les dirigeants et leurs alternants, accessible à tout moment de l’année.</p>
     </section>
 
     <!-- 2. Le constat : la pousse grandit seule et penche, l'image perd son cadre puis devient floue -->
-    <section class="bloc constat" data-u=".128,.2" data-up=".128,.165" style="--x:5;--y:14;--w:33">
+    <section class="bloc constat plaque" data-u=".128,.2" data-up=".128,.165" style="--x:5;--y:14;--w:33">
       <h2 class="titre">Le constat</h2>
       <p class="grand">Votre alternant en communication est en poste depuis quelques mois et vous sentez qu’il manque un cadre&nbsp;: personne dans l’entreprise n’est communicant pour le guider.</p>
     </section>
-    <section class="bloc symptomes a-droite" data-u=".158,.2" data-up=".165,.2" style="--r:5;--y:14;--w:30">
+    <section class="bloc symptomes plaque a-droite" data-u=".158,.2" data-up=".165,.2" style="--r:5;--y:14;--w:30">
       <p class="lead">Résultat fréquent</p>
       <p><span class="surligne" data-s=".166">Des objectifs flous</span>, <span class="surligne" data-s=".173">un alternant qui se demande quoi prioriser</span>, <span class="surligne" data-s=".18">un dirigeant qui manque de temps pour le guider</span>, et <span class="surligne" data-s=".187">une alternance qui n’exploite pas tout son potentiel</span>.</p>
     </section>
@@ -297,29 +320,29 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
       <div class="trim"><span class="t">T4</span><span class="postit place">Affiches et PLV</span><span class="postit place">Suivi des KPI</span><span class="postit place">E-réputation</span></div>
     </div>
 
-    <!-- 3. Ma promesse : le tuteur rose sort de terre, le lien se noue, l'image redevient nette sur « claire » -->
-    <section class="bloc promesse filet" data-u=".222,.284" data-trait="tuteur_lien" data-tu=".226,.284" style="--x:35;--y:12;--w:31">
+    <!-- 3. Ma promesse : le tuteur en bois apparaît, le raphia se noue, l'image redevient nette sur « claire » -->
+    <section class="bloc promesse plaque filet" data-u=".222,.284" data-trait="tuteur_lien" data-tu=".226,.284" style="--x:35;--y:12;--w:31">
       <h2 class="lead">Ma promesse</h2>
       <p class="promesse-texte">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route <span class="surligne" data-s=".25">claire</span> jusqu’à la fin de son alternance.</p>
     </section>
 
     <!-- 4. Pour qui : on recule depuis le nœud jusqu'à voir tout le plant -->
-    <section class="bloc" data-u=".29,.352" style="--x:5;--y:14"><h2 class="titre">Pour qui&#8239;?</h2></section>
-    <section class="bloc qui-bloc filet sous" data-u=".297,.352" data-up=".297,.313" data-trait="pied" style="--x:5;--y:56;--w:29">
+    <section class="bloc" data-u=".29,.352" style="--x:5;--y:14"><h2 class="titre plaque">Pour qui&#8239;?</h2></section>
+    <section class="bloc qui-bloc plaque filet sous" data-u=".297,.352" data-up=".297,.313" data-trait="pied" style="--x:5;--y:56;--w:29">
       <h3>Les dirigeants</h3>
       <p>de TPE, PME, associations ou exploitations qui accueillent un alternant en communication, déjà en poste ou sur le point d’arriver, sans tuteur communicant.</p>
     </section>
-    <section class="bloc qui-bloc filet sous a-droite" data-u=".307,.352" data-up=".313,.329" data-trait="pointe" style="--r:6;--y:18;--w:26">
+    <section class="bloc qui-bloc plaque filet sous a-droite" data-u=".307,.352" data-up=".313,.329" data-trait="pointe" style="--r:6;--y:18;--w:26">
       <h3>Les alternants</h3>
       <p>qui veulent un cadre clair, des priorités et un regard expert pour progresser.</p>
     </section>
-    <section class="bloc qui-bloc filet sous a-droite" data-u=".317,.352" data-up=".329,.352" data-trait="noeud" style="--r:6;--y:50;--w:26">
+    <section class="bloc qui-bloc plaque filet sous a-droite" data-u=".317,.352" data-up=".329,.352" data-trait="noeud" style="--r:6;--y:50;--w:26">
       <h3>Les écoles et CFA</h3>
       <p>qui souhaitent sécuriser le parcours de leurs étudiants en entreprise.</p>
     </section>
 
     <!-- 5. Mon approche : au ras de la terre, le long du tronc, en haut quand les branches s'écartent -->
-    <section class="bloc approche a-droite" data-u=".356,.48" style="--r:3;--y:12;--w:29">
+    <section class="bloc approche plaque a-droite" data-u=".356,.48" style="--r:3;--y:12;--w:29">
       <h2 class="titre">Mon approche en 3&nbsp;temps</h2>
       <ol class="temps">
         <li class="filet" data-v=".358" data-vp=".358,.392" data-replie data-trait="pied" data-tu=".36,.392">
@@ -340,18 +363,18 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
       </ol>
     </section>
 
-    <!-- 6. Ce que vous recevez : la ramure se déploie pendant un quart de tour, un livrable au bout de six branches -->
-    <section class="bloc" data-u=".482,.56" style="--x:3;--y:13;--w:22"><h2 class="titre">Ce que vous recevez</h2></section>
+    <!-- 6. Ce que vous recevez : la ramure se déploie pendant que la caméra tourne, un livrable au bout de six branches -->
+    <section class="bloc" data-u=".482,.56" style="--x:3;--y:13;--w:22"><h2 class="titre plaque">Ce que vous recevez</h2></section>
     <ul class="bloc eparpille livrables sous" data-u=".49,.56">
-      <li class="filet" data-v=".498" data-trait="livrable1" data-tup=".5,.505" style="--x:3;--y:30;--w:19"><h3>Une synthèse de diagnostic</h3><p>D’une page&nbsp;: objectifs, cibles, enjeux, ressources.</p></li>
-      <li class="filet" data-v=".505" data-trait="livrable2" data-tup=".507,.512" style="--x:3;--y:49;--w:19"><h3>Un plan d’action jusqu’à la fin de l’alternance</h3><p>Priorités par trimestre, actions concrètes, indicateurs de réussite.</p></li>
-      <li class="filet" data-v=".512" data-trait="livrable3" data-tup=".514,.519" style="--x:3;--y:71;--w:19"><h3>Un calendrier</h3><p>Les temps forts de communication de l’année.</p></li>
-      <li class="filet a-droite" data-v=".519" data-trait="livrable4" data-tup=".521,.526" style="--r:3;--y:18;--w:19"><h3>Une répartition des rôles</h3><p>Ce que l’alternant fait en autonomie, ce qui passe par la validation du dirigeant.</p></li>
-      <li class="filet a-droite" data-v=".526" data-trait="livrable5" data-tup=".528,.533" style="--r:3;--y:43;--w:19"><h3>Des points de suivi</h3><p>Pour ajuster le cap.</p></li>
-      <li class="filet a-droite" data-v=".533" data-trait="livrable6" data-tup=".535,.56" style="--r:3;--y:62;--w:19"><h3>Un support par mail</h3><p>Pour débloquer les situations au quotidien.</p></li>
+      <li class="plaque filet" data-v=".498" data-trait="livrable1" data-tup=".5,.505" style="--x:3;--y:30;--w:19"><h3>Une synthèse de diagnostic</h3><p>D’une page&nbsp;: objectifs, cibles, enjeux, ressources.</p></li>
+      <li class="plaque filet" data-v=".505" data-trait="livrable2" data-tup=".507,.512" style="--x:3;--y:49;--w:19"><h3>Un plan d’action jusqu’à la fin de l’alternance</h3><p>Priorités par trimestre, actions concrètes, indicateurs de réussite.</p></li>
+      <li class="plaque filet" data-v=".512" data-trait="livrable3" data-tup=".514,.519" style="--x:3;--y:71;--w:19"><h3>Un calendrier</h3><p>Les temps forts de communication de l’année.</p></li>
+      <li class="plaque filet a-droite" data-v=".519" data-trait="livrable4" data-tup=".521,.526" style="--r:3;--y:18;--w:19"><h3>Une répartition des rôles</h3><p>Ce que l’alternant fait en autonomie, ce qui passe par la validation du dirigeant.</p></li>
+      <li class="plaque filet a-droite" data-v=".526" data-trait="livrable5" data-tup=".528,.533" style="--r:3;--y:43;--w:19"><h3>Des points de suivi</h3><p>Pour ajuster le cap.</p></li>
+      <li class="plaque filet a-droite" data-v=".533" data-trait="livrable6" data-tup=".535,.56" style="--r:3;--y:62;--w:19"><h3>Un support par mail</h3><p>Pour débloquer les situations au quotidien.</p></li>
     </ul>
 
-    <!-- 7. Le déroulé : la caméra plonge dans le haut de l'arbre et suit la branche, un rameau par étape -->
+    <!-- 7. Le déroulé : la caméra entre dans la ramure, six jeunes feuilles poussent dressées sur une branche, une par étape -->
     <section class="bloc" data-u=".572,.698" style="--x:5;--y:13"><h2 class="titre plaque">Le déroulé</h2></section>
     <ol class="bloc etapes a-droite sous" data-u=".588,.698" style="--r:4;--y:13;--w:25">
       <li class="plaque filet" data-v=".593" data-vp=".593,.61" data-replie data-trait="rameau1" data-tu=".595,.612"><p class="moment">Au démarrage</p><p>Entretien dirigeant et entretien alternant</p></li>
@@ -384,38 +407,38 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
       <a class="btn btn-rose" data-contact href="#parlons-en">Réserver un premier échange de 30&nbsp;minutes</a>
     </section>
 
-    <!-- 9. Pourquoi ça marche : le tuteur rentre dans la terre, l'arbre tient seul et fleurit -->
-    <section class="bloc" data-u=".792,.878" style="--x:3;--y:13;--w:22"><h2 class="titre">Pourquoi ça marche</h2></section>
+    <!-- 9. Pourquoi ça marche : le tuteur disparaît, le chêne grandit seul et se couvre de glands -->
+    <section class="bloc" data-u=".792,.878" style="--x:3;--y:13;--w:22"><h2 class="titre plaque">Pourquoi ça marche</h2></section>
     <ul class="bloc eparpille raisons sous" data-u=".793,.878">
-      <li class="filet a-droite" data-v=".795" data-trait="terre" data-tup=".797,.806" style="--r:3;--y:64;--w:20"><span class="qui">Le dirigeant gagne du temps.</span> <span class="pourquoi">Il n’a plus à improviser la mission de l’alternant.</span></li>
-      <li class="filet" data-v=".802" data-trait="tuteur" data-tup=".804,.816" style="--x:3;--y:64;--w:20"><span class="qui">L’alternant gagne en autonomie.</span> <span class="pourquoi">Il sait quoi faire, pourquoi et dans quel ordre.</span></li>
-      <li class="filet" data-v=".816" data-trait="ramure" data-tup=".818,.836" style="--x:3;--y:33;--w:20"><span class="qui">La communication de l’entreprise devient cohérente.</span> <span class="pourquoi">Les actions répondent à de vrais objectifs.</span></li>
-      <li class="filet a-droite" data-v=".836" data-trait="fleurs" data-tup=".838,.878" style="--r:3;--y:27;--w:20"><span class="qui">L’alternance est mieux exploitée.</span> <span class="pourquoi">Résultats visibles et compétences acquises.</span></li>
+      <li class="plaque filet a-droite" data-v=".795" data-trait="terre" data-tup=".797,.806" style="--r:3;--y:64;--w:20"><span class="qui">Le dirigeant gagne du temps.</span> <span class="pourquoi">Il n’a plus à improviser la mission de l’alternant.</span></li>
+      <li class="plaque filet" data-v=".802" data-trait="tuteur" data-tup=".804,.812" style="--x:3;--y:64;--w:20"><span class="qui">L’alternant gagne en autonomie.</span> <span class="pourquoi">Il sait quoi faire, pourquoi et dans quel ordre.</span></li>
+      <li class="plaque filet" data-v=".814" data-trait="ramure" data-tup=".816,.849" style="--x:3;--y:33;--w:20"><span class="qui">La communication de l’entreprise devient cohérente.</span> <span class="pourquoi">Les actions répondent à de vrais objectifs.</span></li>
+      <li class="plaque filet a-droite" data-v=".849" data-trait="fleurs" data-tup=".851,.878" style="--r:3;--y:27;--w:20"><span class="qui">L’alternance est mieux exploitée.</span> <span class="pourquoi">Résultats visibles et compétences acquises.</span></li>
     </ul>
 
-    <!-- 10. Questions fréquentes : tour lent autour de l'arbre en fleurs -->
-    <section class="bloc" data-u=".881,.946" style="--x:3;--y:13;--w:22"><h2 class="titre">Questions fréquentes</h2></section>
+    <!-- 10. Questions fréquentes : les glands mûrissent dans la ramure -->
+    <section class="bloc" data-u=".881,.946" style="--x:3;--y:13;--w:22"><h2 class="titre plaque">Questions fréquentes</h2></section>
     <div class="bloc eparpille questions sous" data-u=".882,.946">
-      <div class="filet" data-v=".884" data-vp=".884,.897" data-replie style="--x:3;--y:30;--w:21">
+      <div class="plaque filet" data-v=".884" data-vp=".884,.897" data-replie style="--x:3;--y:30;--w:21">
         <h3>Faut-il que l’alternant soit déjà en poste&#8239;?</h3>
         <p>Non. L’accompagnement convient aux alternants déjà en poste depuis quelques mois comme à ceux qui arrivent tout juste&nbsp;: nous partons de ce qui existe déjà.</p>
       </div>
-      <div class="filet" data-v=".897" data-vp=".897,.91" data-replie style="--x:3;--y:62;--w:21">
+      <div class="plaque filet" data-v=".897" data-vp=".897,.91" data-replie style="--x:3;--y:62;--w:21">
         <h3>Qui participe aux entretiens&#8239;?</h3>
         <p>Le dirigeant et l’alternant, séparément, afin que chacun puisse s’exprimer librement.</p>
       </div>
-      <div class="filet a-droite" data-v=".91" data-vp=".91,.923" data-replie style="--r:3;--y:20;--w:21">
+      <div class="plaque filet a-droite" data-v=".91" data-vp=".91,.923" data-replie style="--r:3;--y:20;--w:21">
         <h3>Faut-il déjà avoir une stratégie ou des outils de communication&#8239;?</h3>
         <p>Non, nous partons de ce qui existe, même s’il n’y a presque rien. Le diagnostic sert justement à identifier les priorités.</p>
       </div>
-      <div class="filet a-droite" data-v=".923" style="--r:3;--y:54;--w:21">
+      <div class="plaque filet a-droite" data-v=".923" style="--r:3;--y:54;--w:21">
         <h3>Peut-on prolonger l’accompagnement au-delà de la période prévue&#8239;?</h3>
         <p>Oui, sur devis, si l’alternance se poursuit ou si un nouvel alternant arrive.</p>
       </div>
     </div>
 
-    <!-- 11. Parlons-en : une graine se détache d'une fleur et tombe au pied de l'arbre -->
-    <section class="bloc parlons" id="parlons-en" data-u=".95,9" style="--x:4;--y:42;--w:24">
+    <!-- 11. Parlons-en : un gland se détache et tombe au pied de l'arbre, comme au début -->
+    <section class="bloc parlons plaque" id="parlons-en" data-u=".95,9" style="--x:4;--y:42;--w:24">
       <h2>Parlons-en.</h2>
       <div data-v=".986" data-trait="graine2" data-tu=".99,9">
         <p class="parlons-texte">Un premier échange de 30&nbsp;minutes, sans engagement, pour voir si cet accompagnement correspond à votre situation.</p>
@@ -457,13 +480,13 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 
   /* ---------- 1. Le défilement fait avancer le film : longueur de chaque passage (en centièmes d'écran) et où en est le film à la fin ---------- */
   const PASSAGES = [
-    [70, .02],     // accueil : le nom, l'île immobile
-    [110, .064],   // l'offre : on descend jusqu'à la graine
+    [70, .02],     // accueil : le nom, les vignes immobiles
+    [110, .064],   // l'offre : on descend jusqu'au gland
     [80, .088],    // la pousse sort
     [110, .12],    // les feuilles s'ouvrent
     [60, .152],    // le constat : la pousse grandit seule, l'image penche
     [160, .2],     // les post-it tombent, l'image devient floue
-    [60, .224],    // la promesse : le tuteur sort, le lien se noue
+    [60, .224],    // la promesse : le tuteur apparaît, le raphia se noue
     [150, .282],   // le nœud, les post-it se rangent, « claire »
     [50, .3],      // pour qui : on recule
     [150, .352],
@@ -476,10 +499,10 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
     [300, .698],   // on suit la branche, rameau par rameau
     [60, .722],    // les formules : on recule
     [170, .79],
-    [60, .81],     // pourquoi : grand plan, le tuteur rentre
-    [190, .878],   // l'arbre fleurit
-    [230, .946],   // questions : tour lent
-    [110, .985],   // parlons-en : la graine tombe
+    [60, .81],     // pourquoi : le tuteur, puis les années passent
+    [190, .878],   // le chêne grandit seul et se couvre de glands
+    [230, .946],   // questions : les glands dans la ramure
+    [110, .985],   // parlons-en : le gland tombe
     [70, 1],       // le plan final
     [50, 1]
   ];
@@ -540,9 +563,11 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
     }
   }
 
-  /* ---------- 3. Le film : les images Blender en plein écran, chargées autour de l'endroit où l'on est ---------- */
+  /* ---------- 3. Le film : les images de la vidéo en plein écran, chargées autour de l'endroit où l'on est ---------- */
   const N = 400;
-  let FMT = null, LARG = 1440, HAUT = 810, REP = null, images = [], etat = new Uint8Array(N);
+  // les 400 images ne sont pas régulières en u : plus serrées quand la caméra bouge, une seule quand l'image est
+  // immobile pendant la lecture. U (dans les repères) donne le u de chaque image.
+  let FMT = null, LARG = 1440, HAUT = 810, REP = null, U = null, images = [], etat = new Uint8Array(N);
   let gen = 0, enCours = 0, ordre = [], k = 0;
   let W = 0, H = 0, cov = { e: 1, dx: 0, dy: 0 };
   let u = -1, iAff = -1, attente = false;
@@ -552,15 +577,22 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
     if (f === FMT) return;
     FMT = f; gen++;
     LARG = f === 'b' ? 1440 : 640; HAUT = f === 'b' ? 810 : 1280;
-    images = new Array(N); etat = new Uint8Array(N); enCours = 0; k = 0; REP = null; iAff = -1;
+    images = new Array(N); etat = new Uint8Array(N); enCours = 0; k = 0; REP = null; U = null; iAff = -1;
     ordre = [];
     const pris = new Uint8Array(N);
     for (let pas = 32; pas >= 1; pas /= 2) for (let i = 0; i < N; i += pas) if (!pris[i]) { pris[i] = 1; ordre.push(i); }
     const g = gen;
-    fetch(`reperes_${f}.json`).then(r => r.json()).then(d => { if (g === gen) { REP = d.reperes; demander(); } }).catch(() => {});
+    fetch(`reperes_${f}.json`).then(r => r.json()).then(d => { if (g === gen) { REP = d.reperes; U = d.u || null; iAff = -1; demander(); } }).catch(() => {});
+  }
+  function indice(v) {
+    v = borne(v);
+    if (!U) return Math.round(v * (N - 1));
+    let a = 0, b = U.length - 1;
+    while (b - a > 1) { const m = (a + b) >> 1; if (U[m] <= v) a = m; else b = m; }
+    return v - U[a] <= U[b] - v ? a : b;
   }
   function prochain() {
-    const c = Math.round(Math.max(0, u) * (N - 1));
+    const c = indice(u);
     for (let d = 0; d <= 10; d++) {
       for (const j of d ? [c + d, c - d] : [c]) if (j >= 0 && j < N && !etat[j]) return j;
     }
@@ -574,7 +606,7 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
       etat[i] = 1; enCours++;
       const g = gen, im = new Image();
       im.decoding = 'async';
-      im.src = `i/${FMT}/${String(i).padStart(3, '0')}.webp`;
+      im.src = `i/${FMT}/${String(i).padStart(3, '0')}.avif`;
       im.decode().then(() => { if (g === gen) { images[i] = im; etat[i] = 2; demander(); } }, () => { if (g === gen) etat[i] = 3; })
         .finally(() => { if (g === gen) { enCours--; charger(); } });
     }
@@ -651,7 +683,7 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
     for (const t of TETES) if (t.style.opacity !== ot) t.style.opacity = ot;
   }
 
-  /* ---------- 6. Les traits : de chaque texte à la partie de l'arbre dont il parle (positions exportées par Blender) ---------- */
+  /* ---------- 6. Les traits : de chaque texte à la partie de l'arbre dont il parle (positions suivies dans la vidéo) ---------- */
   const el = (nom, cls, parent) => { const x = document.createElementNS(NS, nom); if (cls) x.setAttribute('class', cls); if (parent) parent.appendChild(x); return x; };
   function chemin(pts, prog) {
     let tot = 0;
@@ -668,7 +700,7 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 
   // Les rails des formules suivent la grande branche, sous elle : Essentiel jusqu'au rameau 2,
   // Accompagné jusqu'au rameau 4 puis en pointillé (le mail) jusqu'au bout, Premium jusqu'au bout.
-  const RAILS = [{ fin: .315 }, { fin: .625, pointille: .935 }, { fin: .935 }];
+  const RAILS = [{ fin: .258 }, { fin: .587, pointille: .94 }, { fin: .94 }];
   const RAIL_DEBUT_B = [.716, .722, .728], RAIL_DEBUT_T = [.716, .738, .76];
   const gRails = el('g', 'rails', svg);
   RAILS.forEach(R => {
@@ -741,12 +773,13 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
       const hote = L.el.closest('.bloc');
       const rb = hote && hote !== L.el && !hote.classList.contains('eparpille') ? hote.getBoundingClientRect() : r;
       const xd = Math.max(r.right, rb.right) + 16, xg = Math.min(r.left, rb.left) - 16;
-      const y0 = L.el.classList.contains('filet') ? r.top + 1.5 : r.top + Math.min(r.height / 2, 18);
+      // une plaque de verre a les coins arrondis : le trait part de son côté ; un filet à l'intérieur d'une plaque se prolonge en trait
+      const y0 = L.el.classList.contains('filet') && !L.el.classList.contains('plaque') ? r.top + .5 : r.top + Math.min(r.height / 2, 18);
       let pts;
       if (a[0] > xd + 6) pts = [[r.right, y0], [xd, y0], a];
       else if (a[0] < xg - 6) pts = [[r.left, y0], [xg, y0], a];
       else {
-        const x = Math.min(r.right - 12, Math.max(r.left + 12, a[0]));
+        const x = Math.min(r.right - 20, Math.max(r.left + 20, a[0]));
         pts = a[1] > r.bottom ? [[x, r.bottom], [x, r.bottom + 12], a] : [[x, r.top], [x, r.top - 12], a];
       }
       const d = chemin(pts, prog);
@@ -766,7 +799,7 @@ a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
     // un peu d'inertie pour ne pas sauter d'images quand on défile vite
     u = u < 0 || calme.matches ? vise : u + (vise - u) * .2;
     if (Math.abs(vise - u) < 1e-4) u = vise;
-    const c = Math.round(u * (N - 1)), i = plusProche(c);
+    const c = indice(u), i = plusProche(c);
     if (i >= 0 && i !== iAff) { iAff = i; ctx.drawImage(images[i], cov.dx, cov.dy, LARG * cov.e, HAUT * cov.e); }
     const ia = iAff >= 0 ? iAff : c;
     effets(u);
