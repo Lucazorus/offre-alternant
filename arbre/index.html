@@ -4,24 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="canonical" href="https://communicantsdedemain.fr/">
-<title>Communicants de demain, faire grandir les talents</title>
-<meta name="description" content="Faire grandir les talents, structurer votre communication. Un accompagnement stratégique, opérationnel et pédagogique sur mesure pour les dirigeants et leurs alternants en communication, accessible à tout moment de l’année.">
-<meta property="og:title" content="Communicants de demain">
-<meta property="og:description" content="Faire grandir les talents, structurer votre communication. Un accompagnement sur mesure pour les dirigeants et leurs alternants en communication.">
+<title>Communicants de demain</title>
 <meta name="theme-color" content="#007A3F">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add('js')</script>
+<link rel="preload" href="i/b/000.webp" as="image" media="(min-aspect-ratio: 17/20)">
+<link rel="preload" href="i/t/000.webp" as="image" media="(max-aspect-ratio: 17/20)">
 <style>
-/* Polices hébergées avec le site : aucune requête vers un service tiers */
+/* Version /arbre/ : l'arbre reste au centre, le défilement fait avancer le film (et le rembobine),
+   chaque rubrique apparaît autour de lui et pointe la partie de l'arbre dont elle parle.
+   Film et repères : _blender/arbre.py (voir _blender/SCENARIO.md). */
 @font-face { font-family: "Space Mono"; font-weight: 400; font-display: swap; src: url(../fonts/space-mono-400.woff2) format("woff2"); }
 @font-face { font-family: "Space Mono"; font-weight: 700; font-display: swap; src: url(../fonts/space-mono-700.woff2) format("woff2"); }
 @font-face { font-family: "Nunito Sans"; font-weight: 400 700; font-display: swap; src: url(../fonts/nunito-sans.woff2) format("woff2"); }
 
-/* Charte mp : vert, rose, Space Mono pour les titres, Avenir Next pour le texte.
-   Avenir Next n'est pas libre pour le web : elle s'affiche sur Mac, iPhone et iPad,
-   ailleurs c'est Nunito Sans, la plus proche des polices libres. */
 :root {
   --vert: #007A3F;
   --vert-fonce: #00532A;
@@ -32,407 +28,206 @@
   --filet: #D3DDD7;
   --mono: "Space Mono", ui-monospace, Menlo, monospace;
   --texte: "Avenir Next", "Avenir Next Thai Modern", "Avenir", "Nunito Sans", system-ui, sans-serif;
-  --marge: clamp(18px, 5cqi, 72px);
-  --max: 1280px;
+  --haut: 62px;
   color-scheme: light;
 }
-
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0;
-  background: var(--blanc);
-  color: var(--encre);
-  font-family: var(--texte);
-  font-size: 18px;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
-}
-h1, h2, h3, p { margin: 0; }
+html { font-size: clamp(14px, .5vw + 1.1vh, 18px); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--blanc); color: var(--encre); font-family: var(--texte); font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
 a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.conteneur { max-width: var(--max); margin: 0 auto; padding: 0 var(--marge); }
 
-/* Infos pas encore remplies : surlignées en jaune, hors charte exprès */
-.a-remplir { background: #FFE14D; color: #111 !important; padding: 0 .25em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-
-/* Boutons, dans l'esprit de l'étiquette de la charte : au survol, le blanc balaie le rose */
-.btn { position: relative; isolation: isolate; overflow: hidden; display: inline-block; font-family: var(--mono); font-weight: 700; font-size: 1rem; line-height: 1.25; text-decoration: none; padding: 17px 24px; border-radius: 12px; transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+/* Boutons de la charte : au survol, le blanc balaie le rose */
+.btn { position: relative; isolation: isolate; overflow: hidden; display: inline-block; font-family: var(--mono); font-weight: 700; font-size: .95rem; line-height: 1.25; text-decoration: none; padding: 15px 22px; border-radius: 12px; }
 .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--blanc); transform: scaleX(0); transform-origin: right; transition: transform .5s cubic-bezier(.7, 0, .2, 1); }
 .btn:hover::before { transform: scaleX(1); transform-origin: left; }
 .btn-rose { background: var(--rose); color: var(--encre); }
-.btn-petit { padding: 10px 15px; font-size: .88rem; border-radius: 10px; }
+.btn-rose:hover { box-shadow: inset 0 0 0 2px var(--rose); }
+.btn-petit { padding: 9px 14px; font-size: .85rem; border-radius: 10px; }
 
-/* Titres de section en Space Mono */
-.titre { font-family: var(--mono); font-weight: 700; font-size: clamp(1.9rem, 1.05rem + 2.7cqi, 3.6rem); line-height: 1.04; letter-spacing: -0.035em; }
-.bloc { padding: clamp(72px, 10cqi, 136px) 0; }
-.deux { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 64px; align-items: start; }
-.grand { font-size: clamp(1.15rem, 1rem + .5cqi, 1.4rem); line-height: 1.45; }
+/* ---------- La barre du haut, affichée tout du long ---------- */
+.entete { position: fixed; z-index: 20; top: 0; left: 0; right: 0; background: var(--vert); color: var(--blanc); }
+.entete-corps { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: var(--haut); padding: 0 clamp(16px, 3vw, 44px); }
+.marque { display: flex; align-items: center; gap: 13px; color: var(--rose); text-decoration: none; }
+.marque .logo { width: 46px; height: auto; display: block; }
+.entete-nom { font-family: var(--mono); font-weight: 700; font-size: .85rem; color: var(--blanc); }
+.entete-avance { position: absolute; left: 0; right: 0; bottom: -3px; height: 3px; background: var(--rose); transform-origin: left; transform: scaleX(0); }
 
-/* ========== Le mur de l'alternant ========== */
-.scene { position: relative; height: 230vh; background: var(--vert); color: var(--blanc); }
-.scene-colle { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-rows: auto minmax(0, 1fr); overflow: hidden; }
-.barre { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: var(--max); width: 100%; margin: 0 auto; padding: 18px var(--marge); }
-.marque { display: flex; align-items: center; gap: 14px; color: var(--rose); text-decoration: none; }
-.marque .logo { width: 62px; height: auto; display: block; }
-.marque-texte { font-family: var(--mono); font-weight: 700; font-size: .8rem; line-height: 1.3; }
-.scene-corps { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; max-width: var(--max); width: 100%; margin: 0 auto; padding: 12px var(--marge) 40px; min-height: 0; }
-.scene-texte { align-self: center; }
-h1 { font-family: var(--mono); font-weight: 700; font-size: clamp(2rem, .8rem + 3cqi, 4rem); line-height: 1.02; letter-spacing: -0.04em; color: var(--rose); }
-.accroche { margin-top: 22px; font-weight: 700; font-size: clamp(1.25rem, 1rem + .9cqi, 1.75rem); line-height: 1.25; max-width: 21ch; }
-.scene-texte .btn { margin-top: 32px; }
+/* ---------- La scène : le film en plein écran, les traits, les textes ---------- */
+.scene { position: fixed; inset: 0; overflow: hidden; }
+.film { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--blanc); transform-origin: 50% 62%; }
+.traits { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.traits .halo { fill: none; stroke: var(--blanc); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.traits .trait { fill: none; stroke: var(--encre); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.traits circle.halo { fill: var(--blanc); stroke: none; }
+.traits circle.point { fill: var(--rose); stroke: var(--vert-fonce); stroke-width: 2.5; }
+.traits .rail-fond { fill: none; stroke: var(--vert-fonce); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.traits .rail { fill: none; stroke: var(--blanc); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.traits .pointille { stroke-dasharray: 0 11; }
+.traits circle.bout { fill: var(--rose); stroke: var(--vert-fonce); stroke-width: 2.5; }
+.piste { height: 2500vh; }
+.calque { position: absolute; inset: 0; pointer-events: none; }
 
-.mur { position: relative; min-height: 0; height: 100%; }
-.note {
-  display: inline-flex; align-items: center;
-  margin: 0 8px 8px 0; padding: 10px 12px;
-  background: var(--rose); color: var(--encre);
-  border-radius: 8px;
-  font-weight: 600; font-size: 15px; line-height: 1.12;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, .16);
+.bloc {
+  position: absolute; left: calc(var(--x, 5) * 1vw); top: calc(var(--y, 13) * 1vh); width: calc(var(--w, 32) * 1vw); max-width: 36rem;
+  opacity: 0; visibility: hidden; pointer-events: auto;
+  transform: translate(var(--tx, 0), var(--dy, 0px));
 }
-.js .note { position: absolute; left: 0; top: 0; margin: 0; overflow: hidden; will-change: transform; transform-origin: 50% 50%; }
-.note .q { white-space: pre; }
+.a-droite { left: auto; right: calc(var(--r, 5) * 1vw); }
+.eparpille { left: 0; top: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
+.eparpille > * { position: absolute; left: calc(var(--x, 5) * 1vw); top: calc(var(--y, 13) * 1vh); width: calc(var(--w, 26) * 1vw); max-width: 30rem; pointer-events: auto; }
+.eparpille > .a-droite { left: auto; right: calc(var(--r, 5) * 1vw); }
+[data-v] { opacity: 0; transform: translateY(var(--dy, 0px)); }
+.plaque { background: var(--blanc); padding: .85rem 1.05rem 1rem; }
+.filet { border-top: 3px solid var(--encre); padding-top: .65rem; }
+.plaque.filet { padding-top: .75rem; }
+.replie { display: none; }
 
-/* ========== La question ========== */
-.offre { background: var(--rose); }
-.question { font-weight: 700; font-size: clamp(1.6rem, 1rem + 2.3cqi, 3.1rem); line-height: 1.14; letter-spacing: -0.01em; max-width: 27ch; }
-.reponse { margin-top: 26px; font-family: var(--mono); font-weight: 700; font-size: clamp(1.2rem, 1rem + .9cqi, 1.8rem); line-height: 1.2; letter-spacing: -0.02em; color: var(--vert-fonce); }
-.offre .grand { margin-top: clamp(40px, 6cqi, 72px); max-width: 44ch; font-size: clamp(1.2rem, 1rem + .9cqi, 1.7rem); line-height: 1.4; }
+/* Typographie */
+.titre { font-family: var(--mono); font-weight: 700; font-size: clamp(1.6rem, .9rem + 1.6vw, 2.8rem); line-height: 1.04; letter-spacing: -.035em; }
+.titre.plaque { display: inline-block; padding: .4rem .7rem .5rem; }
+.lead { font-family: var(--mono); font-weight: 700; font-size: .9rem; color: var(--vert); margin-bottom: .55rem; }
+.grand { font-size: 1.3rem; line-height: 1.38; letter-spacing: -.005em; }
+.calque h3 { font-family: var(--mono); font-weight: 700; font-size: 1.08rem; line-height: 1.2; letter-spacing: -.02em; color: var(--vert); margin-bottom: .3rem; }
+.calque p { text-wrap: pretty; }
+.quand, .moment { display: inline-block; margin-bottom: .45rem; padding: .22rem .55rem; border-radius: 8px; background: var(--rose); font-family: var(--mono); font-weight: 700; font-size: .72rem; line-height: 1.3; letter-spacing: .03em; text-transform: uppercase; color: var(--encre); }
+.surligne { background-image: linear-gradient(var(--rose), var(--rose)); background-repeat: no-repeat; background-size: calc(var(--s, 0) * 100%) 100%; border-radius: 6px; padding: 0 .14em; margin: 0 -.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 
-/* ========== Le constat ========== */
-.symptomes { margin-top: 36px; font-weight: 700; font-size: clamp(1.4rem, 1rem + 1.5cqi, 2.25rem); line-height: 1.32; letter-spacing: -0.01em; }
-.symptomes .lead { display: block; font-family: var(--mono); font-weight: 700; font-size: .95rem; letter-spacing: 0; color: var(--vert); margin-bottom: 10px; }
+/* 0. Accueil : le nom tapé à la machine au-dessus de l'île */
+.accueil { --tx: -50%; left: 50%; top: 13vh; width: min(92vw, 62rem); max-width: none; text-align: center; }
+.nom { font-family: var(--mono); font-weight: 700; font-size: clamp(2.2rem, 1rem + 3.4vw, 4.6rem); line-height: 1; letter-spacing: -.045em; min-height: 1em; }
+.curseur { display: inline-block; width: .55em; height: .86em; margin-left: .05em; vertical-align: -.06em; background: currentColor; animation: clignote 1.05s steps(1) infinite; }
+.curseur.tape { animation: none; }
+@keyframes clignote { 50% { opacity: 0; } }
+.metier { margin-top: 1rem; font-family: var(--mono); font-weight: 700; font-size: .95rem; color: var(--vert); }
+.accueil h1 { margin-top: 2.1rem; font-family: var(--mono); font-weight: 700; font-size: clamp(1.4rem, .8rem + 1.5vw, 2.5rem); line-height: 1.05; letter-spacing: -.035em; color: var(--vert); }
+.accroche { margin-top: .55rem; font-size: 1.25rem; }
+.accueil .apres { opacity: 0; transform: translateY(10px); transition: opacity .8s, transform 1s cubic-bezier(.2, .8, .2, 1); }
+.accueil.tape .apres { opacity: 1; transform: none; }
+.accueil.tape h1 { transition-delay: .35s; }
+.accueil.tape .accroche { transition-delay: .6s; }
+.indice { --tx: -50%; left: 50%; top: auto; bottom: 3.5vh; width: 2px; height: 46px; background: var(--filet); overflow: hidden; }
+.indice::after { content: ""; position: absolute; left: 0; top: -40%; width: 2px; height: 40%; background: var(--vert); animation: descend 1.8s cubic-bezier(.6, 0, .3, 1) infinite; }
+@keyframes descend { to { top: 100%; } }
 
-/* ========== La promesse ========== */
-.promesse { background: var(--vert); color: var(--blanc); }
-.promesse h2 { font-family: var(--mono); font-weight: 700; font-size: 1rem; color: var(--rose); margin-bottom: 22px; }
-.promesse-texte { font-weight: 700; font-size: clamp(1.8rem, .9rem + 3.4cqi, 4.2rem); line-height: 1.06; letter-spacing: -0.02em; max-width: 22ch; }
+/* 1. L'offre */
+.question { font-family: var(--mono); font-weight: 700; font-size: clamp(1.25rem, .75rem + 1.15vw, 2.05rem); line-height: 1.13; letter-spacing: -.03em; }
+.reponse { margin-top: 1.3rem; font-family: var(--mono); font-weight: 700; font-size: 1.3rem; line-height: 1.2; color: var(--vert); display: table; }
+.offre .grand { margin-top: 1rem; }
 
-/* ========== Pour qui ========== */
-.registre { margin: clamp(36px, 5cqi, 64px) 0 0; }
-.registre > div { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 8px 64px; padding: 30px 0; border-top: 3px solid var(--encre); align-items: baseline; }
-.registre dt { font-family: var(--mono); font-weight: 700; font-size: clamp(1.4rem, 1rem + 1.4cqi, 2.2rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--vert); }
-.registre dd { margin: 0; font-size: clamp(1.08rem, 1rem + .3cqi, 1.25rem); max-width: 46ch; }
+/* 2 et 3. Les post-it : ils tombent en vrac au constat, se rangent en trimestres à la promesse */
+.notes { position: absolute; inset: 0; pointer-events: none; }
+.postit { display: inline-flex; align-items: center; padding: .55rem .75rem; border-radius: 8px; font-weight: 600; font-size: .86rem; line-height: 1.12; white-space: nowrap; }
+.note { position: absolute; left: 0; top: 0; background: var(--rose); color: var(--encre); box-shadow: 0 1px 0 rgba(0, 0, 0, .16); opacity: 0; visibility: hidden; will-change: transform; }
+.note .q { display: inline-block; white-space: pre; overflow: hidden; vertical-align: bottom; max-width: calc(var(--q, 1) * 1.2em); opacity: var(--q, 1); }
+.grille { position: absolute; left: 5vw; bottom: 6vh; display: grid; grid-template-columns: repeat(4, auto); gap: 0 1.2rem; pointer-events: none; }
+.trim { display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+.trim .t { font-family: var(--mono); font-weight: 700; font-size: .8rem; color: var(--vert-fonce); opacity: 0; }
+.place { visibility: hidden; }
+.constat .grand { margin-top: .9rem; }
+.symptomes p:last-child { font-size: 1.15rem; line-height: 1.5; }
+.promesse .lead { margin-bottom: .45rem; }
+.promesse-texte { font-family: var(--mono); font-weight: 700; font-size: clamp(1.15rem, .7rem + 1vw, 1.8rem); line-height: 1.2; letter-spacing: -.025em; }
 
-/* ========== Approche ========== */
-.approche { border-top: 1px solid var(--filet); }
-.temps { list-style: none; padding: 0; margin: clamp(36px, 5cqi, 64px) 0 0; }
-.temps li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 12px 64px; padding: 30px 0 34px; border-top: 3px solid var(--encre); }
-.temps h3 { font-weight: 700; font-size: clamp(1.5rem, 1rem + 1.4cqi, 2.25rem); line-height: 1.08; letter-spacing: -0.01em; }
-.temps .quand { display: block; width: fit-content; transform-origin: left center; margin-bottom: 14px; padding: 5px 10px; border-radius: 8px; background: var(--rose); font-family: var(--mono); font-weight: 700; font-size: .78rem; line-height: 1.3; letter-spacing: .03em; text-transform: uppercase; }
-.temps p { font-size: 1.08rem; max-width: 52ch; }
+/* 4. Pour qui */
+.qui-bloc p { color: var(--gris); }
 
-/* ========== Ce que vous recevez ========== */
-.recevez { background: var(--rose); }
-.livrables { list-style: none; padding: 0; margin: clamp(36px, 5cqi, 64px) 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 64px; }
-.livrables li { border-top: 3px solid var(--encre); padding: 22px 0 36px; }
-.livrables h3 { font-weight: 700; font-size: clamp(1.3rem, 1rem + .8cqi, 1.7rem); line-height: 1.14; margin-bottom: 8px; }
+/* 5. Mon approche en 3 temps */
+.temps li { margin-top: 1.05rem; }
+.temps p { font-size: .94rem; color: var(--gris); }
 
-/* ========== Le déroulé ========== */
-.frise-cadre { position: relative; margin-top: clamp(36px, 5cqi, 64px); }
-.frise { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 3px solid var(--encre); }
-.frise li { padding: 18px 20px 8px 0; }
-.frise li + li { padding-left: 18px; border-left: 1px solid var(--filet); }
-.frise .moment { font-family: var(--mono); font-weight: 700; font-size: clamp(1.1rem, .9rem + .6cqi, 1.45rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--vert); }
-.frise p { margin-top: 14px; font-size: 1rem; line-height: 1.45; }
+/* 6. Ce que vous recevez */
+.livrables p { font-size: .94rem; color: var(--gris); }
 
-/* ========== Les gravures ==========
-   Linogravures à l'encre noire, détourées : l'image ne sert que de pochoir,
-   la couleur vient de la charte (vert sur rose, rose sur vert). */
-.gravure { --img: linear-gradient(transparent, transparent); display: block; background: currentColor; -webkit-mask: var(--img) center / contain no-repeat; mask: var(--img) center / contain no-repeat; aspect-ratio: var(--ratio, 1); }
+/* 7. Le déroulé : une étape par rameau */
+.etapes li { margin-bottom: .55rem; }
+.etapes li p:last-child { font-size: .95rem; line-height: 1.35; }
 
-/* Le tuteur : le piquet qui tient la jeune pousse, à côté de « Vous êtes au bon endroit » */
-.offre-corps { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 330px); gap: 40px 72px; align-items: end; }
-.tuteur { --ratio: 715 / 1100; width: 100%; color: var(--vert); transform-origin: 50% 72%; }
-/* Il pousse depuis la terre : racines, tige, puis feuilles */
-.anime .tuteur { clip-path: inset(100% 0 0 0); transition: clip-path 2.4s cubic-bezier(.5, 0, .2, 1); }
-.anime .tuteur-cadre.vu .tuteur { clip-path: inset(0 0 0 0); }
+/* 8. Les formules : trois rails le long de la branche */
+.formules .formule { margin-bottom: .7rem; }
+.f-tete { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.f-nom { font-family: var(--mono); font-weight: 700; font-size: 1.05rem; }
+.f-prix { font-family: var(--mono); font-weight: 700; font-size: 1.5rem; line-height: 1; letter-spacing: -.04em; color: var(--vert); white-space: nowrap; }
+.f-prix small { font-family: var(--texte); font-weight: 600; font-size: .78rem; letter-spacing: 0; color: var(--gris); }
+.formule ul { margin-top: .45rem; }
+.formule li { position: relative; padding-left: 1.2em; font-size: .86rem; line-height: 1.35; margin-top: .15rem; }
+.formule li::before { content: "✓"; position: absolute; left: 0; color: var(--vert); font-weight: 700; }
+.formule li.plus { font-weight: 700; }
+.formule li.plus::before { content: "+"; }
+.cadre p { font-size: .88rem; color: var(--gris); }
+.cadre .btn { margin-top: .9rem; }
 
-/* La feuille de route, dans « Ma promesse » */
-.promesse-corps { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 40px 72px; align-items: center; }
-.feuille { --ratio: 879 / 1000; width: 100%; color: var(--rose); transform: rotate(var(--tourne, -6deg)); transform-origin: 30% 85%; }
-
-/* Pour qui : le tronc, la pousse, la pépinière */
-.registre > div { padding-right: clamp(120px, 13cqi, 170px); }
-.registre .vignette { position: absolute; right: 0; top: 50%; height: clamp(92px, 9cqi, 132px); color: var(--vert); transform: translateY(-50%); transform-origin: 50% 100%; transition: color .3s, transform .5s cubic-bezier(.2, .8, .2, 1); }
-.registre > div:hover .vignette { color: var(--vert-fonce); transform: translateY(-50%) scale(1.08); }
-
-/* Le déroulé : une pousse par étape, posée sur la jauge, qui sort de terre quand le point passe */
-.deroule { --h-pousse: clamp(84px, 8.5cqi, 128px); }
-.deroule .frise-cadre { margin-top: calc(clamp(36px, 5cqi, 64px) + var(--h-pousse)); }
-.frise li { position: relative; }
-.pousse { position: absolute; left: 0; bottom: calc(100% + 9px); height: var(--h-pousse); color: var(--vert); transform-origin: 50% 100%; }
-.frise li + li .pousse { left: 18px; }
-.anime .pousse { clip-path: inset(calc((1 - var(--g, 0)) * 100%) 0 0 0); transform: scale(calc(.8 + .2 * var(--g, 0))); }
-
-/* Bas de page : la sobriété du site, dite simplement */
-.pied { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 28px; }
-
-/* ========== Les formules ========== */
-.formules { background: var(--vert-fonce); color: var(--blanc); }
-.defile { margin-top: clamp(36px, 5cqi, 64px); overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.tableau { width: 100%; min-width: 620px; border-collapse: collapse; }
-.tableau th, .tableau td { padding: 16px 14px; border-bottom: 1px solid rgba(255, 255, 255, .22); text-align: left; vertical-align: middle; font-size: 1rem; }
-.tableau thead th { border-bottom: 3px solid var(--rose); vertical-align: bottom; padding-bottom: 20px; }
-.tableau tbody th { font-weight: 400; padding-left: 0; width: 40%; }
-.tableau td { width: 20%; }
-.f-nom { display: block; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
-.f-prix { display: block; font-family: var(--mono); font-weight: 700; font-size: clamp(1.6rem, 1rem + 1.6cqi, 2.5rem); line-height: 1; letter-spacing: -0.04em; color: var(--rose); white-space: nowrap; }
-.f-prix small { font-family: var(--texte); font-weight: 600; font-size: .85rem; letter-spacing: 0; color: var(--blanc); }
-.oui { color: var(--rose); font-weight: 700; font-size: 1.2rem; }
-.qte { display: block; font-size: .9rem; color: rgba(255, 255, 255, .8); }
-.formules-liste { display: none; }
-.fbloc { border-top: 3px solid var(--rose); padding: 20px 0 30px; }
-.fbloc .f-prix { margin-top: 2px; }
-.fbloc ul { list-style: none; padding: 0; margin: 16px 0 0; }
-.fbloc li { position: relative; padding: 4px 0 4px 28px; }
-.fbloc li::before { content: "✓"; position: absolute; left: 0; color: var(--rose); font-weight: 700; }
-.fbloc li.plus { padding-left: 0; color: rgba(255, 255, 255, .72); }
-.fbloc li.plus::before { content: none; }
-.formules .cadre { margin-top: clamp(44px, 6cqi, 72px); }
-.cadre h3 { font-weight: 700; font-size: 1.3rem; line-height: 1.2; }
-.cadre p { color: rgba(255, 255, 255, .84); max-width: 62ch; }
-.formules .btn { margin-top: 40px; }
-
-/* ========== Pourquoi ça marche ========== */
-.raisons { list-style: none; padding: 0; margin: clamp(36px, 5cqi, 64px) 0 0; }
-.raisons li { padding: 22px 0; border-top: 3px solid var(--encre); font-size: clamp(1.25rem, 1rem + 1cqi, 1.9rem); line-height: 1.22; letter-spacing: -0.01em; }
+/* 9. Pourquoi ça marche */
+.raisons li { font-size: 1.15rem; line-height: 1.32; }
 .raisons .qui { font-weight: 700; }
 .raisons .pourquoi { color: var(--gris); }
 
-/* ========== Questions ========== */
-.faq { border-top: 1px solid var(--filet); }
-.questions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 64px; margin-top: clamp(36px, 5cqi, 64px); }
-.questions h3 { font-weight: 700; font-size: 1.2rem; line-height: 1.25; margin-bottom: 10px; }
-.questions p { color: var(--gris); }
+/* 10. Questions */
+.questions p { font-size: .94rem; color: var(--gris); }
 
-/* ========== Parlons-en ========== */
-.parlons { background: var(--vert); color: var(--blanc); padding: clamp(88px, 12cqi, 168px) 0 36px; }
-.parlons-corps { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; }
-.parlons h2 { white-space: nowrap; font-family: var(--mono); font-weight: 700; font-size: clamp(2.5rem, 1.2rem + 7cqi, 8rem); line-height: .95; letter-spacing: -0.05em; color: var(--rose); }
-.parlons-texte { margin: 30px 0 40px; font-size: clamp(1.25rem, 1rem + 1cqi, 1.8rem); line-height: 1.3; font-weight: 600; max-width: 30ch; }
-.sceau { width: clamp(200px, 24cqi, 320px); height: auto; display: block; }
-.sceau text { font-family: var(--mono); font-weight: 700; font-size: 28px; fill: var(--blanc); }
-.sceau .sceau-logo { color: var(--rose); }
-.pied { margin-top: clamp(72px, 10cqi, 120px); padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .3); font-size: .85rem; color: rgba(255, 255, 255, .75); }
+/* 11. Parlons-en */
+.parlons h2 { font-family: var(--mono); font-weight: 700; font-size: clamp(2.4rem, .6rem + 2.9vw, 4.4rem); line-height: .95; letter-spacing: -.05em; color: var(--vert); white-space: nowrap; }
+.parlons-texte { margin-top: 1.1rem; font-size: 1.15rem; }
+.parlons .btn { margin-top: 1.3rem; }
+.sceau-bloc { width: clamp(150px, 15vw, 230px); }
+.sceau { width: 100%; height: auto; display: block; overflow: visible; }
+.sceau text { font-family: var(--mono); font-weight: 700; font-size: 28px; fill: var(--vert); }
+.sceau .sceau-logo { color: var(--vert); }
+.pied { left: 0; right: 0; top: auto; bottom: 2.4vh; width: auto; max-width: none; display: flex; justify-content: center; flex-wrap: wrap; gap: .3rem 2rem; font-family: var(--mono); font-size: .76rem; color: var(--gris); text-align: center; }
 
-/* ==================================================================
-   Mouvement. Tout ce qui part caché est sous .anime, posé par le script
-   seulement si l'appareil accepte les animations.
-   ================================================================== */
-
-/* Bandeau qui descend une fois le haut de page passé, avec l'avancée de lecture */
-.entete { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: var(--vert); color: var(--blanc); transform: translateY(-100%); transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
-.entete.visible { transform: none; }
-.entete-corps { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: var(--max); margin: 0 auto; padding: 10px var(--marge); }
-.entete .logo { width: 44px; }
-.entete-nom { font-family: var(--mono); font-weight: 700; font-size: .85rem; }
-.entete-avance { height: 3px; background: var(--rose); transform-origin: left; transform: scaleX(var(--avance, 0)); }
-
-/* Le titre tapé à la machine */
-.frappe { position: relative; }
-.anime .frappe .c { visibility: hidden; }
-.anime .frappe .c.on { visibility: visible; }
-.curseur { position: absolute; left: 0; top: 0; width: .55em; height: .84em; background: currentColor; pointer-events: none; animation: clignote 1.05s steps(1) infinite; }
-.curseur.tape { animation: none; }
-@keyframes clignote { 50% { opacity: 0; } }
-.anime .intro { opacity: 0; transform: translateY(16px); transition: opacity .7s, transform .8s cubic-bezier(.2, .8, .2, 1); }
-.anime .intro.on { opacity: 1; transform: none; }
-
-/* Les symptômes se surlignent un par un, au rose de la charte */
-.surligne { background-image: linear-gradient(var(--rose), var(--rose)); background-repeat: no-repeat; background-size: 100% 100%; border-radius: 6px; padding: 0 .14em; margin: 0 -.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.anime .symptomes .surligne { background-size: 0% 100%; transition: background-size .8s cubic-bezier(.7, 0, .2, 1); }
-.anime .symptomes.vu .surligne { background-size: 100% 100%; }
-.symptomes .surligne:nth-of-type(2) { transition-delay: .1s; }
-.symptomes .surligne:nth-of-type(3) { transition-delay: .45s; }
-.symptomes .surligne:nth-of-type(4) { transition-delay: .8s; }
-.symptomes .surligne:nth-of-type(5) { transition-delay: 1.15s; }
-
-/* Les filets se tracent de gauche à droite */
-.registre > div, .temps li, .livrables li, .raisons li, .fbloc { position: relative; }
-.trait { border-top-color: transparent !important; }
-.trait::before { content: ""; position: absolute; left: 0; right: 0; top: -3px; height: 3px; background: var(--couleur-trait, var(--encre)); transform-origin: left; }
-.fbloc { --couleur-trait: var(--rose); }
-.anime .trait::before { transform: scaleX(0); transition: transform 1s cubic-bezier(.7, 0, .2, 1) var(--retard, 0s); }
-.anime .trait.vu::before { transform: scaleX(1); }
-
-/* Les étiquettes de temps sautent en place */
-.anime .temps .quand { transform: scale(.3); opacity: 0; transition: transform .6s cubic-bezier(.34, 1.56, .64, 1) .5s, opacity .2s .5s; }
-.anime .temps li.vu .quand { transform: none; opacity: 1; }
-
-/* Survols */
-.registre > div { isolation: isolate; }
-.registre > div::after { content: ""; position: absolute; z-index: -1; left: -18px; right: -18px; top: 8px; bottom: 6px; background: var(--rose); border-radius: 16px; transform: scaleX(0); transform-origin: left; transition: transform .55s cubic-bezier(.7, 0, .2, 1); }
-.registre dt { transition: transform .45s cubic-bezier(.2, .8, .2, 1), color .3s; }
-.livrables li { isolation: isolate; }
-.livrables li::after { content: ""; position: absolute; z-index: -1; left: -18px; right: -18px; top: 12px; bottom: 10px; background: var(--blanc); border-radius: 16px; opacity: 0; transform: translateY(10px) scale(.97); transition: opacity .3s, transform .5s cubic-bezier(.2, .8, .2, 1); }
-.livrables h3 { transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
-.raisons .qui { background-image: linear-gradient(var(--rose), var(--rose)); background-repeat: no-repeat; background-size: 0% 100%; border-radius: 6px; padding: 0 .12em; margin: 0 -.12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-size .55s cubic-bezier(.7, 0, .2, 1); }
-.tableau th, .tableau td { transition: background .25s; }
-.tableau .survol { background: rgba(255, 255, 255, .08); }
-@media (hover: hover) {
-  .registre > div:hover::after { transform: scaleX(1); }
-  .registre > div:hover dt { transform: translateX(14px); color: var(--vert-fonce); }
-  .livrables li:hover::after { opacity: 1; transform: none; }
-  .livrables li:hover h3 { transform: translateX(6px); }
-  .raisons li:hover .qui { background-size: 100% 100%; }
-}
-
-/* La frise avance avec le défilement */
-.frise-cadre::before { content: ""; position: absolute; left: 0; top: -4px; height: 5px; width: calc(var(--avance, 1) * 100%); background: var(--vert); border-radius: 3px; }
-.frise-cadre::after { content: ""; position: absolute; top: -1.5px; left: calc(var(--avance, 1) * 100%); width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%; background: var(--rose); border: 4px solid var(--vert); }
-html:not(.anime) .frise-cadre::after { display: none; }
-.frise .moment, .frise p { transition: color .4s; }
-.anime .frise li:not(.actif) .moment { color: #A7B6AD; }
-.anime .frise li:not(.actif) p { color: #8A9890; }
-/* Le déroulé se fige en haut de l'écran le temps que la jauge se remplisse (si l'écran est assez haut) */
-.deroule-espace { display: none; }
-.deroule.epingle .deroule-colle { position: sticky; }
-.deroule.epingle .deroule-espace { display: block; height: 110vh; }
-
-/* Les prix défilent, les coches sautent */
-.nombre { display: inline-block; text-align: right; }
-.coche { display: inline-block; }
-.anime .tableau .coche { transform: scale(0) rotate(-30deg); transition: transform .5s cubic-bezier(.34, 1.56, .64, 1) calc(.35s + var(--d, 0s)); }
-.anime .tableau.vu .coche { transform: none; }
-
-/* Parlons-en : les lettres montent puis suivent la souris */
-.parlons h2 .l, .parlons h2 .li { display: inline-block; }
-.anime .parlons h2 .l { opacity: 0; transform: translateY(.45em) rotate(8deg); transition: opacity .4s calc(var(--i) * 50ms), transform .8s cubic-bezier(.2, .9, .25, 1.25) calc(var(--i) * 50ms); }
-.anime .parlons h2.vu .l { opacity: 1; transform: none; }
-.sceau { overflow: visible; }
-
-/* Sans animation : le mur s'affiche directement rangé */
-.scene.fixe { height: auto; }
-.scene.fixe .scene-colle { position: relative; height: auto; min-height: 100vh; }
-.scene.fixe .mur { min-height: 420px; }
-
-/* Tablette */
-@media (max-width: 1000px) {
-  /* La frise passe à la verticale, la barre verte descend le long du trait */
-  .frise { grid-template-columns: minmax(0, 1fr); border-top: 0; border-left: 3px solid var(--encre); }
-  .frise li, .frise li + li { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 6px 32px; align-items: baseline; padding: 18px 0 20px 28px; border-left: 0; }
-  .frise li + li { border-top: 1px solid var(--filet); }
-  .frise p { margin-top: 0; }
-  .frise-cadre::before { top: 0; left: -4px; width: 5px; height: calc(var(--avance, 1) * 100%); }
-  .frise-cadre::after { top: calc(var(--avance, 1) * 100%); left: -1.5px; margin-top: -10px; }
-  /* Frise verticale : chaque pousse se met au bout de sa ligne */
-  .deroule .frise-cadre { margin-top: clamp(36px, 5cqi, 64px); }
-  .frise li, .frise li + li { padding-right: 80px; }
-  .pousse, .frise li + li .pousse { left: auto; right: 0; bottom: auto; top: 12px; height: 64px; }
-  .offre-corps { grid-template-columns: minmax(0, 1fr) minmax(0, 240px); gap: 32px 40px; }
-  .promesse-corps { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 32px 40px; }
-}
-
-/* Téléphone */
-@media (max-width: 760px) {
-  body { font-size: 17px; }
-  .barre { padding-top: 14px; padding-bottom: 10px; }
-  .barre .btn { display: none; }
-  .marque .logo { width: 50px; }
-  .marque-texte { font-size: .72rem; }
-  .scene-corps { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 22px; padding-top: 4px; padding-bottom: 22px; }
-  .scene-texte { align-self: start; }
-  .accroche { margin-top: 12px; }
-  .scene-texte .btn { margin-top: 18px; padding: 14px 18px; font-size: .92rem; }
-  .deux, .registre > div, .temps li { grid-template-columns: minmax(0, 1fr); }
-  .registre > div { padding: 22px 0; }
-  .livrables, .questions { grid-template-columns: minmax(0, 1fr); }
-  .livrables li { padding-bottom: 26px; }
-  .frise li, .frise li + li { display: block; padding: 16px 0 18px 24px; }
-  /* Sur téléphone la pousse flotte à droite : le texte l'habille au lieu de rétrécir */
-  .pousse, .frise li + li .pousse { position: static; float: right; height: 50px; margin: 0 0 6px 14px; }
-  /* Le tuteur passe sous le texte, la feuille au-dessus du sien */
-  .offre-corps, .promesse-corps { grid-template-columns: minmax(0, 1fr); }
-  .tuteur-cadre { width: min(62%, 230px); margin: 8px auto 0; }
-  .feuille-cadre { order: -1; width: min(58%, 220px); }
-  /* Pour qui : la gravure au-dessus de chaque titre */
-  .registre > div { padding: 104px 0 22px; }
-  .registre .vignette { left: 0; right: auto; top: 22px; height: 70px; transform: none; }
-  .registre > div:hover .vignette { transform: scale(1.06); }
-  .frise p + p { margin-top: 6px; }
+/* ---------- Téléphone et écrans en hauteur : l'arbre en bas, les textes en haut ---------- */
+@media (max-aspect-ratio: 17/20) {
+  :root { --haut: 54px; }
+  html { font-size: 15px; }
+  .marque .logo { width: 40px; }
   .entete-nom { display: none; }
-  .entete .logo { width: 40px; }
-  .defile { display: none; }
-  .formules-liste { display: block; margin-top: 36px; }
-  .parlons-corps { grid-template-columns: minmax(0, 1fr); }
-  .sceau { width: 190px; }
+  .bloc, .bloc.a-droite, .eparpille { left: 14px; right: 14px; width: auto; max-width: none; top: calc(var(--haut) + 14px + var(--yp, 0px)); height: auto; }
+  .eparpille { pointer-events: auto; }
+  .eparpille > *, .eparpille > .a-droite { position: relative; left: auto; right: auto; top: auto; width: auto; max-width: none; }
+  .sous { --yp: 2.6rem; }
+  .accueil { left: 50%; right: auto; width: calc(100% - 28px); top: 12vh; }
+  .nom { font-size: 2.3rem; }
+  .accueil h1 { margin-top: 1.4rem; font-size: 1.45rem; }
+  .accroche { font-size: 1.08rem; }
+  .indice { left: 50%; right: auto; width: 2px; top: auto; }
+  .titre { font-size: 1.55rem; }
+  .grand { font-size: 1.05rem; }
+  .question { font-size: 1.12rem; }
+  .reponse { font-size: 1.1rem; margin-top: .8rem; }
+  .offre .grand { margin-top: .6rem; }
+  .symptomes p:last-child { font-size: 1rem; }
+  .promesse-texte { font-size: 1.12rem; }
+  .postit { font-size: .7rem; padding: .38rem .48rem; white-space: normal; max-width: calc((100vw - 28px - 1.2rem) / 4); }
+  .grille { left: 14px; right: 14px; bottom: auto; top: calc(var(--haut) + 13.5rem); grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 .4rem; }
+  .trim { gap: .3rem; }
+  .temps li { margin-top: .6rem; }
+  .livrables li { margin-top: .35rem; padding-top: .35rem; }
+  .livrables li h3 { font-size: .92rem; margin: 0; }
+  .livrables li p { display: none; }
+  .etapes.plaque, .formules.plaque { padding: .7rem .8rem; }
+  .etapes li { margin: 0; }
+  .formules .formule { margin: 0; }
+  .f-prix { font-size: 1.3rem; }
+  .bloc.cadre { top: auto; bottom: 14px; }
+  .cadre p { font-size: .8rem; }
+  .cadre .btn { margin-top: .6rem; padding: 11px 15px; font-size: .85rem; }
+  .raisons li { font-size: .98rem; margin-top: .45rem; padding-top: .4rem; }
+  .questions p { font-size: .9rem; }
+  .parlons h2 { font-size: 2.9rem; }
+  .parlons-texte { margin-top: 1.4rem; font-size: 1.02rem; }
+  .bloc.sceau-bloc { left: auto; right: 14px; top: calc(var(--haut) + 3px); width: 76px; }
+  .bloc.pied { top: auto; left: 14px; right: 14px; bottom: 1.6vh; flex-direction: column; font-size: .66rem; }
 }
 
-/* ========== L'arbre : film Blender déroulé par le défilement ========== */
-main > section:not(.scene) { container-type: inline-size; }
-@container (max-width: 1000px) {
-  /* La frise passe à la verticale, la barre verte descend le long du trait */
-  .frise { grid-template-columns: minmax(0, 1fr); border-top: 0; border-left: 3px solid var(--encre); }
-  .frise li, .frise li + li { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 6px 32px; align-items: baseline; padding: 18px 0 20px 28px; border-left: 0; }
-  .frise li + li { border-top: 1px solid var(--filet); }
-  .frise p { margin-top: 0; }
-  .frise-cadre::before { top: 0; left: -4px; width: 5px; height: calc(var(--avance, 1) * 100%); }
-  .frise-cadre::after { top: calc(var(--avance, 1) * 100%); left: -1.5px; margin-top: -10px; }
-  /* Frise verticale : chaque pousse se met au bout de sa ligne */
-  .deroule .frise-cadre { margin-top: clamp(36px, 5cqi, 64px); }
-  .frise li, .frise li + li { padding-right: 80px; }
-  .pousse, .frise li + li .pousse { left: auto; right: 0; bottom: auto; top: 12px; height: 64px; }
-  .offre-corps { grid-template-columns: minmax(0, 1fr) minmax(0, 240px); gap: 32px 40px; }
-  .promesse-corps { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 32px 40px; }
-}
-@container (max-width: 760px) {
-  body { font-size: 17px; }
-  .barre { padding-top: 14px; padding-bottom: 10px; }
-  .barre .btn { display: none; }
-  .marque .logo { width: 50px; }
-  .marque-texte { font-size: .72rem; }
-  .scene-corps { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 22px; padding-top: 4px; padding-bottom: 22px; }
-  .scene-texte { align-self: start; }
-  .accroche { margin-top: 12px; }
-  .scene-texte .btn { margin-top: 18px; padding: 14px 18px; font-size: .92rem; }
-  .deux, .registre > div, .temps li { grid-template-columns: minmax(0, 1fr); }
-  .registre > div { padding: 22px 0; }
-  .livrables, .questions { grid-template-columns: minmax(0, 1fr); }
-  .livrables li { padding-bottom: 26px; }
-  .frise li, .frise li + li { display: block; padding: 16px 0 18px 24px; }
-  /* Sur téléphone la pousse flotte à droite : le texte l'habille au lieu de rétrécir */
-  .pousse, .frise li + li .pousse { position: static; float: right; height: 50px; margin: 0 0 6px 14px; }
-  /* Le tuteur passe sous le texte, la feuille au-dessus du sien */
-  .offre-corps, .promesse-corps { grid-template-columns: minmax(0, 1fr); }
-  .tuteur-cadre { width: min(62%, 230px); margin: 8px auto 0; }
-  .feuille-cadre { order: -1; width: min(58%, 220px); }
-  /* Pour qui : la gravure au-dessus de chaque titre */
-  .registre > div { padding: 104px 0 22px; }
-  .registre .vignette { left: 0; right: auto; top: 22px; height: 70px; transform: none; }
-  .registre > div:hover .vignette { transform: scale(1.06); }
-  .frise p + p { margin-top: 6px; }
-  .entete-nom { display: none; }
-  .entete .logo { width: 40px; }
-  .defile { display: none; }
-  .formules-liste { display: block; margin-top: 36px; }
-  .parlons-corps { grid-template-columns: minmax(0, 1fr); }
-  .sceau { width: 190px; }
-}
-.arbre-panneau, .fenetre { display: none; }
-.js .arbre-panneau { display: block; position: fixed; pointer-events: none; }
-.arbre-panneau canvas { display: block; width: 100%; height: 100%; }
-/* Ordinateur : l'arbre fixé à droite, les rubriques à gauche ; le mur du haut passe par-dessus */
-@media (min-width: 960px) {
-  :root { --panneau: clamp(380px, 42vw, 880px); }
-  .js .arbre-panneau { top: 0; right: 0; bottom: 0; width: var(--panneau); z-index: 1; }
-  .js main > section:not(.scene) { margin-right: var(--panneau); }
-  .scene { z-index: 2; }
-  .js .tuteur-cadre { display: none; }
-  .js .offre-corps { grid-template-columns: minmax(0, 1fr); }
-}
-/* Téléphone et tablette : l'arbre derrière, visible dans les fenêtres entre les rubriques */
-@media (max-width: 959px) {
-  .js .arbre-panneau { inset: 0; z-index: 0; }
-  .js main > section { position: relative; z-index: 1; }
-  :where(.js main > section) { background-color: var(--blanc); }
-  .js .fenetre { display: block; height: 84vh; height: 84svh; }
+@media (prefers-reduced-motion: reduce) {
+  .indice::after, .curseur { animation: none; }
 }
 </style>
 </head>
 <body>
-
 <!-- Logo mp, repris tel quel de la charte -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="mp" viewBox="0 0 393 237"><path fill="currentColor" d="M 0.8 166 L 0.8 70.9 C 0.8 57.7 3.8 45.8 10 35.3 C 16.2 24.7 25 16.4 36.5 10.3 C 48.1 4.2 61.8 1.2 77.7 1.2 C 85.6 1.2 93 2.1 99.7 3.9 C 106.4 5.6 112.5 8.1 118 11.1 C 123.6 14.1 128.3 17.7 132.3 21.9 L 133 21.9 C 137.1 17.7 142 14.1 147.5 11.1 C 153.1 8.1 159.3 5.6 166.1 3.9 C 172.9 2.1 180.3 1.2 188.2 1.2 C 204.1 1.2 217.8 4.2 229.3 10.3 C 240.9 16.4 249.8 24.7 256 35.3 C 262.3 45.8 265.5 57.7 265.5 70.9 L 265.5 166 L 216.5 166 L 216.5 72.5 C 216.5 67.2 215.2 62.5 212.5 58.2 C 209.9 53.9 206.4 50.4 202 47.7 C 197.6 45 192.6 43.6 187 43.6 C 181.3 43.6 176.2 45 171.7 47.7 C 167.2 50.4 163.7 53.9 161.2 58.2 C 158.7 62.5 157.4 67.2 157.4 72.5 L 157.4 166 L 108.8 166 L 108.8 72.5 C 108.8 67.2 107.5 62.5 104.8 58.2 C 102.2 53.9 98.7 50.4 94.2 47.7 C 89.7 45 84.6 43.6 78.9 43.6 C 73.3 43.6 68.2 45 63.7 47.7 C 59.2 50.4 55.7 53.9 53.2 58.2 C 50.7 62.5 49.4 67.2 49.4 72.5 L 49.4 166Z"/><path fill="currentColor" d="M 304.3 0.4 C 318.1 0.4 330.3 2.6 341.1 6.9 C 351.8 11.3 360.9 17.4 368.4 25.4 C 376 33.4 381.8 42.7 385.8 53.4 C 389.8 64.1 391.8 75.9 391.8 88.9 C 391.8 105 388.5 119.3 381.8 131.7 C 375.1 144.1 365.9 153.8 354.3 160.8 C 342.6 167.8 329 171.3 313.5 171.3 C 306.9 171.3 300.7 170.5 294.9 168.8 C 289.1 167.1 283.8 164.7 279 161.5 C 274.2 158.3 270.2 154.4 267.1 149.7 L 266.1 149.7 L 266.1 236.6 L 216.8 236.6 L 216.8 88.9 C 216.8 70.9 220.4 55.3 227.6 42.1 C 234.8 28.9 245 18.7 258.1 11.4 C 271.3 4.1 286.7 0.4 304.3 0.4Z M 304.3 43.1 C 296.7 43.1 290 44.9 284.4 48.6 C 278.8 52.4 274.5 57.4 271.5 63.9 C 268.5 70.4 267.1 77.6 267.1 85.7 C 267.1 93.8 268.5 101 271.5 107.4 C 274.5 113.7 278.8 118.8 284.4 122.5 C 290 126.2 296.7 128 304.3 128 C 311.9 128 318.5 126.2 324 122.5 C 329.5 118.8 333.8 113.7 336.9 107.4 C 340 101 341.5 93.8 341.5 85.7 C 341.5 77.6 340 70.4 336.9 63.9 C 333.8 57.4 329.5 52.4 324 48.6 C 318.5 44.9 311.9 43.1 304.3 43.1Z"/></symbol>
@@ -440,7 +235,7 @@ main > section:not(.scene) { container-type: inline-size; }
 
 <header class="entete">
   <div class="entete-corps">
-    <a class="marque" href="#haut" aria-label="Communicants de demain, retour en haut">
+    <a class="marque" href="#" data-debut aria-label="Communicants de demain, revenir au début">
       <svg class="logo" viewBox="0 0 393 237" aria-hidden="true"><use href="#mp"/></svg>
       <span class="entete-nom" aria-hidden="true">Communicants de demain</span>
     </a>
@@ -449,901 +244,568 @@ main > section:not(.scene) { container-type: inline-size; }
   <div class="entete-avance"></div>
 </header>
 
-<div class="arbre-panneau" aria-hidden="true"><canvas></canvas></div>
+<div class="scene">
+  <canvas class="film" aria-hidden="true"></canvas>
+  <svg class="traits" aria-hidden="true"></svg>
 
-<main>
+  <main class="calque">
 
-<section class="scene" id="haut">
-  <div class="scene-colle">
-    <div class="barre">
-      <a class="marque" href="#haut" aria-label="mp, Communication RSE et Stratégie d’impact">
-        <svg class="logo" viewBox="0 0 393 237" aria-hidden="true"><use href="#mp"/></svg>
-        <span class="marque-texte" aria-hidden="true">Communication RSE<br>&amp; Stratégie d’impact</span>
-      </a>
-      <a class="btn btn-rose btn-petit" data-contact href="#parlons-en">Prendre rendez-vous</a>
-    </div>
-    <div class="scene-corps">
-      <div class="scene-texte">
-        <h1>Communicants de demain</h1>
-        <p class="accroche intro">Faire grandir les talents, structurer votre communication.</p>
-        <a class="btn btn-rose intro" data-contact href="#parlons-en">Réserver un premier échange de 30&nbsp;minutes</a>
-      </div>
-      <div class="mur" aria-hidden="true">
-        <span class="note" data-q="0" data-x=".04" data-y=".05" data-r="-6">Création de contenu<span class="q"> ?</span></span>
-        <span class="note" data-q="0" data-x=".62" data-y=".01" data-r="5">Calendrier éditorial<span class="q"> ?</span></span>
-        <span class="note" data-q="0" data-x=".34" data-y=".21" data-r="-3">Supports commerciaux<span class="q"> ?</span></span>
-        <span class="note" data-q="1" data-x=".93" data-y=".24" data-r="8">Évènementiel<span class="q"> ?</span></span>
-        <span class="note" data-q="1" data-x=".07" data-y=".41" data-r="4">Social média<span class="q"> ?</span></span>
-        <span class="note" data-q="1" data-x=".57" data-y=".44" data-r="-7">Newsletter<span class="q"> ?</span></span>
-        <span class="note" data-q="2" data-x=".29" data-y=".61" data-r="6">Avis Google<span class="q"> ?</span></span>
-        <span class="note" data-q="2" data-x=".86" data-y=".63" data-r="-4">Relations presse<span class="q"> ?</span></span>
-        <span class="note" data-q="2" data-x=".01" data-y=".79" data-r="-8">Veille concurrentielle<span class="q"> ?</span></span>
-        <span class="note" data-q="3" data-x=".53" data-y=".83" data-r="3">Affiches et PLV<span class="q"> ?</span></span>
-        <span class="note" data-q="3" data-x=".19" data-y=".98" data-r="-2">Suivi des KPI<span class="q"> ?</span></span>
-        <span class="note" data-q="3" data-x=".80" data-y="1" data-r="7">E-réputation<span class="q"> ?</span></span>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- 0. Accueil : une graine rose sur une motte de terre, vue de haut -->
+    <section class="bloc accueil" data-u="-1,.03">
+      <p class="nom"><span class="frappe">Marine Perinel</span></p>
+      <p class="metier apres">Communication RSE &amp; Stratégie d’impact</p>
+      <h1 class="apres">Communicants de demain</h1>
+      <p class="accroche apres">Faire grandir les talents, structurer votre communication.</p>
+    </section>
+    <div class="bloc indice" data-u="-1,.012" aria-hidden="true"></div>
 
-<div class="fenetre" data-u0="0" data-u1="0.08" aria-hidden="true"></div>
-<section class="bloc offre deploie" id="offre" data-u="0">
-  <div class="conteneur offre-corps">
-    <div>
-      <h2 class="question mots">Vous avez recruté un alternant en communication, mais vous manquez d’expertise métier en interne pour l’accompagner&#8239;?</h2>
-      <p class="reponse">Vous êtes au bon endroit.</p>
-      <p class="grand">Un accompagnement stratégique, opérationnel et pédagogique sur mesure pour les dirigeants et leurs alternants, accessible à tout moment de l’année.</p>
-    </div>
-    <!-- Le tuteur : le piquet qui tient la jeune pousse droite le temps qu'elle prenne racine -->
-    <div class="tuteur-cadre" aria-hidden="true"><span class="gravure tuteur" data-img="../img/tuteur.webp"></span></div>
-  </div>
-</section>
+    <!-- 1. L'offre : on descend jusqu'à la graine, la pousse sort, les feuilles s'ouvrent -->
+    <section class="bloc offre" data-u=".03,.122" style="--x:5;--y:15;--w:36">
+      <h2 class="question">Vous avez recruté un alternant en communication, mais vous manquez d’expertise métier en interne pour l’accompagner&#8239;?</h2>
+      <p class="reponse" data-v=".071" data-trait="pointe" data-tu=".074,.122">Vous êtes au bon endroit.</p>
+      <p class="grand" data-v=".093">Un accompagnement stratégique, opérationnel et pédagogique sur mesure pour les dirigeants et leurs alternants, accessible à tout moment de l’année.</p>
+    </section>
 
-<section class="bloc" id="constat" data-u="0.09">
-  <div class="conteneur deux">
-    <h2 class="titre">Le constat</h2>
-    <div>
+    <!-- 2. Le constat : la pousse grandit seule et penche, l'image perd son cadre puis devient floue -->
+    <section class="bloc constat" data-u=".128,.2" data-up=".128,.165" style="--x:5;--y:14;--w:33">
+      <h2 class="titre">Le constat</h2>
       <p class="grand">Votre alternant en communication est en poste depuis quelques mois et vous sentez qu’il manque un cadre&nbsp;: personne dans l’entreprise n’est communicant pour le guider.</p>
-      <p class="symptomes"><span class="lead">Résultat fréquent</span><span class="surligne">Des objectifs flous</span>, <span class="surligne">un alternant qui se demande quoi prioriser</span>, <span class="surligne">un dirigeant qui manque de temps pour le guider</span>, et <span class="surligne">une alternance qui n’exploite pas tout son potentiel</span>.</p>
+    </section>
+    <section class="bloc symptomes a-droite" data-u=".158,.2" data-up=".165,.2" style="--r:5;--y:14;--w:30">
+      <p class="lead">Résultat fréquent</p>
+      <p><span class="surligne" data-s=".166">Des objectifs flous</span>, <span class="surligne" data-s=".173">un alternant qui se demande quoi prioriser</span>, <span class="surligne" data-s=".18">un dirigeant qui manque de temps pour le guider</span>, et <span class="surligne" data-s=".187">une alternance qui n’exploite pas tout son potentiel</span>.</p>
+    </section>
+
+    <div class="notes" aria-hidden="true">
+      <span class="postit note">Création de contenu<span class="q"> ?</span></span>
+      <span class="postit note">Calendrier éditorial<span class="q"> ?</span></span>
+      <span class="postit note">Supports commerciaux<span class="q"> ?</span></span>
+      <span class="postit note">Évènementiel<span class="q"> ?</span></span>
+      <span class="postit note">Social média<span class="q"> ?</span></span>
+      <span class="postit note">Newsletter<span class="q"> ?</span></span>
+      <span class="postit note">Avis Google<span class="q"> ?</span></span>
+      <span class="postit note">Relations presse<span class="q"> ?</span></span>
+      <span class="postit note">Veille concurrentielle<span class="q"> ?</span></span>
+      <span class="postit note">Affiches et PLV<span class="q"> ?</span></span>
+      <span class="postit note">Suivi des KPI<span class="q"> ?</span></span>
+      <span class="postit note">E-réputation<span class="q"> ?</span></span>
     </div>
-  </div>
-</section>
-
-<div class="fenetre" data-u0="0.08" data-u1="0.165" aria-hidden="true"></div>
-<section class="bloc promesse deploie" data-u="0.165">
-  <div class="conteneur promesse-corps">
-    <div>
-      <h2>Ma promesse</h2>
-      <p class="promesse-texte mots">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route claire jusqu’à la fin de son alternance.</p>
+    <div class="grille" aria-hidden="true">
+      <div class="trim"><span class="t">T1</span><span class="postit place">Création de contenu</span><span class="postit place">Calendrier éditorial</span><span class="postit place">Supports commerciaux</span></div>
+      <div class="trim"><span class="t">T2</span><span class="postit place">Évènementiel</span><span class="postit place">Social média</span><span class="postit place">Newsletter</span></div>
+      <div class="trim"><span class="t">T3</span><span class="postit place">Avis Google</span><span class="postit place">Relations presse</span><span class="postit place">Veille concurrentielle</span></div>
+      <div class="trim"><span class="t">T4</span><span class="postit place">Affiches et PLV</span><span class="postit place">Suivi des KPI</span><span class="postit place">E-réputation</span></div>
     </div>
-    <!-- La feuille de route : une feuille dont la nervure est une route, jalons compris -->
-    <div class="feuille-cadre" aria-hidden="true"><span class="gravure feuille" data-img="../img/feuille.webp"></span></div>
-  </div>
-</section>
 
-<div class="fenetre" data-u0="0.165" data-u1="0.26" aria-hidden="true"></div>
-<section class="bloc" id="pour-qui" data-u="0.24">
-  <div class="conteneur">
-    <h2 class="titre">Pour qui&#8239;?</h2>
-    <dl class="registre">
-      <div>
-        <dt>Les dirigeants</dt>
-        <dd><span class="gravure vignette" data-img="../img/pourqui-1.webp" style="--ratio: 488 / 420" aria-hidden="true"></span>de TPE, PME, associations ou exploitations qui accueillent un alternant en communication, déjà en poste ou sur le point d’arriver, sans tuteur communicant.</dd>
-      </div>
-      <div>
-        <dt>Les alternants</dt>
-        <dd><span class="gravure vignette" data-img="../img/pourqui-2.webp" style="--ratio: 368 / 420" aria-hidden="true"></span>qui veulent un cadre clair, des priorités et un regard expert pour progresser.</dd>
-      </div>
-      <div>
-        <dt>Les écoles et CFA</dt>
-        <dd><span class="gravure vignette" data-img="../img/pourqui-3.webp" style="--ratio: 475 / 420" aria-hidden="true"></span>qui souhaitent sécuriser le parcours de leurs étudiants en entreprise.</dd>
-      </div>
-    </dl>
-  </div>
-</section>
+    <!-- 3. Ma promesse : le tuteur rose sort de terre, le lien se noue, l'image redevient nette sur « claire » -->
+    <section class="bloc promesse filet" data-u=".222,.284" data-trait="tuteur_lien" data-tu=".226,.284" style="--x:35;--y:12;--w:31">
+      <h2 class="lead">Ma promesse</h2>
+      <p class="promesse-texte">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route <span class="surligne" data-s=".25">claire</span> jusqu’à la fin de son alternance.</p>
+    </section>
 
-<section class="bloc approche" id="approche" data-u="0.34">
-  <div class="conteneur">
-    <h2 class="titre">Mon approche en 3&nbsp;temps</h2>
-    <ol class="temps">
-      <li>
-        <h3><span class="quand">Au démarrage</span>Comprendre l’entreprise</h3>
-        <p>Un entretien avec le dirigeant pour cerner l’activité, les objectifs, les cibles, les canaux déjà utilisés, les moyens disponibles et les problématiques de communication.</p>
-      </li>
-      <li>
-        <h3><span class="quand">Au démarrage</span>Comprendre l’alternant</h3>
-        <p>Un entretien avec l’alternant pour identifier ses savoir-faire, ses points forts, ses besoins de montée en compétences et ses envies. Nous faisons aussi le point sur ce qui a déjà été réalisé depuis son arrivée.</p>
-      </li>
-      <li>
-        <h3><span class="quand">Fin du premier mois</span>Construire la feuille de route</h3>
-        <p>Un plan d’action jusqu’à la fin de l’alternance (jusqu’à 12&nbsp;mois), découpé par trimestre, qui précise quoi faire, dans quel ordre, avec quels indicateurs, et ce que l’alternant peut mener seul ou doit faire valider.</p>
-      </li>
-    </ol>
-  </div>
-</section>
+    <!-- 4. Pour qui : on recule depuis le nœud jusqu'à voir tout le plant -->
+    <section class="bloc" data-u=".29,.352" style="--x:5;--y:14"><h2 class="titre">Pour qui&#8239;?</h2></section>
+    <section class="bloc qui-bloc filet sous" data-u=".297,.352" data-up=".297,.313" data-trait="pied" style="--x:5;--y:56;--w:29">
+      <h3>Les dirigeants</h3>
+      <p>de TPE, PME, associations ou exploitations qui accueillent un alternant en communication, déjà en poste ou sur le point d’arriver, sans tuteur communicant.</p>
+    </section>
+    <section class="bloc qui-bloc filet sous a-droite" data-u=".307,.352" data-up=".313,.329" data-trait="pointe" style="--r:6;--y:18;--w:26">
+      <h3>Les alternants</h3>
+      <p>qui veulent un cadre clair, des priorités et un regard expert pour progresser.</p>
+    </section>
+    <section class="bloc qui-bloc filet sous a-droite" data-u=".317,.352" data-up=".329,.352" data-trait="noeud" style="--r:6;--y:50;--w:26">
+      <h3>Les écoles et CFA</h3>
+      <p>qui souhaitent sécuriser le parcours de leurs étudiants en entreprise.</p>
+    </section>
 
-<div class="fenetre" data-u0="0.26" data-u1="0.48" aria-hidden="true"></div>
-<section class="bloc recevez deploie" id="livrables" data-u="0.46">
-  <div class="conteneur">
-    <h2 class="titre">Ce que vous recevez</h2>
-    <ul class="livrables">
-      <li><h3>Une synthèse de diagnostic</h3><p>D’une page&nbsp;: objectifs, cibles, enjeux, ressources.</p></li>
-      <li><h3>Un plan d’action jusqu’à la fin de l’alternance</h3><p>Priorités par trimestre, actions concrètes, indicateurs de réussite.</p></li>
-      <li><h3>Un calendrier</h3><p>Les temps forts de communication de l’année.</p></li>
-      <li><h3>Une répartition des rôles</h3><p>Ce que l’alternant fait en autonomie, ce qui passe par la validation du dirigeant.</p></li>
-      <li><h3>Des points de suivi</h3><p>Pour ajuster le cap.</p></li>
-      <li><h3>Un support par mail</h3><p>Pour débloquer les situations au quotidien.</p></li>
+    <!-- 5. Mon approche : au ras de la terre, le long du tronc, en haut quand les branches s'écartent -->
+    <section class="bloc approche a-droite" data-u=".356,.48" style="--r:3;--y:12;--w:29">
+      <h2 class="titre">Mon approche en 3&nbsp;temps</h2>
+      <ol class="temps">
+        <li class="filet" data-v=".358" data-vp=".358,.392" data-replie data-trait="pied" data-tu=".36,.392">
+          <span class="quand">Au démarrage</span>
+          <h3>Comprendre l’entreprise</h3>
+          <p>Un entretien avec le dirigeant pour cerner l’activité, les objectifs, les cibles, les canaux déjà utilisés, les moyens disponibles et les problématiques de communication.</p>
+        </li>
+        <li class="filet" data-v=".392" data-vp=".392,.434" data-replie data-trait="tronc" data-tu=".394,.434">
+          <span class="quand">Au démarrage</span>
+          <h3>Comprendre l’alternant</h3>
+          <p>Un entretien avec l’alternant pour identifier ses savoir-faire, ses points forts, ses besoins de montée en compétences et ses envies. Nous faisons aussi le point sur ce qui a déjà été réalisé depuis son arrivée.</p>
+        </li>
+        <li class="filet" data-v=".434" data-trait="pointe" data-tu=".436,.48">
+          <span class="quand">Fin du premier mois</span>
+          <h3>Construire la feuille de route</h3>
+          <p>Un plan d’action jusqu’à la fin de l’alternance (jusqu’à 12&nbsp;mois), découpé par trimestre, qui précise quoi faire, dans quel ordre, avec quels indicateurs, et ce que l’alternant peut mener seul ou doit faire valider.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 6. Ce que vous recevez : la ramure se déploie pendant un quart de tour, un livrable au bout de six branches -->
+    <section class="bloc" data-u=".482,.56" style="--x:3;--y:13;--w:22"><h2 class="titre">Ce que vous recevez</h2></section>
+    <ul class="bloc eparpille livrables sous" data-u=".49,.56">
+      <li class="filet" data-v=".498" data-trait="livrable1" data-tup=".5,.505" style="--x:3;--y:30;--w:19"><h3>Une synthèse de diagnostic</h3><p>D’une page&nbsp;: objectifs, cibles, enjeux, ressources.</p></li>
+      <li class="filet" data-v=".505" data-trait="livrable2" data-tup=".507,.512" style="--x:3;--y:49;--w:19"><h3>Un plan d’action jusqu’à la fin de l’alternance</h3><p>Priorités par trimestre, actions concrètes, indicateurs de réussite.</p></li>
+      <li class="filet" data-v=".512" data-trait="livrable3" data-tup=".514,.519" style="--x:3;--y:71;--w:19"><h3>Un calendrier</h3><p>Les temps forts de communication de l’année.</p></li>
+      <li class="filet a-droite" data-v=".519" data-trait="livrable4" data-tup=".521,.526" style="--r:3;--y:18;--w:19"><h3>Une répartition des rôles</h3><p>Ce que l’alternant fait en autonomie, ce qui passe par la validation du dirigeant.</p></li>
+      <li class="filet a-droite" data-v=".526" data-trait="livrable5" data-tup=".528,.533" style="--r:3;--y:43;--w:19"><h3>Des points de suivi</h3><p>Pour ajuster le cap.</p></li>
+      <li class="filet a-droite" data-v=".533" data-trait="livrable6" data-tup=".535,.56" style="--r:3;--y:62;--w:19"><h3>Un support par mail</h3><p>Pour débloquer les situations au quotidien.</p></li>
     </ul>
-  </div>
-</section>
 
-<section class="bloc deroule" id="deroule" data-u="0.58">
-  <div class="deroule-colle">
-  <div class="conteneur">
-    <h2 class="titre">Le déroulé</h2>
-    <div class="frise-cadre">
-    <ol class="frise">
-      <li><span class="gravure pousse" data-img="../img/etape-1.webp" style="--ratio: 166 / 360" aria-hidden="true"></span><p class="moment">Au démarrage</p><p>Entretien dirigeant et entretien alternant</p></li>
-      <li><span class="gravure pousse" data-img="../img/etape-2.webp" style="--ratio: 169 / 360" aria-hidden="true"></span><p class="moment">Fin du premier mois</p><p>Remise du diagnostic et du plan d’action jusqu’à la fin de l’alternance</p></li>
-      <li><span class="gravure pousse" data-img="../img/etape-3.webp" style="--ratio: 159 / 360" aria-hidden="true"></span><p class="moment">M+1</p><p>Premier point de suivi&nbsp;: lancement et premiers ajustements</p></li>
-      <li><span class="gravure pousse" data-img="../img/etape-4.webp" style="--ratio: 160 / 360" aria-hidden="true"></span><p class="moment">M+3</p><p>Deuxième point&nbsp;: bilan du premier trimestre, priorités suivantes</p></li>
-      <li><span class="gravure pousse" data-img="../img/etape-5.webp" style="--ratio: 169 / 360" aria-hidden="true"></span><p class="moment">M+6 et M+9</p><p>Points d’ajustement (selon la formule et la date de fin d’alternance)</p></li>
-      <li><span class="gravure pousse" data-img="../img/etape-6.webp" style="--ratio: 196 / 360" aria-hidden="true"></span><p class="moment">Jusqu’à la fin</p><p>Support par mail, jusqu’à la fin de l’alternance</p></li>
+    <!-- 7. Le déroulé : la caméra plonge dans le haut de l'arbre et suit la branche, un rameau par étape -->
+    <section class="bloc" data-u=".572,.698" style="--x:5;--y:13"><h2 class="titre plaque">Le déroulé</h2></section>
+    <ol class="bloc etapes a-droite sous" data-u=".588,.698" style="--r:4;--y:13;--w:25">
+      <li class="plaque filet" data-v=".593" data-vp=".593,.61" data-replie data-trait="rameau1" data-tu=".595,.612"><p class="moment">Au démarrage</p><p>Entretien dirigeant et entretien alternant</p></li>
+      <li class="plaque filet" data-v=".61" data-vp=".61,.627" data-replie data-trait="rameau2" data-tu=".612,.629"><p class="moment">Fin du premier mois</p><p>Remise du diagnostic et du plan d’action jusqu’à la fin de l’alternance</p></li>
+      <li class="plaque filet" data-v=".627" data-vp=".627,.644" data-replie data-trait="rameau3" data-tu=".629,.646"><p class="moment">M+1</p><p>Premier point de suivi&nbsp;: lancement et premiers ajustements</p></li>
+      <li class="plaque filet" data-v=".644" data-vp=".644,.661" data-replie data-trait="rameau4" data-tu=".646,.663"><p class="moment">M+3</p><p>Deuxième point&nbsp;: bilan du premier trimestre, priorités suivantes</p></li>
+      <li class="plaque filet" data-v=".661" data-vp=".661,.678" data-replie data-trait="rameau5" data-tu=".663,.68"><p class="moment">M+6 et M+9</p><p>Points d’ajustement (selon la formule et la date de fin d’alternance)</p></li>
+      <li class="plaque filet" data-v=".678" data-trait="rameau6" data-tu=".68,.698"><p class="moment">Jusqu’à la fin</p><p>Support par mail, jusqu’à la fin de l’alternance</p></li>
     </ol>
-    </div>
-  </div>
-  </div>
-  <div class="deroule-espace" aria-hidden="true"></div>
-</section>
 
-<div class="fenetre" data-u0="0.48" data-u1="0.72" aria-hidden="true"></div>
-<section class="bloc formules deploie" id="formules" data-u="0.72">
-  <div class="conteneur">
-    <h2 class="titre">Les formules</h2>
-    <div class="defile">
-      <table class="tableau">
-        <thead>
-          <tr>
-            <th scope="col"><span class="sr">Ce qui est compris</span></th>
-            <th scope="col"><span class="f-nom">Essentiel</span><span class="f-prix"><span class="nombre" data-n="690">690</span>&nbsp;€ <small>HT</small></span></th>
-            <th scope="col"><span class="f-nom">Accompagné</span><span class="f-prix"><span class="nombre" data-n="1090">1&#8239;090</span>&nbsp;€ <small>HT</small></span></th>
-            <th scope="col"><span class="f-nom">Premium</span><span class="f-prix"><span class="nombre" data-n="1690">1&#8239;690</span>&nbsp;€ <small>HT</small></span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Entretien dirigeant + entretien alternant</th><td class="oui">✓</td><td class="oui">✓</td><td class="oui">✓</td></tr>
-          <tr><th scope="row">Synthèse de diagnostic</th><td class="oui">✓</td><td class="oui">✓</td><td class="oui">✓</td></tr>
-          <tr><th scope="row">Plan d’action jusqu’à la fin de l’alternance</th><td class="oui">✓</td><td class="oui">✓</td><td class="oui">✓</td></tr>
-          <tr><th scope="row">Points de suivi M+1 et M+3</th><td><span class="sr">Non</span></td><td class="oui">✓</td><td class="oui">✓</td></tr>
-          <tr><th scope="row">Points de suivi M+6 et M+9 + bilan de fin</th><td><span class="sr">Non</span></td><td><span class="sr">Non</span></td><td class="oui">✓</td></tr>
-          <tr><th scope="row">Support par mail</th><td><span class="sr">Non</span></td><td><span class="oui">✓</span><span class="qte">3&nbsp;échanges par mois</span></td><td><span class="oui">✓</span><span class="qte">5&nbsp;échanges par mois</span></td></tr>
-          <tr><th scope="row">Outils et modèles (calendrier éditorial, reporting)</th><td><span class="sr">Non</span></td><td><span class="sr">Non</span></td><td class="oui">✓</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="formules-liste">
-      <div class="fbloc">
-        <p class="f-nom">Essentiel</p>
-        <p class="f-prix"><span class="nombre" data-n="690">690</span>&nbsp;€ <small>HT</small></p>
-        <ul>
-          <li>Entretien dirigeant + entretien alternant</li>
-          <li>Synthèse de diagnostic</li>
-          <li>Plan d’action jusqu’à la fin de l’alternance</li>
-        </ul>
+    <!-- 8. Les formules : chaque rail s'arrête à la dernière étape comprise -->
+    <section class="bloc" data-u=".708,.79" style="--x:5;--y:13"><h2 class="titre plaque">Les formules</h2></section>
+    <div class="bloc formules sous" data-u=".71,.79" style="--x:5;--y:23;--w:25">
+      <div class="formule plaque filet" data-v=".714" data-vp=".714,.736" data-replie data-trait="rail0" data-tup=".716,.736">
+        <div class="f-tete"><p class="f-nom">Essentiel</p><p class="f-prix">690&nbsp;€ <small>HT</small></p></div>
+        <ul><li>Entretien dirigeant + entretien alternant</li><li>Synthèse de diagnostic</li><li>Plan d’action jusqu’à la fin de l’alternance</li></ul>
       </div>
-      <div class="fbloc">
-        <p class="f-nom">Accompagné</p>
-        <p class="f-prix"><span class="nombre" data-n="1090">1&#8239;090</span>&nbsp;€ <small>HT</small></p>
-        <ul>
-          <li class="plus">Tout l’Essentiel, et en plus</li>
-          <li>Points de suivi M+1 et M+3</li>
-          <li>Support par mail, 3&nbsp;échanges par mois</li>
-        </ul>
+      <div class="formule plaque filet" data-v=".72" data-vp=".736,.758" data-replie data-trait="rail1" data-tup=".738,.758">
+        <div class="f-tete"><p class="f-nom">Accompagné</p><p class="f-prix">1&#8239;090&nbsp;€ <small>HT</small></p></div>
+        <ul><li class="plus">Tout l’Essentiel, et en plus</li><li>Points de suivi M+1 et M+3</li><li>Support par mail, 3&nbsp;échanges par mois</li></ul>
       </div>
-      <div class="fbloc">
-        <p class="f-nom">Premium</p>
-        <p class="f-prix"><span class="nombre" data-n="1690">1&#8239;690</span>&nbsp;€ <small>HT</small></p>
-        <ul>
-          <li class="plus">Tout l’Accompagné, et en plus</li>
-          <li>Points de suivi M+6 et M+9 + bilan de fin</li>
-          <li>Support par mail, 5&nbsp;échanges par mois</li>
-          <li>Outils et modèles (calendrier éditorial, reporting)</li>
-        </ul>
+      <div class="formule plaque filet" data-v=".726" data-vp=".758,.79" data-trait="rail2" data-tup=".76,.79">
+        <div class="f-tete"><p class="f-nom">Premium</p><p class="f-prix">1&#8239;690&nbsp;€ <small>HT</small></p></div>
+        <ul><li class="plus">Tout l’Accompagné, et en plus</li><li>Points de suivi M+6 et M+9 + bilan de fin</li><li>Support par mail, 5&nbsp;échanges par mois</li><li>Outils et modèles (calendrier éditorial, reporting)</li></ul>
       </div>
     </div>
-    <div class="cadre deux">
+    <section class="bloc cadre plaque filet a-droite" data-u=".734,.79" data-up=".766,.79" style="--r:5;--y:63;--w:26">
       <h3>Le cadre du support par mail</h3>
       <p>Réponse sous 48&nbsp;h ouvrées, dans la limite du volume prévu par votre formule. Sont exclus&nbsp;: la production de contenus, la création graphique et la relecture complète de documents. Ces prestations peuvent faire l’objet d’un devis séparé.</p>
-    </div>
-    <a class="btn btn-rose" data-contact href="#parlons-en">Réserver un premier échange de 30&nbsp;minutes</a>
-  </div>
-</section>
+      <a class="btn btn-rose" data-contact href="#parlons-en">Réserver un premier échange de 30&nbsp;minutes</a>
+    </section>
 
-<section class="bloc" id="pourquoi" data-u="0.8">
-  <div class="conteneur">
-    <h2 class="titre">Pourquoi ça marche</h2>
-    <ul class="raisons">
-      <li><span class="qui">Le dirigeant gagne du temps.</span> <span class="pourquoi">Il n’a plus à improviser la mission de l’alternant.</span></li>
-      <li><span class="qui">L’alternant gagne en autonomie.</span> <span class="pourquoi">Il sait quoi faire, pourquoi et dans quel ordre.</span></li>
-      <li><span class="qui">La communication de l’entreprise devient cohérente.</span> <span class="pourquoi">Les actions répondent à de vrais objectifs.</span></li>
-      <li><span class="qui">L’alternance est mieux exploitée.</span> <span class="pourquoi">Résultats visibles et compétences acquises.</span></li>
+    <!-- 9. Pourquoi ça marche : le tuteur rentre dans la terre, l'arbre tient seul et fleurit -->
+    <section class="bloc" data-u=".792,.878" style="--x:3;--y:13;--w:22"><h2 class="titre">Pourquoi ça marche</h2></section>
+    <ul class="bloc eparpille raisons sous" data-u=".793,.878">
+      <li class="filet a-droite" data-v=".795" data-trait="terre" data-tup=".797,.806" style="--r:3;--y:64;--w:20"><span class="qui">Le dirigeant gagne du temps.</span> <span class="pourquoi">Il n’a plus à improviser la mission de l’alternant.</span></li>
+      <li class="filet" data-v=".802" data-trait="tuteur" data-tup=".804,.816" style="--x:3;--y:64;--w:20"><span class="qui">L’alternant gagne en autonomie.</span> <span class="pourquoi">Il sait quoi faire, pourquoi et dans quel ordre.</span></li>
+      <li class="filet" data-v=".816" data-trait="ramure" data-tup=".818,.836" style="--x:3;--y:33;--w:20"><span class="qui">La communication de l’entreprise devient cohérente.</span> <span class="pourquoi">Les actions répondent à de vrais objectifs.</span></li>
+      <li class="filet a-droite" data-v=".836" data-trait="fleurs" data-tup=".838,.878" style="--r:3;--y:27;--w:20"><span class="qui">L’alternance est mieux exploitée.</span> <span class="pourquoi">Résultats visibles et compétences acquises.</span></li>
     </ul>
-  </div>
-</section>
 
-<div class="fenetre" data-u0="0.72" data-u1="0.87" aria-hidden="true"></div>
-<section class="bloc faq" id="questions" data-u="0.86">
-  <div class="conteneur">
-    <h2 class="titre">Questions fréquentes</h2>
-    <div class="questions">
-      <div>
+    <!-- 10. Questions fréquentes : tour lent autour de l'arbre en fleurs -->
+    <section class="bloc" data-u=".881,.946" style="--x:3;--y:13;--w:22"><h2 class="titre">Questions fréquentes</h2></section>
+    <div class="bloc eparpille questions sous" data-u=".882,.946">
+      <div class="filet" data-v=".884" data-vp=".884,.897" data-replie style="--x:3;--y:30;--w:21">
         <h3>Faut-il que l’alternant soit déjà en poste&#8239;?</h3>
         <p>Non. L’accompagnement convient aux alternants déjà en poste depuis quelques mois comme à ceux qui arrivent tout juste&nbsp;: nous partons de ce qui existe déjà.</p>
       </div>
-      <div>
+      <div class="filet" data-v=".897" data-vp=".897,.91" data-replie style="--x:3;--y:62;--w:21">
         <h3>Qui participe aux entretiens&#8239;?</h3>
         <p>Le dirigeant et l’alternant, séparément, afin que chacun puisse s’exprimer librement.</p>
       </div>
-      <div>
-        <h3>Peut-on prolonger l’accompagnement au-delà de la période prévue&#8239;?</h3>
-        <p>Oui, sur devis, si l’alternance se poursuit ou si un nouvel alternant arrive.</p>
-      </div>
-      <div>
+      <div class="filet a-droite" data-v=".91" data-vp=".91,.923" data-replie style="--r:3;--y:20;--w:21">
         <h3>Faut-il déjà avoir une stratégie ou des outils de communication&#8239;?</h3>
         <p>Non, nous partons de ce qui existe, même s’il n’y a presque rien. Le diagnostic sert justement à identifier les priorités.</p>
       </div>
+      <div class="filet a-droite" data-v=".923" style="--r:3;--y:54;--w:21">
+        <h3>Peut-on prolonger l’accompagnement au-delà de la période prévue&#8239;?</h3>
+        <p>Oui, sur devis, si l’alternance se poursuit ou si un nouvel alternant arrive.</p>
+      </div>
     </div>
-  </div>
-</section>
 
-<div class="fenetre" data-u0="0.87" data-u1="1" aria-hidden="true"></div>
-<section class="parlons deploie" id="parlons-en" data-u="0.93">
-  <div class="conteneur">
-    <div class="parlons-corps">
-      <div>
-        <h2>Parlons-en.</h2>
+    <!-- 11. Parlons-en : une graine se détache d'une fleur et tombe au pied de l'arbre -->
+    <section class="bloc parlons" id="parlons-en" data-u=".95,9" style="--x:4;--y:42;--w:24">
+      <h2>Parlons-en.</h2>
+      <div data-v=".986" data-trait="graine2" data-tu=".99,9">
         <p class="parlons-texte">Un premier échange de 30&nbsp;minutes, sans engagement, pour voir si cet accompagnement correspond à votre situation.</p>
         <a class="btn btn-rose" data-contact href="#parlons-en">Réserver un premier échange</a>
       </div>
-      <svg class="sceau" viewBox="0 0 240 240" aria-hidden="true">
+    </section>
+    <div class="bloc sceau-bloc a-droite" data-u=".988,9" style="--r:9;--y:30" aria-hidden="true">
+      <svg class="sceau" viewBox="0 0 240 240">
         <path id="rond" d="M 28 120 A 92 92 0 1 1 212 120 A 92 92 0 1 1 28 120" fill="none"/>
-        <text class="sceau-anneau" transform="rotate(-58 120 120)"><textPath href="#rond" textLength="572" lengthAdjust="spacing">Sens · Cohérence · Impact · </textPath></text>
+        <g class="sceau-tourne"><text transform="rotate(-58 120 120)"><textPath href="#rond" textLength="572" lengthAdjust="spacing">Sens · Cohérence · Impact · </textPath></text></g>
         <svg class="sceau-logo" x="68" y="90" width="104" height="63" viewBox="0 0 393 237"><use href="#mp"/></svg>
       </svg>
     </div>
-    <p class="pied"><span><span data-info="nom">[Votre nom]</span>, <span data-info="metier">Communication RSE &amp; Stratégie d’impact</span></span><span class="sobre">Site sobre&nbsp;: sans cookie ni traceur.</span></p>
-  </div>
-</section>
+    <p class="bloc pied" data-u=".992,9"><span>Marine Perinel, Communication RSE &amp; Stratégie d’impact</span><span>Sans cookie ni traceur.</span></p>
 
-</main>
+  </main>
+</div>
+<div class="piste" aria-hidden="true"></div>
+<noscript><p style="position:fixed;z-index:30;left:0;right:0;bottom:0;margin:0;padding:16px;background:#fff;text-align:center">Cette version a besoin de JavaScript. <a href="../">Voir le site</a></p></noscript>
 
 <script>
-/* ============================================================
-   À REMPLIR : tout ce qui est vide reste surligné en jaune sur la page.
-   ============================================================ */
-const INFOS = {
-  nom: "Marine Perinel",
-  metier: "Communication RSE & Stratégie d’impact",
-  lienRdv: "https://calendly.com/bonjour-marine-perinel/30min"
-};
-
-(function () {
-  const vide = v => !v || !String(v).trim();
-
-  document.querySelectorAll('[data-info]').forEach(el => {
-    const v = INFOS[el.dataset.info];
-    if (vide(v)) { el.classList.add('a-remplir'); return; }
-    el.textContent = v;
-    const type = el.dataset.type;
-    if (type === 'web') el.href = /^https?:\/\//.test(v) ? v : 'https://' + v;
-  });
-
-  let contact = null;
-  if (!vide(INFOS.lienRdv)) contact = INFOS.lienRdv;
-  if (contact) {
-    document.querySelectorAll('[data-contact]').forEach(a => {
-      a.href = contact;
-      if (!vide(INFOS.lienRdv)) { a.target = '_blank'; a.rel = 'noopener'; }
-    });
-  }
-})();
-
-/* ============================================================
-   Mouvement : le mur de post-it, les titres tapés à la machine,
-   les aplats qui se déploient, la frise qui avance, les prix qui défilent.
-   Tout est coupé si l'appareil demande moins d'animations.
-   ============================================================ */
-(function () {
-  const racine = document.documentElement;
-  const calme = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const mouvement = !calme.matches;
-  const fin = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (mouvement) racine.classList.add('anime');
+(() => {
+  'use strict';
+  const LIEN_RDV = 'https://calendly.com/bonjour-marine-perinel/30min';
+  for (const a of document.querySelectorAll('[data-contact]')) { a.href = LIEN_RDV; a.target = '_blank'; a.rel = 'noopener'; }
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const borne = v => Math.min(1, Math.max(0, v));
-  const adoucir = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  const sortie = t => 1 - Math.pow(1 - t, 3);
-  const prets = (document.fonts && document.fonts.ready) || Promise.resolve();
+  const borne = v => v < 0 ? 0 : v > 1 ? 1 : v;
+  const rampe = (u, a, b) => borne((u - a) / (b - a));
+  const doux = t => t * t * (3 - 2 * t);
+  const freine = t => 1 - Math.pow(1 - t, 3);
+  const NS = 'http://www.w3.org/2000/svg';
+  const mqP = matchMedia('(max-aspect-ratio: 17/20)');
+  const calme = matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* ---------- Déclenchement quand un élément arrive à l'écran ---------- */
-  const vu = new IntersectionObserver(entrees => entrees.forEach(e => {
-    if (!e.isIntersecting) return;
-    vu.unobserve(e.target);
-    e.target.classList.add('vu');
-    if (e.target._quandVu) e.target._quandVu();
-  }), { rootMargin: '0px 0px -12% 0px' });
-  const quandVu = (el, f) => { if (!el) return; if (f) el._quandVu = f; vu.observe(el); };
-  // Les titres, eux, démarrent dès qu'ils pointent à l'écran
-  const vuTot = new IntersectionObserver(entrees => entrees.forEach(e => {
-    if (!e.isIntersecting) return;
-    vuTot.unobserve(e.target);
-    e.target._quandVu();
+  const toile = $('.film'), ctx = toile.getContext('2d', { alpha: false });
+  const svg = $('.traits'), piste = $('.piste'), avance = $('.entete-avance');
+
+  /* ---------- 1. Le défilement fait avancer le film : longueur de chaque passage (en centièmes d'écran) et où en est le film à la fin ---------- */
+  const PASSAGES = [
+    [70, .02],     // accueil : le nom, l'île immobile
+    [110, .064],   // l'offre : on descend jusqu'à la graine
+    [80, .088],    // la pousse sort
+    [110, .12],    // les feuilles s'ouvrent
+    [60, .152],    // le constat : la pousse grandit seule, l'image penche
+    [160, .2],     // les post-it tombent, l'image devient floue
+    [60, .224],    // la promesse : le tuteur sort, le lien se noue
+    [150, .282],   // le nœud, les post-it se rangent, « claire »
+    [50, .3],      // pour qui : on recule
+    [150, .352],
+    [70, .376],    // l'approche : au ras de la terre
+    [110, .428],   // le long du tronc
+    [120, .48],    // en haut, les branches s'écartent
+    [170, .536],   // la ramure se déploie, six livrables
+    [70, .56],     // fin du quart de tour
+    [60, .588],    // le déroulé : on plonge dans le haut de l'arbre
+    [300, .698],   // on suit la branche, rameau par rameau
+    [60, .722],    // les formules : on recule
+    [170, .79],
+    [60, .81],     // pourquoi : grand plan, le tuteur rentre
+    [190, .878],   // l'arbre fleurit
+    [230, .946],   // questions : tour lent
+    [110, .985],   // parlons-en : la graine tombe
+    [70, 1],       // le plan final
+    [50, 1]
+  ];
+  const ECHELLE = .85;
+  const ST = [[0, 0]];
+  let TOTAL = 0;
+  for (const [l, v] of PASSAGES) { TOTAL += l * ECHELLE; ST.push([TOTAL, v]); }
+  piste.style.height = `calc(${TOTAL.toFixed(1)}vh + 100vh)`;
+  const progression = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    return max > 0 ? borne(scrollY / max) : 0;
+  };
+  function filmA(p) {
+    const s = p * TOTAL;
+    for (let j = 1; j < ST.length; j++) if (s <= ST[j][0]) {
+      const [s0, u0] = ST[j - 1], [s1, u1] = ST[j];
+      return s1 > s0 ? u0 + (u1 - u0) * (s - s0) / (s1 - s0) : u1;
+    }
+    return 1;
+  }
+
+  /* ---------- 2. Textes : chacun a sa fenêtre dans le film (data-u pour une rubrique, data-v pour un élément qui s'ajoute) ---------- */
+  const FONDU = .006;
+  const fenetre = (el, nom) => {
+    const v = el.getAttribute(nom);
+    if (v == null) return null;
+    const t = v.split(',').map(Number);
+    return [t[0], t.length > 1 ? t[1] : 9];
+  };
+  const ELEMS = $$('[data-u],[data-v]').map(el => ({
+    el, b: fenetre(el, 'data-u') || fenetre(el, 'data-v'), p: fenetre(el, 'data-up') || fenetre(el, 'data-vp'),
+    replie: el.hasAttribute('data-replie'), parent: null, o: 0, f: -1, d: -1, vis: null, rep: null
   }));
-
-  /* ---------- Frappe à la machine (Space Mono) ---------- */
-  function preparerFrappe(el) {
-    const texte = el.textContent;
-    el.setAttribute('aria-label', texte);
-    el.classList.add('frappe');
-    el.textContent = '';
-    const lettres = [...texte].map(ch => {
-      const s = document.createElement('span');
-      s.className = 'c';
-      s.setAttribute('aria-hidden', 'true');
-      s.textContent = ch;
-      el.appendChild(s);
-      return s;
-    });
-    return pas => new Promise(fini => {
-      const curseur = document.createElement('span');
-      curseur.className = 'curseur tape';
-      curseur.setAttribute('aria-hidden', 'true');
-      el.appendChild(curseur);
-      const taille = parseFloat(getComputedStyle(el).fontSize);
-      const placer = s => {
-        const ref = s || lettres[0];
-        curseur.style.left = (s ? s.offsetLeft + s.offsetWidth : ref.offsetLeft) + 'px';
-        curseur.style.top = (ref.offsetTop + ref.offsetHeight / 2 - taille * .44) + 'px';
-      };
-      placer(null);
-      let i = 0;
-      function suivant() {
-        if (i >= lettres.length) {
-          curseur.classList.remove('tape');
-          setTimeout(() => curseur.remove(), 2600);
-          fini();
-          return;
-        }
-        const s = lettres[i++];
-        s.classList.add('on');
-        placer(s);
-        setTimeout(suivant, s.textContent === ' ' ? pas * 2.2 : pas * (.6 + Math.random() * .8));
-      }
-      setTimeout(suivant, 420);
-    });
+  for (const e of ELEMS) {
+    let p = e.el.parentElement;
+    while (p && !p.matches('[data-u],[data-v]')) p = p.parentElement;
+    e.parent = p ? ELEMS.find(x => x.el === p) : null;
   }
+  const SURLIGNES = $$('[data-s]').map(el => ({ el, s: +el.dataset.s, v: -1 }));
 
-  /* ---------- Titres de section qui se décodent ---------- */
-  const signes = 'abcdefghijklmnopqrstuvwxyz#%&*+=/<>';
-  const garde = /[\s  '’?!.,:;-]/;
-  const brouiller = (vrai, k) => [...vrai].map((ch, i) => i < k || garde.test(ch) ? ch : signes[Math.random() * signes.length | 0]).join('');
-  function decoder(el) {
-    const vrai = el.dataset.vrai, n = [...vrai].length, duree = Math.min(1100, 420 + n * 30), t0 = performance.now();
-    let dernier = -1e3;
-    (function image(ts) {
-      const k = Math.floor((ts - t0) / duree * n);
-      if (k >= n) { el.textContent = vrai; return; }
-      if (ts - dernier > 50) { el.textContent = brouiller(vrai, k); dernier = ts; }
-      requestAnimationFrame(image);
-    })(t0);
-  }
-
-  /* ---------- Mise en place ---------- */
-  // Filets tracés (avec ou sans animation, le filet passe par un pseudo-élément)
-  $$('.registre > div, .temps li, .livrables li, .raisons li, .fbloc').forEach(el => {
-    el.classList.add('trait');
-    el.style.setProperty('--retard', ([...el.parentNode.children].indexOf(el) % 6) * .09 + 's');
-    if (mouvement) quandVu(el);
-  });
-
-  // Coches du tableau
-  $$('.tableau td.oui').forEach(td => { td.innerHTML = '<span class="coche">✓</span>'; });
-  $$('.tableau span.oui').forEach(s => s.classList.add('coche'));
-  $$('.tableau tbody tr').forEach((tr, r) => $$('.coche', tr).forEach((c, k) => c.style.setProperty('--d', (r * .07 + k * .06) + 's')));
-
-  // Survol d'une formule : toute la colonne s'éclaire
-  const tableau = $('.tableau');
-  if (fin && tableau) {
-    const eteindre = () => $$('.survol', tableau).forEach(c => c.classList.remove('survol'));
-    tableau.addEventListener('mouseover', e => {
-      const cellule = e.target.closest('td, th');
-      eteindre();
-      if (cellule && cellule.cellIndex > 0) $$('tr', tableau).forEach(tr => tr.cells[cellule.cellIndex] && tr.cells[cellule.cellIndex].classList.add('survol'));
-    });
-    tableau.addEventListener('mouseleave', eteindre);
-  }
-
-  const lettresFin = [];
-  let blocsMots = [];
-
-  if (mouvement) {
-    // Le titre se tape, puis l'accroche et le bouton arrivent
-    const taperTitre = preparerFrappe($('.scene h1'));
-    taperTitre(64).then(() => $$('.intro').forEach((el, i) => setTimeout(() => el.classList.add('on'), 100 + i * 170)));
-
-    // Les titres de section se décodent en arrivant
-    $$('.titre').forEach(el => {
-      el.dataset.vrai = el.textContent;
-      el.setAttribute('aria-label', el.textContent);
-      el.textContent = brouiller(el.dataset.vrai, 0);
-      el._quandVu = () => decoder(el);
-      vuTot.observe(el);
-    });
-
-    // « Vous êtes au bon endroit. » se tape aussi
-    const reponse = $('.reponse');
-    const taperReponse = preparerFrappe(reponse);
-    quandVu(reponse, () => taperReponse(48));
-
-    quandVu($('.symptomes'));
-    quandVu(tableau);
-
-    // Les grandes phrases s'éclairent mot à mot au fil de la lecture
-    blocsMots = $$('.mots').map(el => {
-      const texte = el.textContent;
-      el.textContent = '';
-      const mots = texte.split(' ').map((m, i, tout) => {
-        const s = document.createElement('span');
-        s.className = 'mot';
-        s.textContent = m;
-        el.appendChild(s);
-        if (i < tout.length - 1) el.appendChild(document.createTextNode(' '));
-        return s;
-      });
-      return { el, mots, k: -1 };
-    });
-
-    // Les prix défilent jusqu'à leur valeur
-    const format = n => n >= 1000 ? Math.floor(n / 1000) + ' ' + String(n % 1000).padStart(3, '0') : String(n);
-    prets.then(() => $$('.nombre').forEach(el => {
-      const largeur = el.getBoundingClientRect().width;
-      if (!largeur) return;
-      el.style.minWidth = largeur + 'px';
-      const n = +el.dataset.n;
-      el.textContent = '0';
-      const col = el.closest('th, .fbloc');
-      const rang = col ? [...col.parentNode.children].indexOf(col) : 0;
-      quandVu(el, () => {
-        const t0 = performance.now() + rang * 150, duree = 1300;
-        (function image(ts) {
-          const t = borne((ts - t0) / duree);
-          el.textContent = format(Math.round(sortie(t) * n / 10) * 10);
-          if (t < 1) requestAnimationFrame(image); else el.textContent = format(n);
-        })(performance.now());
-      });
-    }));
-
-    // « Parlons-en. » lettre par lettre
-    const titreFin = $('.parlons h2'), texteFin = titreFin.textContent;
-    titreFin.setAttribute('aria-label', texteFin);
-    titreFin.textContent = '';
-    [...texteFin].forEach((ch, i) => {
-      const o = document.createElement('span');
-      o.className = 'l';
-      o.style.setProperty('--i', i);
-      o.setAttribute('aria-hidden', 'true');
-      const d = document.createElement('span');
-      d.className = 'li';
-      d.textContent = ch;
-      o.appendChild(d);
-      titreFin.appendChild(o);
-      lettresFin.push({ o, d, y: 0, r: 0 });
-    });
-    quandVu(titreFin);
-
-    // Boutons aimantés
-    if (fin) $$('.btn').forEach(b => {
-      b.addEventListener('mousemove', e => {
-        const r = b.getBoundingClientRect();
-        b.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * .16).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * .3).toFixed(1)}px)`;
-      });
-      b.addEventListener('mouseleave', () => { b.style.transform = ''; });
-    });
-  }
-
-  /* ---------- Le mur : les post-it en vrac se rangent en colonnes ---------- */
-  const scene = $('.scene'), mur = $('.mur', scene);
-  $$('.note', mur).forEach(el => { el.innerHTML = '<span>' + el.innerHTML + '</span>'; });
-  const notes = $$('.note', mur).map((el, i) => ({
-    el, q: $('.q', el),
-    quart: +el.dataset.q, x: +el.dataset.x, y: +el.dataset.y, r: +el.dataset.r,
-    phase: i * 1.73, px: 0, py: 0, w: -1
-  }));
-  const parQuart = [0, 0, 0, 0];
-  notes.forEach(n => { n.place = parQuart[n.quart]++; });
-
-  let W, H, noteW, noteH, gonfle;
-  function mesurerMur() {
-    W = mur.clientWidth; H = mur.clientHeight;
-    const cols = W >= 560 ? 4 : 2;
-    const rangs = 4 / cols;
-    const gap = cols === 4 ? 16 : 12;
-    const ecartRang = 22, labelH = 0, interNote = 8;
-    const cellW = (W - gap * (cols - 1)) / cols;
-    noteW = cellW;
-    const hauteurCase = (H - ecartRang * (rangs - 1)) / rangs;
-    noteH = Math.max(30, Math.min(66, (hauteurCase - labelH - interNote * 2) / 3));
-    const rangH = labelH + noteH * 3 + interNote * 2 + ecartRang;
-    const grilleH = rangH * rangs - ecartRang;
-    const haut = Math.max(0, (H - grilleH) / 2);
-    const taille = Math.max(12.5, Math.min(17, noteH * .3));
-    // En vrac : post-it plus gros sur ordi, plus étroits sur téléphone pour rester lisibles
-    gonfle = cols === 4 ? .22 : 0;
-    notes.forEach(n => {
-      n.w = -1;
-      n.el.style.height = noteH + 'px';
-      n.el.style.fontSize = taille + 'px';
-      // Jamais plus étroit que son mot le plus long (« concurrentielle ») ;
-      // si ce mot dépasse la colonne, le texte de ce post-it rapetisse un peu
-      n.el.style.width = 'min-content';
-      let mini = n.el.offsetWidth;
-      if (mini > noteW) {
-        n.el.style.fontSize = (taille * noteW / mini * .97).toFixed(2) + 'px';
-        mini = n.el.offsetWidth;
-      }
-      n.w0 = cols === 4 ? noteW : Math.min(noteW, Math.max(W * .4, mini));
-      n.ax = n.x * (W - n.w0);
-      n.ay = n.y * (H - noteH);
-      const c = n.quart % cols, rg = Math.floor(n.quart / cols);
-      n.bx = c * (cellW + gap);
-      n.by = haut + rg * rangH + labelH + n.place * (noteH + interNote);
-    });
-  }
-
-  const debut = performance.now() + 150;
-  function dessinerMur(p, ts, rMur) {
-    const sx = souris && rMur ? souris.x - rMur.left : -1e4;
-    const sy = souris && rMur ? souris.y - rMur.top : -1e4;
-    notes.forEach((n, i) => {
-      const t = adoucir(borne((p - .06 - i * .026) / .52));
-      const c = 1 - t;
-      const w = n.w0 + (noteW - n.w0) * t;
-      let x = n.ax + (n.bx - n.ax) * t, y = n.ay + (n.by - n.ay) * t, r = n.r * c, s = 1 + gonfle * c, o = 1;
-      if (mouvement) {
-        // Arrivée : les post-it tombent sur le mur l'un après l'autre
-        const a = sortie(borne((ts - debut - i * 80) / 720));
-        // En vrac, ils flottent doucement et s'écartent du curseur
-        x += Math.sin(ts * .0011 + n.phase) * 4 * c;
-        y += Math.cos(ts * .0009 + n.phase * 1.3) * 5 * c;
-        r += Math.sin(ts * .0007 + n.phase) * 1.4 * c;
-        let tx = 0, ty = 0;
-        if (c > .02) {
-          const dx = x + w / 2 - sx, dy = y + noteH / 2 - sy, d = Math.hypot(dx, dy) || 1, R = 190;
-          if (d < R) { const f = Math.pow(1 - d / R, 2) * 40 * c; tx = dx / d * f; ty = dy / d * f; }
-        }
-        n.px += (tx - n.px) * .12;
-        n.py += (ty - n.py) * .12;
-        x += n.px;
-        y += n.py - (1 - a) * 90;
-        r += (1 - a) * n.r * 3;
-        s *= 1 + (1 - a) * .15;
-        o = a;
-      }
-      if (Math.abs(w - n.w) > .2) { n.el.style.width = w + 'px'; n.w = w; }
-      n.el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(3)})`;
-      n.el.style.opacity = o;
-      n.q.style.opacity = 1 - borne(t * 1.6);
-    });
-  }
-
-  /* ---------- Une seule boucle pour tout ce qui suit le défilement ---------- */
-  const deploies = $$('.deploie');
-  const frise = $('.frise-cadre'), etapes = $$('.frise li');
-  const entete = $('.entete');
-  const parlons = $('.parlons'), anneau = $('.sceau-anneau'), sceau = $('.sceau');
-
-  // Le déroulé se fige sous le bandeau tant que la jauge n'est pas pleine,
-  // seulement s'il tient en entier dans l'écran (sinon la jauge suit la lecture)
-  const deroule = $('#deroule'), colle = $('.deroule-colle'), espace = $('.deroule-espace');
-  let epingle = false, hautColle = 0, course = 1, padHaut = 0, largeurDeroule = 0;
-  // Hauteur d'écran la plus petite (barres du navigateur affichées) : ne bouge pas quand Safari replie sa barre
-  const sonde = document.createElement('div');
-  sonde.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
-  document.body.appendChild(sonde);
-
-  function mesurer() {
-    mesurerMur();
-    hautColle = entete.offsetHeight + 24;
-    largeurDeroule = deroule.clientWidth;
-    deroule.classList.remove('epingle');
-    epingle = mouvement && colle.offsetHeight + hautColle + 16 <= sonde.offsetHeight;
-    deroule.classList.toggle('epingle', epingle);
-    colle.style.top = epingle ? hautColle + 'px' : '';
-    course = Math.max(1, espace.offsetHeight);
-    padHaut = parseFloat(getComputedStyle(deroule).paddingTop) || 0;
-    etapes.forEach(li => { li._haut = li.offsetTop + 14; li._h = li.offsetHeight; });
-    frise._p = -1;
-  }
-
-  /* ---------- Les gravures ---------- */
-  // Chaque image n'est téléchargée qu'à l'approche de l'écran
-  const approche = new IntersectionObserver(entrees => entrees.forEach(e => {
-    if (!e.isIntersecting) return;
-    approche.unobserve(e.target);
-    e.target.style.setProperty('--img', `url(${e.target.dataset.img})`);
-  }), { rootMargin: '900px 0px' });
-  $$('.gravure[data-img]').forEach(el => approche.observe(el));
-
-  const tuteurCadre = $('.tuteur-cadre'), tuteur = $('.tuteur');
-  const feuilleCadre = $('.feuille-cadre'), feuille = $('.feuille');
-  const pousses = $$('.pousse');
-  // Le tuteur pousse quand il est à moitié à l'écran
-  const moitie = new IntersectionObserver(([e]) => {
-    if (!e.isIntersecting) return;
-    moitie.disconnect();
-    tuteurCadre.classList.add('vu');
-  }, { threshold: .45 });
-  moitie.observe(tuteurCadre);
-  let penche = 0;
-
-  let heroVu = true, finVu = false, offreVu = false, souris = null;
-  new IntersectionObserver(([e]) => { heroVu = e.isIntersecting; demander(); }).observe(scene);
-  new IntersectionObserver(([e]) => { finVu = e.isIntersecting; demander(); }).observe(parlons);
-  new IntersectionObserver(([e]) => { offreVu = e.isIntersecting; demander(); }).observe(tuteurCadre);
-
-  let angle = 0, vitesse = .012, vitesseCible = .012;
-  if (fin && mouvement) {
-    window.addEventListener('mousemove', e => { souris = { x: e.clientX, y: e.clientY }; }, { passive: true });
-    window.addEventListener('mouseout', e => { if (!e.relatedTarget) souris = null; });
-    sceau.addEventListener('mouseenter', () => { vitesseCible = .1; });
-    sceau.addEventListener('mouseleave', () => { vitesseCible = .012; });
-  }
-
-  let attente = false, tPrec = 0, scrollPrec = window.scrollY;
-  function demander() {
-    if (attente) return;
-    attente = true;
-    requestAnimationFrame(image);
-  }
-
-  function image(ts) {
-    attente = false;
-    const dt = tPrec ? Math.min(64, ts - tPrec) : 16;
-    tPrec = ts;
-    const vh = window.innerHeight, vw = window.innerWidth, defil = window.scrollY;
-
-    // Toutes les lectures d'abord…
-    const rScene = scene.getBoundingClientRect();
-    const rMur = heroVu ? mur.getBoundingClientRect() : null;
-    const hautsDep = deploies.map(d => d.getBoundingClientRect().top);
-    const hautsMots = blocsMots.map(b => b.el.getBoundingClientRect().top);
-    const rFrise = frise.getBoundingClientRect();
-    const hautDeroule = epingle ? deroule.getBoundingClientRect().top : 0;
-    const rTuteur = offreVu ? tuteurCadre.getBoundingClientRect() : null;
-    const rFeuille = feuilleCadre.getBoundingClientRect();
-    const rLettres = finVu && souris ? lettresFin.map(l => l.o.getBoundingClientRect()) : null;
-    const docH = document.documentElement.scrollHeight;
-
-    // …puis les écritures
-    if (heroVu) {
-      const course = rScene.height - vh;
-      const p = scene.classList.contains('fixe') ? 1 : (course > 0 ? borne(-rScene.top / course) : 1);
-      dessinerMur(p, ts, rMur);
+  function textes(u, P) {
+    for (const e of ELEMS) {
+      const b = (P && e.p) || e.b;
+      const entree = rampe(u, b[0], b[0] + FONDU);
+      const f = entree * (1 - rampe(u, b[1] - FONDU, b[1]));
+      e.o = f * (e.parent ? e.parent.o : 1);
+      if (Math.abs(f - e.f) > .001) { e.f = f; e.el.style.opacity = f.toFixed(3); }
+      const d = Math.round((1 - freine(entree)) * 14);
+      if (d !== e.d) { e.d = d; e.el.style.setProperty('--dy', d + 'px'); }
+      const vis = e.o > .003;
+      if (vis !== e.vis) { e.vis = vis; e.el.style.visibility = vis ? 'visible' : 'hidden'; }
+      const rep = P && e.replie && u >= b[1];
+      if (rep !== e.rep) { e.rep = rep; e.el.classList.toggle('replie', rep); }
     }
-
-    // Les aplats s'ouvrent depuis une étiquette arrondie, comme dans la charte
-    const marge = Math.min(vw * .05, 64);
-    deploies.forEach((d, i) => {
-      const e = mouvement ? adoucir(borne((vh - hautsDep[i]) / (vh * .6))) : 1;
-      const v = e >= .999 ? '' : `inset(0px ${((1 - e) * marge).toFixed(1)}px round ${((1 - e) * 40).toFixed(1)}px)`;
-      if (d._clip !== v) { d.style.clipPath = v; d._clip = v; }
-    });
-
-    blocsMots.forEach((b, i) => {
-      const p = borne((vh * .9 - hautsMots[i]) / (vh * .5));
-      const k = p * (b.mots.length + 2);
-      if (Math.abs(k - b.k) < .005) return;
-      b.k = k;
-      b.mots.forEach((m, j) => { m.style.opacity = (.16 + .84 * borne(k - j)).toFixed(3); });
-    });
-
-    // La frise avance : figée en haut, elle se remplit sur 110vh de défilement
-    const vertical = largeurDeroule <= 1000;
-    const pf = !mouvement ? 1 : epingle ? borne((hautColle - hautDeroule - padHaut) / course) : vertical ? borne((vh * .62 - rFrise.top) / rFrise.height) : borne((vh * .82 - rFrise.top) / (vh * .45));
-    if (frise._p !== pf) {
-      frise._p = pf;
-      frise.style.setProperty('--avance', pf.toFixed(4));
-      etapes.forEach((li, j) => li.classList.toggle('actif', vertical ? pf * rFrise.height >= li._haut : pf >= (j + .12) / etapes.length));
-      // Chaque pousse sort de terre au passage du point
-      pousses.forEach((el, j) => {
-        const li = etapes[j];
-        const g = !mouvement ? 1 : vertical ? borne((pf * rFrise.height - li._haut + 10) / (li._h * .7)) : borne((pf * etapes.length - j) / .75);
-        if (el._g !== g) { el._g = g; el.style.setProperty('--g', g.toFixed(3)); }
-      });
+    for (const s of SURLIGNES) {
+      const v = Math.round(doux(rampe(u, s.s, s.s + .007)) * 1000) / 1000;
+      if (v !== s.v) { s.v = v; s.el.style.setProperty('--s', v); }
     }
-
-    // La feuille de route tourne doucement au fil du défilement
-    if (mouvement && rFeuille.bottom > -40 && rFeuille.top < vh + 40) {
-      const t = borne((vh - rFeuille.top) / (vh + rFeuille.height));
-      const v = (-18 + 26 * adoucir(t)).toFixed(2) + 'deg';
-      if (feuille._v !== v) { feuille._v = v; feuille.style.setProperty('--tourne', v); }
-    }
-
-    // Le tuteur plie un peu au passage de la souris, comme sous le vent, et s'écarte d'elle
-    if (rTuteur && mouvement) {
-      let cible = Math.sin(ts * .0011) * .6;
-      if (souris) {
-        const dx = souris.x - (rTuteur.left + rTuteur.width / 2), dy = souris.y - (rTuteur.top + rTuteur.height * .4);
-        const f = Math.max(0, 1 - Math.hypot(dx, dy) / 460);
-        cible += Math.sign(dx) * f * f * 7;
-      }
-      penche += (cible - penche) * .06;
-      tuteur.style.transform = `skewX(${penche.toFixed(2)}deg)`;
-    }
-
-    // Le bandeau du haut et l'avancée de lecture
-    entete.classList.toggle('visible', rScene.bottom < 60);
-    entete.style.setProperty('--avance', borne(defil / Math.max(1, docH - vh)).toFixed(4));
-
-    // Parlons-en : le sceau tourne, les lettres suivent la souris
-    if (finVu && mouvement) {
-      vitesse += (vitesseCible - vitesse) * .05;
-      angle += dt * vitesse + (defil - scrollPrec) * .15;
-      anneau.setAttribute('transform', `rotate(${(angle - 58).toFixed(2)} 120 120)`);
-      lettresFin.forEach((l, j) => {
-        let ty = 0, tr = 0;
-        if (rLettres) {
-          const r = rLettres[j];
-          const dx = r.left + r.width / 2 - souris.x, dy = r.top + r.height / 2 - souris.y;
-          const f = Math.max(0, 1 - Math.hypot(dx, dy) / 260);
-          ty = -f * f * r.height * .3;
-          tr = -dx / 260 * f * 12;
-        }
-        l.y += (ty - l.y) * .15;
-        l.r += (tr - l.r) * .15;
-        l.d.style.transform = `translate3d(0, ${l.y.toFixed(2)}px, 0) rotate(${l.r.toFixed(2)}deg)`;
-      });
-    }
-    scrollPrec = defil;
-
-    // Tant que le mur ou la fin sont à l'écran, ça continue de vivre
-    if (mouvement && !document.hidden && (heroVu || finVu || offreVu)) demander();
   }
 
-  function regler() {
-    scene.classList.toggle('fixe', calme.matches);
-    mesurer();
-    demander();
+  /* ---------- 3. Le film : les images Blender en plein écran, chargées autour de l'endroit où l'on est ---------- */
+  const N = 400;
+  let FMT = null, LARG = 1440, HAUT = 810, REP = null, images = [], etat = new Uint8Array(N);
+  let gen = 0, enCours = 0, ordre = [], k = 0;
+  let W = 0, H = 0, cov = { e: 1, dx: 0, dy: 0 };
+  let u = -1, iAff = -1, attente = false;
+
+  function choisirFormat() {
+    const f = mqP.matches ? 't' : 'b';
+    if (f === FMT) return;
+    FMT = f; gen++;
+    LARG = f === 'b' ? 1440 : 640; HAUT = f === 'b' ? 810 : 1280;
+    images = new Array(N); etat = new Uint8Array(N); enCours = 0; k = 0; REP = null; iAff = -1;
+    ordre = [];
+    const pris = new Uint8Array(N);
+    for (let pas = 32; pas >= 1; pas /= 2) for (let i = 0; i < N; i += pas) if (!pris[i]) { pris[i] = 1; ordre.push(i); }
+    const g = gen;
+    fetch(`reperes_${f}.json`).then(r => r.json()).then(d => { if (g === gen) { REP = d.reperes; demander(); } }).catch(() => {});
   }
-
-  regler();
-  window.addEventListener('scroll', demander, { passive: true });
-  window.addEventListener('resize', () => { mesurer(); demander(); });
-  calme.addEventListener?.('change', regler);
-  document.addEventListener('visibilitychange', demander);
-  prets.then(() => { mesurer(); demander(); });
-})();
-</script>
-<script>
-/* ---------- L'arbre : les images du film Blender suivent le défilement ---------- */
-(() => {
-  const panneau = document.querySelector('.arbre-panneau');
-  if (!panneau) return;
-  const toile = panneau.querySelector('canvas'), ctx = toile.getContext('2d');
-  const N = 240, LARG = 960, HAUT = 1200;
-  const images = new Array(N);
-  const reperes = [...document.querySelectorAll('main > section[data-u]')];
-  const fenetres = [...document.querySelectorAll('.fenetre')];
-  const large = window.matchMedia('(min-width: 960px)');
-  const calme = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const borne = v => Math.min(1, Math.max(0, v));
-
-  // Chargement du grossier au fin : la dernière image, puis une sur 16, sur 8, 4, 2, 1
-  const ordre = [N - 1];
-  for (let pas = 16; pas >= 1; pas /= 2)
-    for (let i = 0; i < N; i += pas) if (!ordre.includes(i)) ordre.push(i);
-  let k = 0, enCours = 0;
+  function prochain() {
+    const c = Math.round(Math.max(0, u) * (N - 1));
+    for (let d = 0; d <= 10; d++) {
+      for (const j of d ? [c + d, c - d] : [c]) if (j >= 0 && j < N && !etat[j]) return j;
+    }
+    while (k < ordre.length && etat[ordre[k]]) k++;
+    return k < ordre.length ? ordre[k] : -1;
+  }
   function charger() {
-    while (enCours < 6 && k < ordre.length) {
-      const i = ordre[k++];
-      const im = new Image();
-      enCours++;
+    while (enCours < 6) {
+      const i = prochain();
+      if (i < 0) return;
+      etat[i] = 1; enCours++;
+      const g = gen, im = new Image();
       im.decoding = 'async';
-      im.src = 'i/' + String(i).padStart(3, '0') + '.webp';
-      im.decode().then(() => { images[i] = im; demander(); }, () => {}).finally(() => { enCours--; charger(); });
+      im.src = `i/${FMT}/${String(i).padStart(3, '0')}.webp`;
+      im.decode().then(() => { if (g === gen) { images[i] = im; etat[i] = 2; demander(); } }, () => { if (g === gen) etat[i] = 3; })
+        .finally(() => { if (g === gen) { enCours--; charger(); } });
     }
   }
-
-  // Position dans le film (0 à 1) selon le défilement
-  function cible() {
-    const vh = window.innerHeight, y = window.scrollY;
-    const pts = [];
-    if (large.matches) {
-      // chaque rubrique commence son moment quand son haut passe aux 60 % de l'écran
-      reperes.forEach(r => pts.push([y + r.getBoundingClientRect().top - vh * .6, +r.dataset.u]));
-      pts.push([document.documentElement.scrollHeight - vh, 1]);
-    } else {
-      // l'arbre pousse pendant que sa fenêtre traverse l'écran
-      fenetres.forEach(f => {
-        const r = f.getBoundingClientRect();
-        pts.push([y + r.top - vh * .8, +f.dataset.u0], [y + r.bottom - vh * .3, +f.dataset.u1]);
-      });
-    }
-    if (!pts.length || y <= pts[0][0]) return pts.length ? pts[0][1] : 0;
-    for (let j = 1; j < pts.length; j++) {
-      const [y0, u0] = pts[j - 1], [y1, u1] = pts[j];
-      if (y <= y1) return y1 > y0 ? u0 + (u1 - u0) * (y - y0) / (y1 - y0) : u1;
-    }
-    return pts[pts.length - 1][1];
-  }
-
-  let u = -1, uVise = 0, iAffichee = -1, l = 0, h = 0, attente = false, voileAff = -1;
-
-  function taille() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    l = panneau.clientWidth; h = panneau.clientHeight;
-    toile.width = Math.round(l * dpr); toile.height = Math.round(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    iAffichee = -1;
-    demander();
-  }
-
-  function plusProche(i) {
+  function plusProche(c) {
     for (let d = 0; d < N; d++) {
-      if (images[i - d]) return i - d;
-      if (images[i + d]) return i + d;
+      if (c - d >= 0 && images[c - d]) return c - d;
+      if (c + d < N && images[c + d]) return c + d;
     }
     return -1;
   }
+  function taille() {
+    choisirFormat();
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    toile.width = Math.round(W * dpr); toile.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+    // l'image couvre tout l'écran, centrée (comme background-size: cover)
+    const e = Math.max(W / LARG, H / HAUT);
+    cov = { e, dx: (W - LARG * e) / 2, dy: (H - HAUT * e) / 2 };
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    mesurerNotes();
+    iAff = -1;
+    demander();
+  }
+  const ecran = p => p ? [cov.dx + p[0] * LARG * cov.e, cov.dy + p[1] * HAUT * cov.e] : null;
 
-  function dessiner() {
-    attente = false;
-    uVise = cible();
-    // un peu d'inertie pour ne pas sauter d'images quand on défile vite
-    u = u < 0 || calme.matches ? uVise : u + (uVise - u) * .22;
-    if (Math.abs(uVise - u) < .0005) u = uVise;
-    const i = plusProche(Math.round(u * (N - 1)));
-    // le sol remplit l'image au début : on le fond dans le blanc par les bords
-    const voile = 1 - borne((u - .3) / .2);
-    if (i >= 0 && (i !== iAffichee || Math.abs(voile - voileAff) > .01)) {
-      iAffichee = i; voileAff = voile;
-      // l'image tient entière dans le panneau (fond blanc des deux côtés), centrée
-      const e = Math.min(l / LARG, h / HAUT);
-      const dl = LARG * e, dh = HAUT * e, dx = (l - dl) / 2, dy = (h - dh) / 2;
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(0, 0, l, h);
-      ctx.drawImage(images[i], dx, dy, dl, dh);
-      if (voile > 0) {
-        const x0 = Math.max(0, dx), y0 = Math.max(0, dy), x1 = Math.min(l, dx + dl), y1 = Math.min(h, dy + dh);
-        ctx.save();
-        ctx.translate((x0 + x1) / 2, (y0 + y1) / 2);
-        ctx.scale((x1 - x0) / 2, (y1 - y0) / 2);
-        const g = ctx.createRadialGradient(0, 0, 0, 0, 0, 1.05);
-        g.addColorStop(.55, 'rgba(255,255,255,0)');
-        g.addColorStop(1, `rgba(255,255,255,${voile.toFixed(3)})`);
-        ctx.fillStyle = g;
-        ctx.fillRect(-1, -1, 2, 2);
-        ctx.restore();
-      }
+  /* ---------- 4. L'image perd son cadre (« il manque un cadre »), devient floue (« Des objectifs flous ») puis nette (« claire ») ---------- */
+  let effetAvant = '';
+  function effets(u) {
+    let tr = '', fl = '';
+    if (!calme.matches) {
+      const pen = doux(rampe(u, .142, .154)) * (1 - doux(rampe(u, .2, .214)));
+      const flou = doux(rampe(u, .166, .174)) * (1 - doux(rampe(u, .25, .258)));
+      if (pen > .001) tr = `translateX(${(-2.2 * pen).toFixed(3)}vw) rotate(${(-3.2 * pen).toFixed(3)}deg) scale(${(1 + .075 * pen).toFixed(4)})`;
+      if (flou > .01) fl = `blur(${(3.6 * flou).toFixed(2)}px)`;
     }
-    if (u !== uVise) demander();
+    const cle = tr + '|' + fl;
+    if (cle !== effetAvant) { effetAvant = cle; toile.style.transform = tr; toile.style.filter = fl; }
   }
 
-  function demander() {
-    if (attente) return;
-    attente = true;
-    requestAnimationFrame(dessiner);
+  /* ---------- 5. Les post-it : en vrac autour de la pousse, puis rangés en quatre trimestres sans leur « ? » ---------- */
+  const NOTES = $$('.notes .note'), PLACES = $$('.grille .place'), TETES = $$('.grille .t');
+  const VRAC_B = [[.36, .55, -8], [.39, .66, 6], [.31, .77, -3], [.42, .9, 9], [.68, .52, 5], [.66, .63, -7], [.72, .75, 4], [.64, .86, -5], [.3, .93, 7], [.55, .95, -4], [.75, .93, 8], [.33, .64, -9]];
+  const VRAC_T = [[.18, .55, -8], [.4, .6, 6], [.14, .68, -3], [.33, .76, 9], [.84, .58, 5], [.86, .69, -7], [.76, .8, 4], [.17, .87, -5], [.42, .91, 7], [.64, .94, -4], [.86, .91, 8], [.36, .68, -9]];
+  let tNotes = [], tPlaces = [], cPlaces = [];
+  const etatNotes = NOTES.map(() => ({ o: -1, t: '' }));
+  function mesurerNotes() {
+    for (const n of NOTES) n.style.setProperty('--q', 1);
+    tNotes = NOTES.map(n => [n.offsetWidth, n.offsetHeight]);
+    tPlaces = PLACES.map(p => [p.offsetWidth, p.offsetHeight]);
+    cPlaces = PLACES.map(p => { const r = p.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; });
+    etatNotes.forEach(s => { s.o = -1; s.t = ''; });
+  }
+  function placerNotes(u, P) {
+    const V = P ? VRAC_T : VRAC_B;
+    const fin = rampe(u, .279, .288);
+    NOTES.forEach((n, j) => {
+      const a = .128 + j * .0036, chute = freine(rampe(u, a, a + .013));
+      const b = .229 + j * .0025, range = doux(rampe(u, b, b + .013));
+      const o = chute > 0 ? 1 - fin : 0, s = etatNotes[j];
+      if (o !== s.o) { s.o = o; n.style.opacity = o.toFixed(3); n.style.visibility = o > .003 ? 'visible' : 'hidden'; }
+      if (o <= .003 || !cPlaces[j]) return;
+      const [vx, vy, vr] = V[j], X = vx * W, Y = vy * H, haut = -90;
+      const x = X + (cPlaces[j][0] - X) * range;
+      const y = (haut + (Y - haut) * chute) * (1 - range) + cPlaces[j][1] * range;
+      const r = (vr + (1 - chute) * vr * 2.5) * (1 - range);
+      const w = tNotes[j][0] * (1 - range) + tPlaces[j][0] * range, h = tNotes[j][1] * (1 - range) + tPlaces[j][1] * range;
+      const t = `translate(${(x - w / 2).toFixed(1)}px,${(y - h / 2).toFixed(1)}px) rotate(${r.toFixed(2)}deg)`;
+      if (t !== s.t) { s.t = t; n.style.transform = t; n.style.setProperty('--q', (1 - range).toFixed(3)); }
+    });
+    const ot = (rampe(u, .238, .246) * (1 - fin)).toFixed(3);
+    for (const t of TETES) if (t.style.opacity !== ot) t.style.opacity = ot;
   }
 
-  window.addEventListener('scroll', demander, { passive: true });
-  window.addEventListener('resize', taille);
-  large.addEventListener('change', taille);
+  /* ---------- 6. Les traits : de chaque texte à la partie de l'arbre dont il parle (positions exportées par Blender) ---------- */
+  const el = (nom, cls, parent) => { const x = document.createElementNS(NS, nom); if (cls) x.setAttribute('class', cls); if (parent) parent.appendChild(x); return x; };
+  function chemin(pts, prog) {
+    let tot = 0;
+    const lg = [];
+    for (let j = 1; j < pts.length; j++) { const l = Math.hypot(pts[j][0] - pts[j - 1][0], pts[j][1] - pts[j - 1][1]); lg.push(l); tot += l; }
+    let reste = tot * prog, d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+    for (let j = 1; j < pts.length && reste > 0; j++) {
+      const l = lg[j - 1], t = l > 0 ? Math.min(1, reste / l) : 1;
+      d += `L${(pts[j - 1][0] + (pts[j][0] - pts[j - 1][0]) * t).toFixed(1)} ${(pts[j - 1][1] + (pts[j][1] - pts[j - 1][1]) * t).toFixed(1)}`;
+      reste -= l;
+    }
+    return d;
+  }
+
+  // Les rails des formules suivent la grande branche, sous elle : Essentiel jusqu'au rameau 2,
+  // Accompagné jusqu'au rameau 4 puis en pointillé (le mail) jusqu'au bout, Premium jusqu'au bout.
+  const RAILS = [{ fin: .315 }, { fin: .625, pointille: .935 }, { fin: .935 }];
+  const RAIL_DEBUT_B = [.716, .722, .728], RAIL_DEBUT_T = [.716, .738, .76];
+  const gRails = el('g', 'rails', svg);
+  RAILS.forEach(R => {
+    R.fond = el('path', 'rail-fond', gRails); R.trait = el('path', 'rail', gRails);
+    R.fondP = el('path', 'rail-fond pointille', gRails); R.traitP = el('path', 'rail pointille', gRails);
+    R.bout = el('circle', 'bout', gRails); R.bout.setAttribute('r', 0);
+  });
+  let DEPARTS = null;
+  function pointSur(B, s) {
+    const t = s * 10, j = Math.min(9, Math.floor(t)), f = t - j;
+    return [B[j][0] + (B[j + 1][0] - B[j][0]) * f, B[j][1] + (B[j + 1][1] - B[j][1]) * f];
+  }
+  function sousChemin(B, s0, s1, dy) {
+    const pts = [pointSur(B, s0)];
+    for (let j = Math.floor(s0 * 10) + 1; j < s1 * 10; j++) pts.push(B[j]);
+    pts.push(pointSur(B, s1));
+    return pts.map(([x, y]) => [x, y + dy]);
+  }
+  function rails(u, i, P) {
+    const vis = rampe(u, .712, .72) * (1 - rampe(u, .782, .79));
+    DEPARTS = null;
+    let B = null;
+    if (vis > .01 && REP) {
+      B = [];
+      for (let j = 0; j <= 10; j++) { const p = REP['branche' + j] && REP['branche' + j][i]; if (!p) { B = null; break; } B.push(ecran(p)); }
+    }
+    gRails.style.display = B ? '' : 'none';
+    if (!B) return;
+    gRails.style.opacity = vis.toFixed(3);
+    const pas = H * (P ? .026 : .041), debuts = P ? RAIL_DEBUT_T : RAIL_DEBUT_B;
+    DEPARTS = [];
+    RAILS.forEach((R, j) => {
+      const dy = pas * (j + 1.1), prog = doux(rampe(u, debuts[j], debuts[j] + .012));
+      const pts = sousChemin(B, 0, R.fin, dy), d = chemin(pts, prog);
+      R.fond.setAttribute('d', d); R.trait.setAttribute('d', d);
+      DEPARTS.push(pts[0]);
+      let bout = pts[pts.length - 1], pb = rampe(prog, .92, 1);
+      if (R.pointille) {
+        const prog2 = rampe(u, debuts[j] + .012, debuts[j] + .02), pts2 = sousChemin(B, R.fin, R.pointille, dy), d2 = prog2 > 0 ? chemin(pts2, prog2) : '';
+        R.fondP.setAttribute('d', d2); R.traitP.setAttribute('d', d2);
+        bout = pts2[pts2.length - 1]; pb = rampe(prog2, .92, 1);
+      }
+      R.bout.setAttribute('cx', bout[0].toFixed(1)); R.bout.setAttribute('cy', bout[1].toFixed(1)); R.bout.setAttribute('r', (6 * pb).toFixed(2));
+    });
+  }
+
+  const LIGNES = $$('[data-trait]').map(x => {
+    const g = el('g', 'ligne', svg);
+    const L = { el: x, nom: x.dataset.trait, b: fenetre(x, 'data-tu'), p: fenetre(x, 'data-tup'), e: ELEMS.find(e => e.el === x), g, vu: null };
+    L.halo = el('path', 'halo', g); L.trait = el('path', 'trait', g);
+    L.ph = el('circle', 'halo', g); L.pt = el('circle', 'point', g);
+    g.style.display = 'none';
+    return L;
+  });
+  function ancre(nom, i) {
+    if (nom.startsWith('rail')) return DEPARTS ? DEPARTS[+nom.slice(4)] : null;
+    if (!REP || !REP[nom]) return null;
+    return ecran(REP[nom][i]);
+  }
+  function traits(u, i, P) {
+    for (const L of LIGNES) {
+      const w = (P && L.p) || L.b || (P && L.e.p) || L.e.b;
+      const o = L.e.o * rampe(u, w[0], w[0] + FONDU) * (1 - rampe(u, w[1] - FONDU, w[1]));
+      const a = o > .01 ? ancre(L.nom, i) : null;
+      const dedans = a && a[0] > -30 && a[0] < W + 30 && a[1] > -30 && a[1] < H + 30;
+      if (!dedans) { if (L.vu !== false) { L.vu = false; L.g.style.display = 'none'; } continue; }
+      if (L.vu !== true) { L.vu = true; L.g.style.display = ''; }
+      const prog = doux(rampe(u, w[0], w[0] + FONDU * 1.8));
+      const r = L.el.getBoundingClientRect();
+      const hote = L.el.closest('.bloc');
+      const rb = hote && hote !== L.el && !hote.classList.contains('eparpille') ? hote.getBoundingClientRect() : r;
+      const xd = Math.max(r.right, rb.right) + 16, xg = Math.min(r.left, rb.left) - 16;
+      const y0 = L.el.classList.contains('filet') ? r.top + 1.5 : r.top + Math.min(r.height / 2, 18);
+      let pts;
+      if (a[0] > xd + 6) pts = [[r.right, y0], [xd, y0], a];
+      else if (a[0] < xg - 6) pts = [[r.left, y0], [xg, y0], a];
+      else {
+        const x = Math.min(r.right - 12, Math.max(r.left + 12, a[0]));
+        pts = a[1] > r.bottom ? [[x, r.bottom], [x, r.bottom + 12], a] : [[x, r.top], [x, r.top - 12], a];
+      }
+      const d = chemin(pts, prog);
+      L.halo.setAttribute('d', d); L.trait.setAttribute('d', d);
+      const pp = rampe(prog, .88, 1);
+      for (const [c, r0] of [[L.ph, 9], [L.pt, 5.5]]) { c.setAttribute('cx', a[0].toFixed(1)); c.setAttribute('cy', a[1].toFixed(1)); c.setAttribute('r', (r0 * pp).toFixed(2)); }
+      L.g.style.opacity = o.toFixed(3);
+    }
+  }
+
+  /* ---------- 7. La boucle : à chaque défilement, le film, les textes et les traits se recalent ---------- */
+  const sceau = $('.sceau-tourne');
+  function demander() { if (!attente) { attente = true; requestAnimationFrame(image); } }
+  function image() {
+    attente = false;
+    const p = progression(), vise = filmA(p), P = mqP.matches;
+    // un peu d'inertie pour ne pas sauter d'images quand on défile vite
+    u = u < 0 || calme.matches ? vise : u + (vise - u) * .2;
+    if (Math.abs(vise - u) < 1e-4) u = vise;
+    const c = Math.round(u * (N - 1)), i = plusProche(c);
+    if (i >= 0 && i !== iAff) { iAff = i; ctx.drawImage(images[i], cov.dx, cov.dy, LARG * cov.e, HAUT * cov.e); }
+    const ia = iAff >= 0 ? iAff : c;
+    effets(u);
+    textes(u, P);
+    placerNotes(u, P);
+    rails(u, ia, P);
+    traits(u, ia, P);
+    sceau.setAttribute('transform', `rotate(${(u * 140).toFixed(2)} 120 120)`);
+    avance.style.transform = `scaleX(${p.toFixed(4)})`;
+    charger();
+    if (u !== vise) demander();
+  }
+
+  /* ---------- 8. L'accueil : le nom tapé à la machine, puis le reste ---------- */
+  const accueil = $('.accueil'), frappe = $('.frappe');
+  function taper() {
+    const texte = frappe.textContent;
+    if (calme.matches || filmA(progression()) > .025) { accueil.classList.add('tape'); return; }
+    frappe.setAttribute('aria-label', texte);
+    frappe.textContent = '';
+    const curseur = document.createElement('span');
+    const vis = document.createElement('span'); vis.setAttribute('aria-hidden', 'true');
+    curseur.className = 'curseur tape'; curseur.setAttribute('aria-hidden', 'true');
+    frappe.append(vis, curseur);
+    let j = 0;
+    (function suivant() {
+      if (j > texte.length) { curseur.classList.remove('tape'); accueil.classList.add('tape'); setTimeout(() => curseur.remove(), 3000); return; }
+      vis.textContent = texte.slice(0, j++);
+      setTimeout(suivant, texte[j - 1] === ' ' ? 150 : 55 + Math.random() * 75);
+    })();
+  }
+
+  $('[data-debut]').addEventListener('click', ev => { ev.preventDefault(); scrollTo({ top: 0, behavior: calme.matches ? 'auto' : 'smooth' }); });
+  addEventListener('scroll', demander, { passive: true });
+  addEventListener('resize', taille);
+  mqP.addEventListener('change', taille);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { mesurerNotes(); demander(); });
   taille();
-  // les images arrivent après le reste de la page
-  if (document.readyState === 'complete') charger();
-  else window.addEventListener('load', charger);
+  setTimeout(taper, 350);
 })();
 </script>
 </body>
