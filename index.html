@@ -10,11 +10,14 @@
 <meta property="og:description" content="Faire grandir les talents, structurer votre communication. Un accompagnement sur mesure pour les dirigeants et leurs alternants en communication.">
 <meta name="theme-color" content="#007A3F">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
 <style>
+/* Polices hébergées avec le site : aucune requête vers un service tiers */
+@font-face { font-family: "Space Mono"; font-weight: 400; font-display: swap; src: url(fonts/space-mono-400.woff2) format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; font-display: swap; src: url(fonts/space-mono-700.woff2) format("woff2"); }
+@font-face { font-family: "Nunito Sans"; font-weight: 400 700; font-display: swap; src: url(fonts/nunito-sans.woff2) format("woff2"); }
+
 /* Charte mp : vert, rose, Space Mono pour les titres, Avenir Next pour le texte.
    Avenir Next n'est pas libre pour le web : elle s'affiche sur Mac, iPhone et iPad,
    ailleurs c'est Nunito Sans, la plus proche des polices libres. */
@@ -132,6 +135,38 @@ h1 { font-family: var(--mono); font-weight: 700; font-size: clamp(2rem, .8rem + 
 .frise li + li { padding-left: 18px; border-left: 1px solid var(--filet); }
 .frise .moment { font-family: var(--mono); font-weight: 700; font-size: clamp(1.1rem, .9rem + .6vw, 1.45rem); line-height: 1.08; letter-spacing: -0.03em; color: var(--vert); }
 .frise p { margin-top: 14px; font-size: 1rem; line-height: 1.45; }
+
+/* ========== Les gravures ==========
+   Linogravures à l'encre noire, détourées : l'image ne sert que de pochoir,
+   la couleur vient de la charte (vert sur rose, rose sur vert). */
+.gravure { --img: linear-gradient(transparent, transparent); display: block; background: currentColor; -webkit-mask: var(--img) center / contain no-repeat; mask: var(--img) center / contain no-repeat; aspect-ratio: var(--ratio, 1); }
+
+/* Le tuteur : le piquet qui tient la jeune pousse, à côté de « Vous êtes au bon endroit » */
+.offre-corps { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 330px); gap: 40px 72px; align-items: end; }
+.tuteur { --ratio: 715 / 1100; width: 100%; color: var(--vert); transform-origin: 50% 72%; }
+/* Il pousse depuis la terre : racines, tige, puis feuilles */
+.anime .tuteur { clip-path: inset(100% 0 0 0); transition: clip-path 2.4s cubic-bezier(.5, 0, .2, 1); }
+.anime .tuteur-cadre.vu .tuteur { clip-path: inset(0 0 0 0); }
+
+/* La feuille de route, dans « Ma promesse » */
+.promesse-corps { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 40px 72px; align-items: center; }
+.feuille { --ratio: 879 / 1000; width: 100%; color: var(--rose); transform: rotate(var(--tourne, -6deg)); transform-origin: 30% 85%; }
+
+/* Pour qui : le tronc, la pousse, la pépinière */
+.registre > div { padding-right: clamp(120px, 13vw, 170px); }
+.registre .vignette { position: absolute; right: 0; top: 50%; height: clamp(92px, 9vw, 132px); color: var(--vert); transform: translateY(-50%); transform-origin: 50% 100%; transition: color .3s, transform .5s cubic-bezier(.2, .8, .2, 1); }
+.registre > div:hover .vignette { color: var(--vert-fonce); transform: translateY(-50%) scale(1.08); }
+
+/* Le déroulé : une pousse par étape, posée sur la jauge, qui sort de terre quand le point passe */
+.deroule { --h-pousse: clamp(84px, 8.5vw, 128px); }
+.deroule .frise-cadre { margin-top: calc(clamp(36px, 5vw, 64px) + var(--h-pousse)); }
+.frise li { position: relative; }
+.pousse { position: absolute; left: 0; bottom: calc(100% + 9px); height: var(--h-pousse); color: var(--vert); transform-origin: 50% 100%; }
+.frise li + li .pousse { left: 18px; }
+.anime .pousse { clip-path: inset(calc((1 - var(--g, 0)) * 100%) 0 0 0); transform: scale(calc(.8 + .2 * var(--g, 0))); }
+
+/* Bas de page : la sobriété du site, dite simplement */
+.pied { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 28px; }
 
 /* ========== Les formules ========== */
 .formules { background: var(--vert-fonce); color: var(--blanc); }
@@ -281,6 +316,12 @@ html:not(.anime) .frise-cadre::after { display: none; }
   .frise p { margin-top: 0; }
   .frise-cadre::before { top: 0; left: -4px; width: 5px; height: calc(var(--avance, 1) * 100%); }
   .frise-cadre::after { top: calc(var(--avance, 1) * 100%); left: -1.5px; margin-top: -10px; }
+  /* Frise verticale : chaque pousse se met au bout de sa ligne */
+  .deroule .frise-cadre { margin-top: clamp(36px, 5vw, 64px); }
+  .frise li, .frise li + li { padding-right: 80px; }
+  .pousse, .frise li + li .pousse { left: auto; right: 0; bottom: auto; top: 12px; height: 64px; }
+  .offre-corps { grid-template-columns: minmax(0, 1fr) minmax(0, 240px); gap: 32px 40px; }
+  .promesse-corps { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 32px 40px; }
 }
 
 /* Téléphone */
@@ -299,6 +340,16 @@ html:not(.anime) .frise-cadre::after { display: none; }
   .livrables, .questions { grid-template-columns: minmax(0, 1fr); }
   .livrables li { padding-bottom: 26px; }
   .frise li, .frise li + li { display: block; padding: 16px 0 18px 24px; }
+  /* Sur téléphone la pousse flotte à droite : le texte l'habille au lieu de rétrécir */
+  .pousse, .frise li + li .pousse { position: static; float: right; height: 50px; margin: 0 0 6px 14px; }
+  /* Le tuteur passe sous le texte, la feuille au-dessus du sien */
+  .offre-corps, .promesse-corps { grid-template-columns: minmax(0, 1fr); }
+  .tuteur-cadre { width: min(62%, 230px); margin: 8px auto 0; }
+  .feuille-cadre { order: -1; width: min(58%, 220px); }
+  /* Pour qui : la gravure au-dessus de chaque titre */
+  .registre > div { padding: 104px 0 22px; }
+  .registre .vignette { left: 0; right: auto; top: 22px; height: 70px; transform: none; }
+  .registre > div:hover .vignette { transform: scale(1.06); }
   .frise p + p { margin-top: 6px; }
   .entete-nom { display: none; }
   .entete .logo { width: 40px; }
@@ -363,10 +414,14 @@ html:not(.anime) .frise-cadre::after { display: none; }
 </section>
 
 <section class="bloc offre deploie" id="offre">
-  <div class="conteneur">
-    <h2 class="question mots">Vous avez recruté un alternant en communication, mais vous manquez d’expertise métier en interne pour l’accompagner&#8239;?</h2>
-    <p class="reponse">Vous êtes au bon endroit.</p>
-    <p class="grand">Un accompagnement stratégique, opérationnel et pédagogique sur mesure pour les dirigeants et leurs alternants, accessible à tout moment de l’année.</p>
+  <div class="conteneur offre-corps">
+    <div>
+      <h2 class="question mots">Vous avez recruté un alternant en communication, mais vous manquez d’expertise métier en interne pour l’accompagner&#8239;?</h2>
+      <p class="reponse">Vous êtes au bon endroit.</p>
+      <p class="grand">Un accompagnement stratégique, opérationnel et pédagogique sur mesure pour les dirigeants et leurs alternants, accessible à tout moment de l’année.</p>
+    </div>
+    <!-- Le tuteur : le piquet qui tient la jeune pousse droite le temps qu'elle prenne racine -->
+    <div class="tuteur-cadre" aria-hidden="true"><span class="gravure tuteur" data-img="img/tuteur.webp"></span></div>
   </div>
 </section>
 
@@ -381,9 +436,13 @@ html:not(.anime) .frise-cadre::after { display: none; }
 </section>
 
 <section class="bloc promesse deploie">
-  <div class="conteneur">
-    <h2>Ma promesse</h2>
-    <p class="promesse-texte mots">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route claire jusqu’à la fin de son alternance.</p>
+  <div class="conteneur promesse-corps">
+    <div>
+      <h2>Ma promesse</h2>
+      <p class="promesse-texte mots">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route claire jusqu’à la fin de son alternance.</p>
+    </div>
+    <!-- La feuille de route : une feuille dont la nervure est une route, jalons compris -->
+    <div class="feuille-cadre" aria-hidden="true"><span class="gravure feuille" data-img="img/feuille.webp"></span></div>
   </div>
 </section>
 
@@ -393,15 +452,15 @@ html:not(.anime) .frise-cadre::after { display: none; }
     <dl class="registre">
       <div>
         <dt>Les dirigeants</dt>
-        <dd>de TPE, PME, associations ou exploitations qui accueillent un alternant en communication, déjà en poste ou sur le point d’arriver, sans tuteur communicant.</dd>
+        <dd><span class="gravure vignette" data-img="img/pourqui-1.webp" style="--ratio: 488 / 420" aria-hidden="true"></span>de TPE, PME, associations ou exploitations qui accueillent un alternant en communication, déjà en poste ou sur le point d’arriver, sans tuteur communicant.</dd>
       </div>
       <div>
         <dt>Les alternants</dt>
-        <dd>qui veulent un cadre clair, des priorités et un regard expert pour progresser.</dd>
+        <dd><span class="gravure vignette" data-img="img/pourqui-2.webp" style="--ratio: 368 / 420" aria-hidden="true"></span>qui veulent un cadre clair, des priorités et un regard expert pour progresser.</dd>
       </div>
       <div>
         <dt>Les écoles et CFA</dt>
-        <dd>qui souhaitent sécuriser le parcours de leurs étudiants en entreprise.</dd>
+        <dd><span class="gravure vignette" data-img="img/pourqui-3.webp" style="--ratio: 475 / 420" aria-hidden="true"></span>qui souhaitent sécuriser le parcours de leurs étudiants en entreprise.</dd>
       </div>
     </dl>
   </div>
@@ -447,12 +506,12 @@ html:not(.anime) .frise-cadre::after { display: none; }
     <h2 class="titre">Le déroulé</h2>
     <div class="frise-cadre">
     <ol class="frise">
-      <li><p class="moment">Au démarrage</p><p>Entretien dirigeant et entretien alternant</p></li>
-      <li><p class="moment">Fin du premier mois</p><p>Remise du diagnostic et du plan d’action jusqu’à la fin de l’alternance</p></li>
-      <li><p class="moment">M+1</p><p>Premier point de suivi&nbsp;: lancement et premiers ajustements</p></li>
-      <li><p class="moment">M+3</p><p>Deuxième point&nbsp;: bilan du premier trimestre, priorités suivantes</p></li>
-      <li><p class="moment">M+6 et M+9</p><p>Points d’ajustement (selon la formule et la date de fin d’alternance)</p></li>
-      <li><p class="moment">Jusqu’à la fin</p><p>Support par mail, jusqu’à la fin de l’alternance</p></li>
+      <li><span class="gravure pousse" data-img="img/etape-1.webp" style="--ratio: 166 / 360" aria-hidden="true"></span><p class="moment">Au démarrage</p><p>Entretien dirigeant et entretien alternant</p></li>
+      <li><span class="gravure pousse" data-img="img/etape-2.webp" style="--ratio: 169 / 360" aria-hidden="true"></span><p class="moment">Fin du premier mois</p><p>Remise du diagnostic et du plan d’action jusqu’à la fin de l’alternance</p></li>
+      <li><span class="gravure pousse" data-img="img/etape-3.webp" style="--ratio: 159 / 360" aria-hidden="true"></span><p class="moment">M+1</p><p>Premier point de suivi&nbsp;: lancement et premiers ajustements</p></li>
+      <li><span class="gravure pousse" data-img="img/etape-4.webp" style="--ratio: 160 / 360" aria-hidden="true"></span><p class="moment">M+3</p><p>Deuxième point&nbsp;: bilan du premier trimestre, priorités suivantes</p></li>
+      <li><span class="gravure pousse" data-img="img/etape-5.webp" style="--ratio: 169 / 360" aria-hidden="true"></span><p class="moment">M+6 et M+9</p><p>Points d’ajustement (selon la formule et la date de fin d’alternance)</p></li>
+      <li><span class="gravure pousse" data-img="img/etape-6.webp" style="--ratio: 196 / 360" aria-hidden="true"></span><p class="moment">Jusqu’à la fin</p><p>Support par mail, jusqu’à la fin de l’alternance</p></li>
     </ol>
     </div>
   </div>
@@ -572,7 +631,7 @@ html:not(.anime) .frise-cadre::after { display: none; }
         <svg class="sceau-logo" x="68" y="90" width="104" height="63" viewBox="0 0 393 237"><use href="#mp"/></svg>
       </svg>
     </div>
-    <p class="pied"><span data-info="nom">[Votre nom]</span>, <span data-info="metier">Communication RSE &amp; Stratégie d’impact</span></p>
+    <p class="pied"><span><span data-info="nom">[Votre nom]</span>, <span data-info="metier">Communication RSE &amp; Stratégie d’impact</span></span><span class="sobre">Site sobre&nbsp;: moins de 500&nbsp;Ko, sans cookie ni traceur.</span></p>
   </div>
 </section>
 
@@ -923,12 +982,35 @@ const INFOS = {
     colle.style.top = epingle ? hautColle + 'px' : '';
     course = Math.max(1, espace.offsetHeight);
     padHaut = parseFloat(getComputedStyle(deroule).paddingTop) || 0;
-    etapes.forEach(li => { li._haut = li.offsetTop + 14; });
+    etapes.forEach(li => { li._haut = li.offsetTop + 14; li._h = li.offsetHeight; });
+    frise._p = -1;
   }
 
-  let heroVu = true, finVu = false, souris = null;
+  /* ---------- Les gravures ---------- */
+  // Chaque image n'est téléchargée qu'à l'approche de l'écran
+  const approche = new IntersectionObserver(entrees => entrees.forEach(e => {
+    if (!e.isIntersecting) return;
+    approche.unobserve(e.target);
+    e.target.style.setProperty('--img', `url(${e.target.dataset.img})`);
+  }), { rootMargin: '900px 0px' });
+  $$('.gravure[data-img]').forEach(el => approche.observe(el));
+
+  const tuteurCadre = $('.tuteur-cadre'), tuteur = $('.tuteur');
+  const feuilleCadre = $('.feuille-cadre'), feuille = $('.feuille');
+  const pousses = $$('.pousse');
+  // Le tuteur pousse quand il est à moitié à l'écran
+  const moitie = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    moitie.disconnect();
+    tuteurCadre.classList.add('vu');
+  }, { threshold: .45 });
+  moitie.observe(tuteurCadre);
+  let penche = 0;
+
+  let heroVu = true, finVu = false, offreVu = false, souris = null;
   new IntersectionObserver(([e]) => { heroVu = e.isIntersecting; demander(); }).observe(scene);
   new IntersectionObserver(([e]) => { finVu = e.isIntersecting; demander(); }).observe(parlons);
+  new IntersectionObserver(([e]) => { offreVu = e.isIntersecting; demander(); }).observe(tuteurCadre);
 
   let angle = 0, vitesse = .012, vitesseCible = .012;
   if (fin && mouvement) {
@@ -958,6 +1040,8 @@ const INFOS = {
     const hautsMots = blocsMots.map(b => b.el.getBoundingClientRect().top);
     const rFrise = frise.getBoundingClientRect();
     const hautDeroule = epingle ? deroule.getBoundingClientRect().top : 0;
+    const rTuteur = offreVu ? tuteurCadre.getBoundingClientRect() : null;
+    const rFeuille = feuilleCadre.getBoundingClientRect();
     const rLettres = finVu && souris ? lettresFin.map(l => l.o.getBoundingClientRect()) : null;
     const docH = document.documentElement.scrollHeight;
 
@@ -991,6 +1075,31 @@ const INFOS = {
       frise._p = pf;
       frise.style.setProperty('--avance', pf.toFixed(4));
       etapes.forEach((li, j) => li.classList.toggle('actif', vertical ? pf * rFrise.height >= li._haut : pf >= (j + .12) / etapes.length));
+      // Chaque pousse sort de terre au passage du point
+      pousses.forEach((el, j) => {
+        const li = etapes[j];
+        const g = !mouvement ? 1 : vertical ? borne((pf * rFrise.height - li._haut + 10) / (li._h * .7)) : borne((pf * etapes.length - j) / .75);
+        if (el._g !== g) { el._g = g; el.style.setProperty('--g', g.toFixed(3)); }
+      });
+    }
+
+    // La feuille de route tourne doucement au fil du défilement
+    if (mouvement && rFeuille.bottom > -40 && rFeuille.top < vh + 40) {
+      const t = borne((vh - rFeuille.top) / (vh + rFeuille.height));
+      const v = (-18 + 26 * adoucir(t)).toFixed(2) + 'deg';
+      if (feuille._v !== v) { feuille._v = v; feuille.style.setProperty('--tourne', v); }
+    }
+
+    // Le tuteur plie un peu au passage de la souris, comme sous le vent, et s'écarte d'elle
+    if (rTuteur && mouvement) {
+      let cible = Math.sin(ts * .0011) * .6;
+      if (souris) {
+        const dx = souris.x - (rTuteur.left + rTuteur.width / 2), dy = souris.y - (rTuteur.top + rTuteur.height * .4);
+        const f = Math.max(0, 1 - Math.hypot(dx, dy) / 460);
+        cible += Math.sign(dx) * f * f * 7;
+      }
+      penche += (cible - penche) * .06;
+      tuteur.style.transform = `skewX(${penche.toFixed(2)}deg)`;
     }
 
     // Le bandeau du haut et l'avancée de lecture
@@ -1019,7 +1128,7 @@ const INFOS = {
     scrollPrec = defil;
 
     // Tant que le mur ou la fin sont à l'écran, ça continue de vivre
-    if (mouvement && !document.hidden && (heroVu || finVu)) demander();
+    if (mouvement && !document.hidden && (heroVu || finVu || offreVu)) demander();
   }
 
   function regler() {
