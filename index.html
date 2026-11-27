@@ -180,11 +180,6 @@ h1 { font-family: var(--mono); font-weight: 700; font-size: clamp(2rem, .8rem + 
 .sceau { width: clamp(200px, 24vw, 320px); height: auto; display: block; }
 .sceau text { font-family: var(--mono); font-weight: 700; font-size: 28px; fill: var(--blanc); }
 .sceau .sceau-logo { color: var(--rose); }
-.coordonnees { margin-top: 56px; line-height: 2; }
-.coordonnees a { text-decoration: none; }
-.coordonnees [data-info] { white-space: nowrap; }
-.coordonnees a[href]:hover { text-decoration: underline; }
-.coordonnees .sep { margin: 0 .55em; opacity: .5; }
 .pied { margin-top: clamp(72px, 10vw, 120px); padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .3); font-size: .85rem; color: rgba(255, 255, 255, .75); }
 
 /* ==================================================================
@@ -557,8 +552,8 @@ html:not(.anime) .frise-cadre::after { display: none; }
         <p>Oui, sur devis, si l’alternance se poursuit ou si un nouvel alternant arrive.</p>
       </div>
       <div>
-        <h3>L’offre peut-elle être financée&#8239;?</h3>
-        <p><span data-info="financement">[À compléter selon votre statut et les dispositifs applicables.]</span></p>
+        <h3>Faut-il déjà avoir une stratégie ou des outils de communication&#8239;?</h3>
+        <p>Non, nous partons de ce qui existe, même s’il n’y a presque rien. Le diagnostic sert justement à identifier les priorités.</p>
       </div>
     </div>
   </div>
@@ -578,9 +573,6 @@ html:not(.anime) .frise-cadre::after { display: none; }
         <svg class="sceau-logo" x="68" y="90" width="104" height="63" viewBox="0 0 393 237"><use href="#mp"/></svg>
       </svg>
     </div>
-    <p class="coordonnees">
-      <span data-info="nom">[Votre nom]</span><span class="sep">/</span><a data-info="site" data-type="web">[site]</a>
-    </p>
     <p class="pied"><span data-info="nom">[Votre nom]</span>, <span data-info="metier">Communication RSE &amp; Stratégie d’impact</span></p>
   </div>
 </section>
@@ -594,9 +586,7 @@ html:not(.anime) .frise-cadre::after { display: none; }
 const INFOS = {
   nom: "Marine Perinel",
   metier: "Communication RSE & Stratégie d’impact",
-  site: "",             // ex. "exemple.fr"
-  lienRdv: "https://calendly.com/bonjour-marine-perinel/30min",
-  financement: ""       // réponse à « L'offre peut-elle être financée ? »
+  lienRdv: "https://calendly.com/bonjour-marine-perinel/30min"
 };
 
 (function () {
