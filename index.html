@@ -90,8 +90,6 @@ h1 { font-family: var(--mono); font-weight: 700; font-size: clamp(2rem, .8rem + 
 }
 .js .note { position: absolute; left: 0; top: 0; margin: 0; overflow: hidden; will-change: transform; transform-origin: 50% 50%; }
 .note .q { white-space: pre; }
-.trim { position: absolute; left: 0; top: 0; padding-top: 7px; border-top: 3px solid var(--rose); font-family: var(--mono); font-weight: 700; font-size: 12.5px; letter-spacing: .02em; text-transform: uppercase; opacity: 0; }
-html:not(.js) .trim { display: none; }
 
 /* ========== La question ========== */
 .offre { background: var(--rose); }
@@ -258,6 +256,10 @@ html:not(.anime) .frise-cadre::after { display: none; }
 .frise .moment, .frise p { transition: color .4s; }
 .anime .frise li:not(.actif) .moment { color: #A7B6AD; }
 .anime .frise li:not(.actif) p { color: #8A9890; }
+/* Le déroulé se fige en haut de l'écran le temps que la jauge se remplisse (si l'écran est assez haut) */
+.deroule-espace { display: none; }
+.deroule.epingle .deroule-colle { position: sticky; }
+.deroule.epingle .deroule-espace { display: block; height: 110vh; }
 
 /* Les prix défilent, les coches sautent */
 .nombre { display: inline-block; text-align: right; }
@@ -349,22 +351,18 @@ html:not(.anime) .frise-cadre::after { display: none; }
         <a class="btn btn-rose intro" data-contact href="#parlons-en">Réserver un premier échange de 30&nbsp;minutes</a>
       </div>
       <div class="mur" aria-hidden="true">
-        <span class="trim">Mois 1 à 3</span>
-        <span class="trim">Mois 4 à 6</span>
-        <span class="trim">Mois 7 à 9</span>
-        <span class="trim">Mois 10 à 12</span>
-        <span class="note" data-q="0" data-x=".04" data-y=".05" data-r="-6">Site web à jour<span class="q"> ?</span></span>
-        <span class="note" data-q="0" data-x=".62" data-y=".01" data-r="5">Photos de l’équipe<span class="q"> ?</span></span>
-        <span class="note" data-q="0" data-x=".34" data-y=".21" data-r="-3">Posts LinkedIn<span class="q"> ?</span></span>
-        <span class="note" data-q="1" data-x=".93" data-y=".24" data-r="8">Plaquette<span class="q"> ?</span></span>
-        <span class="note" data-q="1" data-x=".07" data-y=".41" data-r="4">Salon pro<span class="q"> ?</span></span>
+        <span class="note" data-q="0" data-x=".04" data-y=".05" data-r="-6">Création de contenu<span class="q"> ?</span></span>
+        <span class="note" data-q="0" data-x=".62" data-y=".01" data-r="5">Calendrier éditorial<span class="q"> ?</span></span>
+        <span class="note" data-q="0" data-x=".34" data-y=".21" data-r="-3">Supports commerciaux<span class="q"> ?</span></span>
+        <span class="note" data-q="1" data-x=".93" data-y=".24" data-r="8">Évènementiel<span class="q"> ?</span></span>
+        <span class="note" data-q="1" data-x=".07" data-y=".41" data-r="4">Social média<span class="q"> ?</span></span>
         <span class="note" data-q="1" data-x=".57" data-y=".44" data-r="-7">Newsletter<span class="q"> ?</span></span>
-        <span class="note" data-q="2" data-x=".29" data-y=".61" data-r="6">Vidéo<span class="q"> ?</span></span>
-        <span class="note" data-q="2" data-x=".86" data-y=".63" data-r="-4">Instagram tous les jours<span class="q"> ?</span></span>
-        <span class="note" data-q="2" data-x=".01" data-y=".79" data-r="-8">Avis Google<span class="q"> ?</span></span>
-        <span class="note" data-q="3" data-x=".53" data-y=".83" data-r="3">Portes ouvertes<span class="q"> ?</span></span>
-        <span class="note" data-q="3" data-x=".19" data-y=".98" data-r="-2">Communiqué de presse<span class="q"> ?</span></span>
-        <span class="note" data-q="3" data-x=".80" data-y="1" data-r="7">Bilan de l’année<span class="q"> ?</span></span>
+        <span class="note" data-q="2" data-x=".29" data-y=".61" data-r="6">Avis Google<span class="q"> ?</span></span>
+        <span class="note" data-q="2" data-x=".86" data-y=".63" data-r="-4">Relations presse<span class="q"> ?</span></span>
+        <span class="note" data-q="2" data-x=".01" data-y=".79" data-r="-8">Veille concurrentielle<span class="q"> ?</span></span>
+        <span class="note" data-q="3" data-x=".53" data-y=".83" data-r="3">Affiches et PLV<span class="q"> ?</span></span>
+        <span class="note" data-q="3" data-x=".19" data-y=".98" data-r="-2">Suivi des KPI<span class="q"> ?</span></span>
+        <span class="note" data-q="3" data-x=".80" data-y="1" data-r="7">E-réputation<span class="q"> ?</span></span>
       </div>
     </div>
   </div>
@@ -390,7 +388,7 @@ html:not(.anime) .frise-cadre::after { display: none; }
 
 <section class="bloc promesse deploie">
   <div class="conteneur">
-    <h2>Notre promesse</h2>
+    <h2>Ma promesse</h2>
     <p class="promesse-texte mots">Un alternant qui sait quoi faire dès le premier mois, avec une feuille de route claire jusqu’à la fin de son alternance.</p>
   </div>
 </section>
@@ -417,7 +415,7 @@ html:not(.anime) .frise-cadre::after { display: none; }
 
 <section class="bloc approche" id="approche">
   <div class="conteneur">
-    <h2 class="titre">Notre approche en 3&nbsp;temps</h2>
+    <h2 class="titre">Mon approche en 3&nbsp;temps</h2>
     <ol class="temps">
       <li>
         <h3><span class="quand">Au démarrage</span>Comprendre l’entreprise</h3>
@@ -449,7 +447,8 @@ html:not(.anime) .frise-cadre::after { display: none; }
   </div>
 </section>
 
-<section class="bloc" id="deroule">
+<section class="bloc deroule" id="deroule">
+  <div class="deroule-colle">
   <div class="conteneur">
     <h2 class="titre">Le déroulé</h2>
     <div class="frise-cadre">
@@ -463,6 +462,8 @@ html:not(.anime) .frise-cadre::after { display: none; }
     </ol>
     </div>
   </div>
+  </div>
+  <div class="deroule-espace" aria-hidden="true"></div>
 </section>
 
 <section class="bloc formules deploie" id="formules">
@@ -578,7 +579,7 @@ html:not(.anime) .frise-cadre::after { display: none; }
       </svg>
     </div>
     <p class="coordonnees">
-      <span data-info="nom">[Votre nom]</span><span class="sep">/</span><a data-info="email" data-type="mail">[email]</a><span class="sep">/</span><a data-info="telephone" data-type="tel">[téléphone]</a><span class="sep">/</span><a data-info="site" data-type="web">[site]</a>
+      <span data-info="nom">[Votre nom]</span><span class="sep">/</span><a data-info="site" data-type="web">[site]</a>
     </p>
     <p class="pied"><span data-info="nom">[Votre nom]</span>, <span data-info="metier">Communication RSE &amp; Stratégie d’impact</span></p>
   </div>
@@ -593,10 +594,8 @@ html:not(.anime) .frise-cadre::after { display: none; }
 const INFOS = {
   nom: "Marine Perinel",
   metier: "Communication RSE & Stratégie d’impact",
-  email: "",            // ex. "camille@exemple.fr"
-  telephone: "",        // ex. "06 12 34 56 78"
   site: "",             // ex. "exemple.fr"
-  lienRdv: "https://calendly.com/bonjour-marine-perinel/30min", // Vide = les boutons ouvrent un mail.
+  lienRdv: "https://calendly.com/bonjour-marine-perinel/30min",
   financement: ""       // réponse à « L'offre peut-elle être financée ? »
 };
 
@@ -608,14 +607,11 @@ const INFOS = {
     if (vide(v)) { el.classList.add('a-remplir'); return; }
     el.textContent = v;
     const type = el.dataset.type;
-    if (type === 'mail') el.href = 'mailto:' + v;
-    if (type === 'tel') el.href = 'tel:' + v.replace(/[^\d+]/g, '');
     if (type === 'web') el.href = /^https?:\/\//.test(v) ? v : 'https://' + v;
   });
 
   let contact = null;
   if (!vide(INFOS.lienRdv)) contact = INFOS.lienRdv;
-  else if (!vide(INFOS.email)) contact = 'mailto:' + INFOS.email + '?subject=' + encodeURIComponent('Accompagnement de mon alternant en communication');
   if (contact) {
     document.querySelectorAll('[data-contact]').forEach(a => {
       a.href = contact;
@@ -829,8 +825,8 @@ const INFOS = {
     });
   }
 
-  /* ---------- Le mur : les post-it en vrac se rangent par trimestre ---------- */
-  const scene = $('.scene'), mur = $('.mur', scene), trims = $$('.trim', mur);
+  /* ---------- Le mur : les post-it en vrac se rangent en colonnes ---------- */
+  const scene = $('.scene'), mur = $('.mur', scene);
   $$('.note', mur).forEach(el => { el.innerHTML = '<span>' + el.innerHTML + '</span>'; });
   const notes = $$('.note', mur).map((el, i) => ({
     el, q: $('.q', el),
@@ -846,7 +842,7 @@ const INFOS = {
     const cols = W >= 560 ? 4 : 2;
     const rangs = 4 / cols;
     const gap = cols === 4 ? 16 : 12;
-    const ecartRang = 22, labelH = 32, interNote = 8;
+    const ecartRang = 22, labelH = 0, interNote = 8;
     const cellW = (W - gap * (cols - 1)) / cols;
     noteW = cellW;
     const hauteurCase = (H - ecartRang * (rangs - 1)) / rangs;
@@ -855,18 +851,21 @@ const INFOS = {
     const grilleH = rangH * rangs - ecartRang;
     const haut = Math.max(0, (H - grilleH) / 2);
     const taille = Math.max(12.5, Math.min(17, noteH * .3));
-    trims.forEach((t, i) => {
-      const c = i % cols, rg = Math.floor(i / cols);
-      t.style.width = cellW + 'px';
-      t.style.transform = `translate(${c * (cellW + gap)}px, ${haut + rg * rangH}px)`;
-    });
     // En vrac : post-it plus gros sur ordi, plus étroits sur téléphone pour rester lisibles
     gonfle = cols === 4 ? .22 : 0;
     notes.forEach(n => {
-      n.w0 = cols === 4 ? noteW : Math.min(noteW, W * .4);
       n.w = -1;
       n.el.style.height = noteH + 'px';
       n.el.style.fontSize = taille + 'px';
+      // Jamais plus étroit que son mot le plus long (« concurrentielle ») ;
+      // si ce mot dépasse la colonne, le texte de ce post-it rapetisse un peu
+      n.el.style.width = 'min-content';
+      let mini = n.el.offsetWidth;
+      if (mini > noteW) {
+        n.el.style.fontSize = (taille * noteW / mini * .97).toFixed(2) + 'px';
+        mini = n.el.offsetWidth;
+      }
+      n.w0 = cols === 4 ? noteW : Math.min(noteW, Math.max(W * .4, mini));
       n.ax = n.x * (W - n.w0);
       n.ay = n.y * (H - noteH);
       const c = n.quart % cols, rg = Math.floor(n.quart / cols);
@@ -909,8 +908,6 @@ const INFOS = {
       n.el.style.opacity = o;
       n.q.style.opacity = 1 - borne(t * 1.6);
     });
-    const tl = borne((p - .55) / .25);
-    trims.forEach(tr => { tr.style.opacity = tl; });
   }
 
   /* ---------- Une seule boucle pour tout ce qui suit le défilement ---------- */
@@ -919,8 +916,24 @@ const INFOS = {
   const entete = $('.entete');
   const parlons = $('.parlons'), anneau = $('.sceau-anneau'), sceau = $('.sceau');
 
+  // Le déroulé se fige sous le bandeau tant que la jauge n'est pas pleine,
+  // seulement s'il tient en entier dans l'écran (sinon la jauge suit la lecture)
+  const deroule = $('#deroule'), colle = $('.deroule-colle'), espace = $('.deroule-espace');
+  let epingle = false, hautColle = 0, course = 1, padHaut = 0;
+  // Hauteur d'écran la plus petite (barres du navigateur affichées) : ne bouge pas quand Safari replie sa barre
+  const sonde = document.createElement('div');
+  sonde.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
+  document.body.appendChild(sonde);
+
   function mesurer() {
     mesurerMur();
+    hautColle = entete.offsetHeight + 24;
+    deroule.classList.remove('epingle');
+    epingle = mouvement && colle.offsetHeight + hautColle + 16 <= sonde.offsetHeight;
+    deroule.classList.toggle('epingle', epingle);
+    colle.style.top = epingle ? hautColle + 'px' : '';
+    course = Math.max(1, espace.offsetHeight);
+    padHaut = parseFloat(getComputedStyle(deroule).paddingTop) || 0;
     etapes.forEach(li => { li._haut = li.offsetTop + 14; });
   }
 
@@ -955,6 +968,7 @@ const INFOS = {
     const hautsDep = deploies.map(d => d.getBoundingClientRect().top);
     const hautsMots = blocsMots.map(b => b.el.getBoundingClientRect().top);
     const rFrise = frise.getBoundingClientRect();
+    const hautDeroule = epingle ? deroule.getBoundingClientRect().top : 0;
     const rLettres = finVu && souris ? lettresFin.map(l => l.o.getBoundingClientRect()) : null;
     const docH = document.documentElement.scrollHeight;
 
@@ -981,9 +995,9 @@ const INFOS = {
       b.mots.forEach((m, j) => { m.style.opacity = (.16 + .84 * borne(k - j)).toFixed(3); });
     });
 
-    // La frise avance
+    // La frise avance : figée en haut, elle se remplit sur 110vh de défilement
     const vertical = vw <= 1000;
-    const pf = !mouvement ? 1 : vertical ? borne((vh * .62 - rFrise.top) / rFrise.height) : borne((vh * .82 - rFrise.top) / (vh * .45));
+    const pf = !mouvement ? 1 : epingle ? borne((hautColle - hautDeroule - padHaut) / course) : vertical ? borne((vh * .62 - rFrise.top) / rFrise.height) : borne((vh * .82 - rFrise.top) / (vh * .45));
     if (frise._p !== pf) {
       frise._p = pf;
       frise.style.setProperty('--avance', pf.toFixed(4));
